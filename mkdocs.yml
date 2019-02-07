@@ -3,6 +3,9 @@ site_name: ansemjo's docs
 repo_name: ansemjo/wiki
 repo_url: https://github.com/ansemjo/wiki
 
+# license under CC BY-SA 4.0
+copyright: Copyright (c) 2018 Anton Semjonov, licensed under Creative Commons BY-SA 4.0 (https://semjonov.de/license)
+
 # use plain html files / urls
 use_directory_urls: no
 

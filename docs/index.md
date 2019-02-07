@@ -1,6 +1,6 @@
 This is [ansemjo's](https://github.com/ansemjo) small wiki. It contains all sorts of 
 more or less useful information.
 
-It is powered by [mkdocs](https://www.mkdocs.org/) and uses a [Material theme](https://squidfunk.github.io/mkdocs-material/).
-
-
+Unless otherwise noted, the content on this site is licensed under the
+[Creative Commons Attribution-ShareAlike 4.0](https://semjonov.de/license),
+which also applies to my [website](https://semjonov.de).
