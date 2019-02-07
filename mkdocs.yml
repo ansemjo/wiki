@@ -1,0 +1,23 @@
+# site name and backing repository
+site_name: ansemjo's docs
+repo_name: ansemjo/wiki
+repo_url: https://github.com/ansemjo/wiki
+
+# use plain html files / urls
+use_directory_urls: no
+
+# theme settings
+theme:
+  name: material
+  font: no # don't use google fonts
+  favicon: assets/planet.png
+  feature:
+    tabs: yes # display subdirectories as tabs
+
+# markdown settings
+markdown_extensions:
+  - admonition
+  - footnotes
+  - toc
+  - meta
+  - codehilite
