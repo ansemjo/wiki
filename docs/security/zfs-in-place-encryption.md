@@ -106,4 +106,4 @@ Useful pointers:
 - [systemd.unit(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html)
 
 !!! note
-    See [Systemd Decryption Target](systemd-decryption-target.html) for the finished result.
+    See [Systemd Decryption Target](systemd-decryption-target.md) for the finished result.
