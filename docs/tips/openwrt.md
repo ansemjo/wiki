@@ -1,12 +1,10 @@
 # OpenWRT
 
-## Image Builder
+## [Image Builder](https://openwrt.org/docs/guide-user/additional-software/imagebuilder)
 
-The Image Builder (previously called the Image Generator) is a pre-compiled environment suitable for creating custom images without the need for compiling them from source.
-It downloads pre-compiled packages and integrates them in a single flashable image.
-
-!!! hint
-    https://openwrt.org/docs/guide-user/additional-software/imagebuilder
+> The Image Builder (previously called the Image Generator) is a pre-compiled environment
+> suitable for creating custom images without the need for compiling them from source.
+> It downloads pre-compiled packages and integrates them in a single flashable image.
 
 Look for the `openwrt-imagebuilder-<target>-<type>.Linux-x86_64.tar.xz` in the
 firmware image folder for your device. Download and extract it somewhere.
@@ -21,3 +19,7 @@ You can include extra packages by configuring `PACKAGES=`.
     make image PROFILE="archer-c7-v2" PACKAGES="-ppp -ppp-mod-pppoe luci-ssl wireguard"
 
 The result will be stored in `./bin/targets/<target>/<type>/`.
+
+!!! link
+    I wrote a [small script](https://git.rz.semjonov.de/snippets/14) to automate
+    these steps for my Archer C7 v2, so I can quickly build a new snapshot firmware.
