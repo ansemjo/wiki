@@ -798,13 +798,12 @@
                 
                 
                 <h1 id="openwrt">OpenWRT</h1>
-<h2 id="image-builder">Image Builder</h2>
-<p>The Image Builder (previously called the Image Generator) is a pre-compiled environment suitable for creating custom images without the need for compiling them from source.
+<h2 id="image-builder"><a href="https://openwrt.org/docs/guide-user/additional-software/imagebuilder">Image Builder</a></h2>
+<blockquote>
+<p>The Image Builder (previously called the Image Generator) is a pre-compiled environment
+suitable for creating custom images without the need for compiling them from source.
 It downloads pre-compiled packages and integrates them in a single flashable image.</p>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>https://openwrt.org/docs/guide-user/additional-software/imagebuilder</p>
-</div>
+</blockquote>
 <p>Look for the <code>openwrt-imagebuilder-&lt;target&gt;-&lt;type&gt;.Linux-x86_64.tar.xz</code> in the
 firmware image folder for your device. Download and extract it somewhere.</p>
 <p>Get a list of available profiles with <code>make info</code>. For my TP-Link Archer C7 v2:</p>
@@ -818,6 +817,11 @@ firmware image folder for your device. Download and extract it somewhere.</p>
 
 
 <p>The result will be stored in <code>./bin/targets/&lt;target&gt;/&lt;type&gt;/</code>.</p>
+<div class="admonition link">
+<p class="admonition-title">Link</p>
+<p>I wrote a <a href="https://git.rz.semjonov.de/snippets/14">small script</a> to automate
+these steps for my Archer C7 v2, so I can quickly build a new snapshot firmware.</p>
+</div>
                 
                   
                 
