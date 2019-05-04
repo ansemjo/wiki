@@ -1,4 +1,4 @@
-# OCR / Document Scanning
+# Document Scanning
 
 For my document management workflow I have settled on an Android scanner app
 and optical character recognition on the commandline for now.
