@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/secureboot.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
           Security
         </a>
       
@@ -555,6 +555,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../security/secureboot.html" title="Secureboot" class="md-nav__link">
       Secureboot
     </a>
@@ -835,10 +847,10 @@ enrolled machine.</p>
 <p>In FreeIPA on the <a href="https://ipa0.rz.semjonov.de/ipa/ui/#identity/service">Identity &gt; Services</a> page
 add a <code>HTTP</code> service for an actual, enrolled host.</p>
 <p>Edit that service and add a principal alias:</p>
-<div class="codehilite"><pre><span></span>Service Settings
-  Principal alias   HTTP/ifrit.rz.semjonov.de@RZ.SEMJONOV.DE  [Delete]
-                    HTTP/s3.rz.semjonov.de@RZ.SEMJONOV.DE     [Delete]
-                    [Add]
+<div class="codehilite"><pre><span></span><span class="n">Service</span><span class="w"> </span><span class="n">Settings</span><span class="w"></span>
+<span class="w">  </span><span class="n">Principal</span><span class="w"> </span><span class="k">alias</span><span class="w">   </span><span class="n">HTTP</span><span class="o">/</span><span class="n">ifrit</span><span class="p">.</span><span class="n">rz</span><span class="p">.</span><span class="n">semjonov</span><span class="p">.</span><span class="n">de</span><span class="nv">@RZ</span><span class="p">.</span><span class="n">SEMJONOV</span><span class="p">.</span><span class="n">DE</span><span class="w">  </span><span class="o">[</span><span class="n">Delete</span><span class="o">]</span><span class="w"></span>
+<span class="w">                    </span><span class="n">HTTP</span><span class="o">/</span><span class="n">s3</span><span class="p">.</span><span class="n">rz</span><span class="p">.</span><span class="n">semjonov</span><span class="p">.</span><span class="n">de</span><span class="nv">@RZ</span><span class="p">.</span><span class="n">SEMJONOV</span><span class="p">.</span><span class="n">DE</span><span class="w">     </span><span class="o">[</span><span class="n">Delete</span><span class="o">]</span><span class="w"></span>
+<span class="w">                    </span><span class="o">[</span><span class="n">Add</span><span class="o">]</span><span class="w"></span>
 </pre></div>
 
 
@@ -898,13 +910,13 @@ Request ID <span class="s1">&#39;s3.rz.semjonov.de&#39;</span>:
           </a>
         
         
-          <a href="../security/secureboot.html" title="Secureboot" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Secureboot
+                Network Disk Decryption
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

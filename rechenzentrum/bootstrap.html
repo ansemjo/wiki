@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/secureboot.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
           Security
         </a>
       
@@ -604,6 +604,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
         
           
           
@@ -1030,9 +1042,9 @@
 </ul>
 <h3 id="matchbox">Matchbox</h3>
 <p>Boot CoreOS into RAM through your preferred method, e.g. using the <a href="https://coreos.com/os/docs/latest/booting-with-iso.html">CoreOS ISO</a> or <a href="https://netboot.xyz/downloads/">netboot.xyz</a>. Then install to disk with <code>coreos-install</code>:</p>
-<div class="codehilite"><pre><span></span>curl -Lo install.json https://ks.surge.sh/matchbox.json
-sudo coreos-install -d /dev/sda -i install.json
-sudo reboot
+<div class="codehilite"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">Lo</span> <span class="n">install</span><span class="p">.</span><span class="n">json</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">ks</span><span class="p">.</span><span class="n">surge</span><span class="p">.</span><span class="n">sh</span><span class="o">/</span><span class="n">matchbox</span><span class="p">.</span><span class="n">json</span>
+<span class="n">sudo</span> <span class="n">coreos</span><span class="o">-</span><span class="n">install</span> <span class="o">-</span><span class="n">d</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">sda</span> <span class="o">-</span><span class="n">i</span> <span class="n">install</span><span class="p">.</span><span class="n">json</span>
+<span class="n">sudo</span> <span class="n">reboot</span>
 </pre></div>
 
 
@@ -1053,47 +1065,47 @@ boot
 <h3 id="squid-proxy">Squid proxy</h3>
 <p>Instead of mirroring multiple repositories locally, you could run a <a href="https://wiki.squid-cache.org/FrontPage">Squid</a> proxy in your network and point all <code>yum</code> clients at it. With some URL rewriting you can cache the same packages from many different mirrors in a deduplicated fashion.</p>
 <p>I used the <a href="https://github.com/sameersbn/docker-squid">sameersbn/squid</a> image on a CoreOS host, started with the following arguments:</p>
-<div class="codehilite"><pre><span></span>docker run -d --net host --name squid \
-  -v /var/spool/squid:/var/spool/squid \
-  -v /etc/squid:/etc/squid sameersbn/squid
+<div class="codehilite"><pre><span></span><span class="n">docker</span> <span class="n">run</span> <span class="o">-</span><span class="n">d</span> <span class="c1">--net host --name squid \</span>
+  <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">squid</span><span class="p">:</span><span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">spool</span><span class="o">/</span><span class="n">squid</span> <span class="err">\</span>
+  <span class="o">-</span><span class="n">v</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">squid</span><span class="p">:</span><span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">squid</span> <span class="n">sameersbn</span><span class="o">/</span><span class="n">squid</span>
 </pre></div>
 
 
 <p>The configuration files cache all <code>.rpm</code>'s from any mirrors. This is probably too open and broad to be used as a general proxy, so be careful.</p>
 <p><strong><code>/etc/squid/storeid.db</code></strong>:</p>
-<div class="codehilite"><pre><span></span># /etc/squid/squid.conf
+<div class="codehilite"><pre><span></span># <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">squid</span><span class="o">/</span><span class="nv">squid</span>.<span class="nv">conf</span>
 
-acl safe_ports port 80 21 443
-acl tls_ports  port 443
-acl CONNECT method CONNECT
+<span class="nv">acl</span> <span class="nv">safe_ports</span> <span class="nv">port</span> <span class="mi">80</span> <span class="mi">21</span> <span class="mi">443</span>
+<span class="nv">acl</span> <span class="nv">tls_ports</span>  <span class="nv">port</span> <span class="mi">443</span>
+<span class="nv">acl</span> <span class="k">CONNECT</span> <span class="nv">method</span> <span class="k">CONNECT</span>
 
-http_access deny !safe_ports
-http_access deny CONNECT !tls_ports
+<span class="nv">http_access</span> <span class="nv">deny</span> <span class="o">!</span><span class="nv">safe_ports</span>
+<span class="nv">http_access</span> <span class="nv">deny</span> <span class="k">CONNECT</span> <span class="o">!</span><span class="nv">tls_ports</span>
 
-http_access allow localhost
-http_access allow all
+<span class="nv">http_access</span> <span class="nv">allow</span> <span class="nv">localhost</span>
+<span class="nv">http_access</span> <span class="nv">allow</span> <span class="nv">all</span>
 
-http_port 3128
+<span class="nv">http_port</span> <span class="mi">3128</span>
 
-# cache yum/rpm downloads:
-# http://ma.ttwagner.com/lazy-distro-mirrors-with-squid/
-# https://serverfault.com/questions/837291/squid-and-caching-of-dnf-yum-downloads
+# <span class="nv">cache</span> <span class="nv">yum</span><span class="o">/</span><span class="nv">rpm</span> <span class="nv">downloads</span>:
+# <span class="nv">http</span>:<span class="o">//</span><span class="nv">ma</span>.<span class="nv">ttwagner</span>.<span class="nv">com</span><span class="o">/</span><span class="nv">lazy</span><span class="o">-</span><span class="nv">distro</span><span class="o">-</span><span class="nv">mirrors</span><span class="o">-</span><span class="nv">with</span><span class="o">-</span><span class="nv">squid</span><span class="o">/</span>
+# <span class="nv">https</span>:<span class="o">//</span><span class="nv">serverfault</span>.<span class="nv">com</span><span class="o">/</span><span class="nv">questions</span><span class="o">/</span><span class="mi">837291</span><span class="o">/</span><span class="nv">squid</span><span class="o">-</span><span class="nv">and</span><span class="o">-</span><span class="nv">caching</span><span class="o">-</span><span class="nv">of</span><span class="o">-</span><span class="nv">dnf</span><span class="o">-</span><span class="nv">yum</span><span class="o">-</span><span class="nv">downloads</span>
 
-cache_replacement_policy heap LFUDA     # least-frequently-used
-cache_dir aufs /var/spool/squid 20000 16 256    # 20GB disk cache
-maximum_object_size 4096 MB         # up to 4GB files
+<span class="nv">cache_replacement_policy</span> <span class="nv">heap</span> <span class="nv">LFUDA</span>     # <span class="nv">least</span><span class="o">-</span><span class="nv">frequently</span><span class="o">-</span><span class="nv">used</span>
+<span class="nv">cache_dir</span> <span class="nv">aufs</span> <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">spool</span><span class="o">/</span><span class="nv">squid</span> <span class="mi">20000</span> <span class="mi">16</span> <span class="mi">256</span>    # <span class="mi">20</span><span class="nv">GB</span> <span class="nv">disk</span> <span class="nv">cache</span>
+<span class="nv">maximum_object_size</span> <span class="mi">4096</span> <span class="nv">MB</span>         # <span class="nv">up</span> <span class="nv">to</span> <span class="mi">4</span><span class="nv">GB</span> <span class="nv">files</span>
 
-store_id_program /usr/lib/squid/storeid_file_rewrite /etc/squid/storeid.db  # rewrite all centos mirror urls
+<span class="nv">store_id_program</span> <span class="o">/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">squid</span><span class="o">/</span><span class="nv">storeid_file_rewrite</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">squid</span><span class="o">/</span><span class="nv">storeid</span>.<span class="nv">db</span>  # <span class="nv">rewrite</span> <span class="nv">all</span> <span class="nv">centos</span> <span class="nv">mirror</span> <span class="nv">urls</span>
 
-coredump_dir /var/spool/squid
+<span class="nv">coredump_dir</span> <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">spool</span><span class="o">/</span><span class="nv">squid</span>
 
-refresh_pattern -i \.(deb|rpm|tar|tar.gz|tgz)$ 10080 90% 43200 override-expire ignore-no-cache ignore-no-store ignore-private
-refresh_pattern .   0   20% 4320
+<span class="nv">refresh_pattern</span> <span class="o">-</span><span class="nv">i</span> \.<span class="ss">(</span><span class="nv">deb</span><span class="o">|</span><span class="nv">rpm</span><span class="o">|</span><span class="nv">tar</span><span class="o">|</span><span class="nv">tar</span>.<span class="nv">gz</span><span class="o">|</span><span class="nv">tgz</span><span class="ss">)</span>$ <span class="mi">10080</span> <span class="mi">90</span><span class="o">%</span> <span class="mi">43200</span> <span class="nv">override</span><span class="o">-</span><span class="nv">expire</span> <span class="nv">ignore</span><span class="o">-</span><span class="nv">no</span><span class="o">-</span><span class="nv">cache</span> <span class="nv">ignore</span><span class="o">-</span><span class="nv">no</span><span class="o">-</span><span class="nv">store</span> <span class="nv">ignore</span><span class="o">-</span><span class="nv">private</span>
+<span class="nv">refresh_pattern</span> .   <span class="mi">0</span>   <span class="mi">20</span><span class="o">%</span> <span class="mi">4320</span>
 </pre></div>
 
 
 <p><strong><code>/etc/squid/storeid.db</code></strong>:</p>
-<div class="codehilite"><pre><span></span>\/([0-9\.\-]+)\/([a-z]+)\/(x86_64|i386)\/(.*\.d?rpm)    http://rpmcache.squid.internal/$1/$2/$3/$4
+<div class="codehilite"><pre><span></span><span class="err">\</span><span class="o">/</span><span class="p">([</span><span class="mi">0</span><span class="o">-</span><span class="mi">9</span><span class="err">\</span><span class="p">.</span><span class="err">\</span><span class="o">-</span><span class="p">]</span><span class="o">+</span><span class="p">)</span><span class="err">\</span><span class="o">/</span><span class="p">([</span><span class="n">a</span><span class="o">-</span><span class="n">z</span><span class="p">]</span><span class="o">+</span><span class="p">)</span><span class="err">\</span><span class="o">/</span><span class="p">(</span><span class="n">x86_64</span><span class="o">|</span><span class="n">i386</span><span class="p">)</span><span class="err">\</span><span class="o">/</span><span class="p">(.</span><span class="o">*</span><span class="err">\</span><span class="p">.</span><span class="n">d</span><span class="o">?</span><span class="n">rpm</span><span class="p">)</span>    <span class="n">http</span><span class="p">:</span><span class="o">//</span><span class="n">rpmcache</span><span class="p">.</span><span class="n">squid</span><span class="p">.</span><span class="n">internal</span><span class="o">/</span><span class="err">$</span><span class="mi">1</span><span class="o">/</span><span class="err">$</span><span class="mi">2</span><span class="o">/</span><span class="err">$</span><span class="mi">3</span><span class="o">/</span><span class="err">$</span><span class="mi">4</span>
 </pre></div>
 
 
@@ -1101,19 +1113,19 @@ refresh_pattern .   0   20% 4320
 <p>Finally, simply add <code>proxy=http://url.to.your.proxy:3128</code> in your clients' <code>/etc/yum.conf</code>.</p>
 <h4 id="reverse-proxy">reverse proxy</h4>
 <p>With a small addition to your <code>squid.conf</code> you can also make Squid act as a reverse proxy (or "accelerator" in Squid terms) for a mirror of your choice, using <strong>the same cache</strong>. Although the wiki still says that <code>cache_peer</code> requests do not pass through the <code>storeid</code> helper, it in fact seems to do just that. At the time of this writing, the latest container uses <code>Squid Cache: Version 3.5.27</code> from Ubuntu's repositories.</p>
-<div class="codehilite"><pre><span></span>...
+<div class="codehilite"><pre><span></span><span class="p">...</span>
 
-http_port 3128
-http_port 80  accel defaultsite=ftp.halifax.rwth-aachen.de no-vhost
+<span class="n">http_port</span> <span class="mi">3128</span>
+<span class="n">http_port</span> <span class="mi">80</span>  <span class="n">accel</span> <span class="n">defaultsite</span><span class="o">=</span><span class="n">ftp</span><span class="p">.</span><span class="n">halifax</span><span class="p">.</span><span class="n">rwth</span><span class="o">-</span><span class="n">aachen</span><span class="p">.</span><span class="n">de</span> <span class="k">no</span><span class="o">-</span><span class="n">vhost</span>
 
-cache_peer ftp.halifax.rwth-aachen.de parent 80 0 no-query originserver name=mirror
+<span class="n">cache_peer</span> <span class="n">ftp</span><span class="p">.</span><span class="n">halifax</span><span class="p">.</span><span class="n">rwth</span><span class="o">-</span><span class="n">aachen</span><span class="p">.</span><span class="n">de</span> <span class="n">parent</span> <span class="mi">80</span> <span class="mi">0</span> <span class="k">no</span><span class="o">-</span><span class="n">query</span> <span class="n">originserver</span> <span class="n">name</span><span class="o">=</span><span class="n">mirror</span>
 
-acl mirror dstdomain ftp.halifax.rwth-aachen.de
-http_access allow mirror
-cache_peer_access mirror allow mirror
-cache_peer_access mirror deny all
+<span class="n">acl</span> <span class="n">mirror</span> <span class="n">dstdomain</span> <span class="n">ftp</span><span class="p">.</span><span class="n">halifax</span><span class="p">.</span><span class="n">rwth</span><span class="o">-</span><span class="n">aachen</span><span class="p">.</span><span class="n">de</span>
+<span class="n">http_access</span> <span class="n">allow</span> <span class="n">mirror</span>
+<span class="n">cache_peer_access</span> <span class="n">mirror</span> <span class="n">allow</span> <span class="n">mirror</span>
+<span class="n">cache_peer_access</span> <span class="n">mirror</span> <span class="n">deny</span> <span class="k">all</span>
 
-...
+<span class="p">...</span>
 </pre></div>
 
 

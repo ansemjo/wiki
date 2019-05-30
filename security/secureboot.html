@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="secureboot.html" title="Security" class="md-tabs__link md-tabs__link--active">
+        <a href="net-disk-decryption.html" title="Security" class="md-tabs__link md-tabs__link--active">
           Security
         </a>
       
@@ -503,6 +503,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
         
           
           
@@ -1010,24 +1022,24 @@ signed Linux kernels.</p>
 <em> binutils
 </em> sbsigntools</p>
 <p>Then clone and install the above two tools: <code>mkefikeys</code> and <code>mksignkernels</code>.</p>
-<div class="codehilite"><pre><span></span>cd /tmp/...
-git clone https://github.com/ansemjo/mkefikeys
-git clone https://github.com/ansemjo/mksignkernels
-(cd mkefikeys &amp;amp;&amp;amp; make -f install.mk install)
-(cd mksignkernels &amp;amp;&amp;amp; make -f install.mk install)
+<div class="codehilite"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">tmp</span><span class="o">/</span><span class="p">...</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">ansemjo</span><span class="o">/</span><span class="n">mkefikeys</span>
+<span class="n">git</span> <span class="n">clone</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">github</span><span class="p">.</span><span class="n">com</span><span class="o">/</span><span class="n">ansemjo</span><span class="o">/</span><span class="n">mksignkernels</span>
+<span class="p">(</span><span class="n">cd</span> <span class="n">mkefikeys</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">install</span><span class="p">.</span><span class="n">mk</span> <span class="n">install</span><span class="p">)</span>
+<span class="p">(</span><span class="n">cd</span> <span class="n">mksignkernels</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">make</span> <span class="o">-</span><span class="n">f</span> <span class="n">install</span><span class="p">.</span><span class="n">mk</span> <span class="n">install</span><span class="p">)</span>
 </pre></div>
 
 
 <h4 id="signing-keys">Signing keys</h4>
 <p>Create a set of signing keys in <code>/etc/efikeys</code>:</p>
-<div class="codehilite"><pre><span></span>mkdir /etc/efikeys &amp;amp;&amp;amp; cd /etc/efikeys
-mkefikeys certs der
+<div class="codehilite"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">efikeys</span> <span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span><span class="o">&amp;</span><span class="n">amp</span><span class="p">;</span> <span class="n">cd</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">efikeys</span>
+<span class="n">mkefikeys</span> <span class="n">certs</span> <span class="n">der</span>
 </pre></div>
 
 
 <p>The <code>der</code> target is required to output DER-encoded certificates in case you need to install those in your firmware. This is the case for OVMF, i.e. KVM machines. My Thinkpad needs authenticated "efi signature lists" .. generate them with <code>mkefikeys auth</code>.</p>
 <p>Copy files required for installation to the unencrypted ESP:</p>
-<div class="codehilite"><pre><span></span>cp /etc/efikeys/*.cer /boot/efi
+<div class="codehilite"><pre><span></span><span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">efikeys</span><span class="cm">/*.cer /boot/efi</span>
 </pre></div>
 
 
@@ -1048,7 +1060,7 @@ mkefikeys certs der
 
 
 <p>Next, we need to create the output directory:</p>
-<div class="codehilite"><pre><span></span>mkdir /boot/efi/EFI/Linux
+<div class="codehilite"><pre><span></span><span class="n">mkdir</span> <span class="o">/</span><span class="n">boot</span><span class="o">/</span><span class="n">efi</span><span class="o">/</span><span class="n">EFI</span><span class="o">/</span><span class="n">Linux</span>
 </pre></div>
 
 
@@ -1061,20 +1073,20 @@ mkefikeys certs der
 </ul>
 <h4 id="use-systemd-boot">Use systemd-boot</h4>
 <p>Check that <code>systemd-boot</code> is installed and you are indeed running UEFI, yadda yadda ..</p>
-<div class="codehilite"><pre><span></span>bootctl status
+<div class="codehilite"><pre><span></span><span class="n">bootctl</span> <span class="n">status</span>
 </pre></div>
 
 
 <p>To install it as the default bootloader, simply issue:</p>
-<div class="codehilite"><pre><span></span>bootctl install
+<div class="codehilite"><pre><span></span><span class="n">bootctl</span> <span class="n">install</span>
 </pre></div>
 
 
 <p>To enable the selection prompt uncomment the <code>timeout</code> in <code>/boot/efi/loader/loader.conf</code>. Otherwise it directly boots the default kernel.</p>
 <h4 id="sign-your-bootloader">Sign your bootloader</h4>
 <p>Before you reboot and attempt to enable Secureboot now, you need to sign the bootloader itself:</p>
-<div class="codehilite"><pre><span></span>mksignkernels sign SIGN=/boot/efi/systemd/systemd-bootx64.efi
-mksignkernels sign SIGN=/boot/efi/BOOT/BOOTX64.EFI
+<div class="codehilite"><pre><span></span><span class="n">mksignkernels</span> <span class="n">sign</span> <span class="n">SIGN</span><span class="o">=/</span><span class="n">boot</span><span class="o">/</span><span class="n">efi</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="n">systemd</span><span class="o">-</span><span class="n">bootx64</span><span class="p">.</span><span class="n">efi</span>
+<span class="n">mksignkernels</span> <span class="n">sign</span> <span class="n">SIGN</span><span class="o">=/</span><span class="n">boot</span><span class="o">/</span><span class="n">efi</span><span class="o">/</span><span class="n">BOOT</span><span class="o">/</span><span class="n">BOOTX64</span><span class="p">.</span><span class="n">EFI</span>
 </pre></div>
 
 
@@ -1103,7 +1115,7 @@ Do that and enable Secureboot now.</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="../rechenzentrum/tls-host-aliases.html" title="TLS for Host Aliases" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="net-disk-decryption.html" title="Network Disk Decryption" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1112,7 +1124,7 @@ Do that and enable Secureboot now.</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                TLS for Host Aliases
+                Network Disk Decryption
               </span>
             </div>
           </a>

@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/secureboot.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
           Security
         </a>
       
@@ -501,6 +501,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
         
           
           
@@ -824,7 +836,7 @@ firmware image folder for your device. Download and extract it somewhere.</p>
 <li>profile: <code>archer-c7-v2</code></li>
 </ul>
 <p>You can include extra packages by configuring <code>PACKAGES=</code>.</p>
-<div class="codehilite"><pre><span></span>make image PROFILE=&quot;archer-c7-v2&quot; PACKAGES=&quot;-ppp -ppp-mod-pppoe luci-ssl wireguard&quot;
+<div class="codehilite"><pre><span></span><span class="n">make</span> <span class="n">image</span> <span class="n">PROFILE</span><span class="o">=</span><span class="ss">&quot;archer-c7-v2&quot;</span> <span class="n">PACKAGES</span><span class="o">=</span><span class="ss">&quot;-ppp -ppp-mod-pppoe luci-ssl wireguard&quot;</span>
 </pre></div>
 
 

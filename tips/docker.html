@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/secureboot.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
           Security
         </a>
       
@@ -501,6 +501,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
         
           
           
@@ -846,10 +858,10 @@ circumvents any firewall managers.</p>
 <h3 id="disable-iptables-tampering">Disable <code>iptables</code> tampering</h3>
 <p>To disable this behaviour add <code>--iptables=false</code> to the start arguments of docker. Either do that by
 editing the systemd service, or set an <code>DOCKER_OPTS="..."</code> in <code>/etc/default/docker</code> if applicable.</p>
-<div class="codehilite"><pre><span></span>$ systemctl edit docker.service
-<span class="o">[</span>Service<span class="o">]</span>
-<span class="nv">ExecStart</span><span class="o">=</span>
-<span class="nv">ExecStart</span><span class="o">=</span>/usr/bin/dockerd -H fd:// --iptables<span class="o">=</span><span class="nb">false</span>
+<div class="codehilite"><pre><span></span><span class="err">$</span><span class="w"> </span><span class="n">systemctl</span><span class="w"> </span><span class="n">edit</span><span class="w"> </span><span class="n">docker</span><span class="p">.</span><span class="n">service</span><span class="w"></span>
+<span class="o">[</span><span class="n">Service</span><span class="o">]</span><span class="w"></span>
+<span class="n">ExecStart</span><span class="o">=</span><span class="w"></span>
+<span class="n">ExecStart</span><span class="o">=/</span><span class="n">usr</span><span class="o">/</span><span class="n">bin</span><span class="o">/</span><span class="n">dockerd</span><span class="w"> </span><span class="o">-</span><span class="n">H</span><span class="w"> </span><span class="nl">fd</span><span class="p">:</span><span class="o">//</span><span class="w"> </span><span class="c1">--iptables=false</span>
 </pre></div>
 
 
@@ -860,8 +872,8 @@ outside world anymore. To reenable the forwarding with <code>firewalld</code> us
 
 
 <p>Or using raw <code>iptables</code> rules:</p>
-<div class="codehilite"><pre><span></span>-A FORWARD -i docker0 -o eth0 -j ACCEPT
--A FORWARD -i eth0 -o docker0 -j ACCEPT
+<div class="codehilite"><pre><span></span><span class="o">-</span><span class="n">A</span> <span class="k">FORWARD</span> <span class="o">-</span><span class="n">i</span> <span class="n">docker0</span> <span class="o">-</span><span class="n">o</span> <span class="n">eth0</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
+<span class="o">-</span><span class="n">A</span> <span class="k">FORWARD</span> <span class="o">-</span><span class="n">i</span> <span class="n">eth0</span> <span class="o">-</span><span class="n">o</span> <span class="n">docker0</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
 </pre></div>
                 
                   

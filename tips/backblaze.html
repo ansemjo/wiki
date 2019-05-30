@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/secureboot.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
           Security
         </a>
       
@@ -501,6 +501,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
         
           
           
@@ -847,25 +859,25 @@
 <p>My GitLab backups are currently stored in a Minio S3 object storage with WORM activated but files
 can still be deleted by accident from the server itself. A naiive workflow would look like this:</p>
 <p>Mirror all files from Minio locally:</p>
-<div class="codehilite"><pre><span></span>tmp
-mc mirror rz/gitlab/ ./
+<div class="codehilite"><pre><span></span><span class="n">tmp</span>
+<span class="n">mc</span> <span class="n">mirror</span> <span class="n">rz</span><span class="o">/</span><span class="n">gitlab</span><span class="o">/</span> <span class="p">.</span><span class="o">/</span>
 </pre></div>
 
 
 <p>Encrypt all files with GPG and remove plaintexts:</p>
-<div class="codehilite"><pre><span></span>for f in $(ls !(*.gpg)); do \
-  gpg --recipient ansemjo --encrypt $f; \
-  rm -fv $f; \
-done;
+<div class="codehilite"><pre><span></span><span class="k">for</span> <span class="nv">f</span> <span class="nv">in</span> $<span class="ss">(</span><span class="nv">ls</span> <span class="o">!</span><span class="ss">(</span><span class="o">*</span>.<span class="nv">gpg</span><span class="ss">))</span><span class="c1">; do \</span>
+  <span class="nv">gpg</span> <span class="o">--</span><span class="nv">recipient</span> <span class="nv">ansemjo</span> <span class="o">--</span><span class="nv">encrypt</span> <span class="mh">$f</span><span class="c1">; \</span>
+  <span class="nv">rm</span> <span class="o">-</span><span class="nv">fv</span> <span class="mh">$f</span><span class="c1">; \</span>
+<span class="nv">done</span><span class="c1">;</span>
 </pre></div>
 
 
 <p>Mirror encrypted files to Backblaze:</p>
-<div class="codehilite"><pre><span></span># check file list
-b2 sync --dryRun --compareVersions none ./ b2://gitbacks/
+<div class="codehilite"><pre><span></span><span class="o">#</span> <span class="k">check</span> <span class="n">file</span> <span class="n">list</span>
+<span class="n">b2</span> <span class="n">sync</span> <span class="c1">--dryRun --compareVersions none ./ b2://gitbacks/</span>
 
-# upload to backblaze
-b2 sync --compareVersions none ./ b2://gitbacks/
+<span class="o">#</span> <span class="n">upload</span> <span class="k">to</span> <span class="n">backblaze</span>
+<span class="n">b2</span> <span class="n">sync</span> <span class="c1">--compareVersions none ./ b2://gitbacks/</span>
 </pre></div>
 
 

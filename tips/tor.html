@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/secureboot.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
           Security
         </a>
       
@@ -501,6 +501,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
         
           
           
@@ -816,9 +828,9 @@
 <p>Since most distributions should ship a default config with those commented out you only need to
 download / install <code>tor</code> and start it. A possible obstacle is the configured <code>DataDirectory</code> if you
 want to run it as a user. In this case use this simple configuration:</p>
-<div class="codehilite"><pre><span></span>SocksPort 9050
-Log notice stderr
-DataDirectory ~/.local/share/tor
+<div class="codehilite"><pre><span></span><span class="n">SocksPort</span> <span class="mi">9050</span>
+<span class="n">Log</span> <span class="n">notice</span> <span class="n">stderr</span>
+<span class="n">DataDirectory</span> <span class="o">~/</span><span class="p">.</span><span class="k">local</span><span class="o">/</span><span class="k">share</span><span class="o">/</span><span class="n">tor</span>
 </pre></div>
 
 

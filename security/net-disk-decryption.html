@@ -36,7 +36,7 @@
     
     
       
-        <title>Systemd Disk Decryption Target - ansemjo's docs</title>
+        <title>Network Disk Decryption - ansemjo's docs</title>
       
     
     
@@ -90,7 +90,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#systemd-disk-decryption-target" tabindex="1" class="md-skip">
+      <a href="#network-disk-decryption" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -116,7 +116,7 @@
                 ansemjo's docs
               </span>
               <span class="md-header-nav__topic">
-                Systemd Disk Decryption Target
+                Network Disk Decryption
               </span>
             
           
@@ -508,11 +508,56 @@
           
           
 
+  
 
-  <li class="md-nav__item">
-    <a href="net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+
+  <li class="md-nav__item md-nav__item--active">
+    
+    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
+    
+      
+    
+    
+      <label class="md-nav__link md-nav__link--active" for="__toc">
+        Network Disk Decryption
+      </label>
+    
+    <a href="net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link md-nav__link--active">
       Network Disk Decryption
     </a>
+    
+      
+<nav class="md-nav md-nav--secondary">
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">Table of contents</label>
+    <ul class="md-nav__list" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#tang-server" title="tang server" class="md-nav__link">
+    tang server
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#clevis-client" title="clevis client" class="md-nav__link">
+    clevis client
+  </a>
+  
+</li>
+      
+      
+      
+      
+      
+    </ul>
+  
+</nav>
+    
   </li>
 
         
@@ -532,90 +577,11 @@
           
           
 
-  
 
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Systemd Disk Decryption Target
-      </label>
-    
-    <a href="systemd-decryption-target.html" title="Systemd Disk Decryption Target" class="md-nav__link md-nav__link--active">
+  <li class="md-nav__item">
+    <a href="systemd-decryption-target.html" title="Systemd Disk Decryption Target" class="md-nav__link">
       Systemd Disk Decryption Target
     </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#crypttab-entries" title="crypttab entries" class="md-nav__link">
-    crypttab entries
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#systemd-units" title="Systemd Units" class="md-nav__link">
-    Systemd Units
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#unlockmetarget" title="unlockme.target" class="md-nav__link">
-    unlockme.target
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unlockedtarget" title="unlocked.target" class="md-nav__link">
-    unlocked.target
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#continueservice" title="continue.service" class="md-nav__link">
-    continue.service
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#change-default-target" title="Change Default Target" class="md-nav__link">
-    Change Default Target
-  </a>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
   </li>
 
         
@@ -837,49 +803,15 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#crypttab-entries" title="crypttab entries" class="md-nav__link">
-    crypttab entries
+  <a href="#tang-server" title="tang server" class="md-nav__link">
+    tang server
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#systemd-units" title="Systemd Units" class="md-nav__link">
-    Systemd Units
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#unlockmetarget" title="unlockme.target" class="md-nav__link">
-    unlockme.target
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#unlockedtarget" title="unlocked.target" class="md-nav__link">
-    unlocked.target
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#continueservice" title="continue.service" class="md-nav__link">
-    continue.service
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#change-default-target" title="Change Default Target" class="md-nav__link">
-    Change Default Target
+  <a href="#clevis-client" title="clevis client" class="md-nav__link">
+    clevis client
   </a>
   
 </li>
@@ -900,123 +832,115 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/ansemjo/wiki/edit/master/docs/security/systemd-decryption-target.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/ansemjo/wiki/edit/master/docs/security/net-disk-decryption.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="systemd-disk-decryption-target">Systemd Disk Decryption Target</h1>
-<p>In order to delay most of your systems services during boot until a bunch of harddisks are decrypted
-but still bring up enough to allow for remote unlocking via <code>ssh</code> you'll need to use a
-<a href="https://www.freedesktop.org/software/systemd/man/systemd.target.html">systemd.target</a>.</p>
-<p>Most of the information here is based
-<a href="https://lists.debian.org/debian-user/2015/06/msg01259.html">a mail on Debian's mailinglist</a> by
-Christian Seiler.</p>
-<h2 id="crypttab-entries"><code>crypttab</code> entries</h2>
-<p>Add entries for your disks to <code>/etc/crypttab</code>. Use <code>-</code> to signal interactive passwords and add
-<code>noauto</code> to avoid hanging at early boot:</p>
-<div class="codehilite"><pre><span></span><span class="o">#</span> <span class="n">format</span><span class="p">:</span> <span class="o">&lt;</span><span class="n">name</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">disk</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="n">keyfile</span><span class="o">&gt;</span> <span class="o">&lt;</span><span class="k">options</span><span class="o">&gt;</span>
-<span class="n">HGST_HDN724040ALE640_PK1334PEHK98JS_LUKS</span>  <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk</span><span class="o">/</span><span class="k">by</span><span class="o">-</span><span class="n">id</span><span class="o">/</span><span class="n">ata</span><span class="o">-</span><span class="n">HGST_HDN724040ALE640_PK1334PEHK98JS</span><span class="o">-</span><span class="n">part1</span>  <span class="o">-</span> <span class="n">luks</span><span class="p">,</span><span class="n">noauto</span>
-<span class="n">HGST_HDN724040ALE640_PK1334PEHLZA1S_LUKS</span>  <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk</span><span class="o">/</span><span class="k">by</span><span class="o">-</span><span class="n">id</span><span class="o">/</span><span class="n">ata</span><span class="o">-</span><span class="n">HGST_HDN724040ALE640_PK1334PEHLZA1S</span><span class="o">-</span><span class="n">part1</span>  <span class="o">-</span> <span class="n">luks</span><span class="p">,</span><span class="n">noauto</span>
-<span class="n">WDC_WD40EZRX</span><span class="o">-</span><span class="mi">00</span><span class="n">SPEB0_WD</span><span class="o">-</span><span class="n">WCC4E0284683_LUKS</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk</span><span class="o">/</span><span class="k">by</span><span class="o">-</span><span class="n">id</span><span class="o">/</span><span class="n">ata</span><span class="o">-</span><span class="n">WDC_WD40EZRX</span><span class="o">-</span><span class="mi">00</span><span class="n">SPEB0_WD</span><span class="o">-</span><span class="n">WCC4E0284683</span><span class="o">-</span><span class="n">part1</span> <span class="o">-</span> <span class="n">luks</span><span class="p">,</span><span class="n">noauto</span>
-<span class="n">WDC_WD40EZRX</span><span class="o">-</span><span class="mi">00</span><span class="n">SPEB0_WD</span><span class="o">-</span><span class="n">WCC4E0496927_LUKS</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk</span><span class="o">/</span><span class="k">by</span><span class="o">-</span><span class="n">id</span><span class="o">/</span><span class="n">ata</span><span class="o">-</span><span class="n">WDC_WD40EZRX</span><span class="o">-</span><span class="mi">00</span><span class="n">SPEB0_WD</span><span class="o">-</span><span class="n">WCC4E0496927</span><span class="o">-</span><span class="n">part1</span> <span class="o">-</span> <span class="n">luks</span><span class="p">,</span><span class="n">noauto</span>
+                <h1 id="network-disk-decryption">Network Disk Decryption</h1>
+<p>Recently RedHat 7.4 introduced the possibility to bind your encrypted disks to a
+network presence. It is called <a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/7/html/Security_Guide/sec-Using_Network-Bound_Disk_Encryption.html">Network-Bound Disk Encryption</a>
+and uses the projects <a href="https://github.com/latchset/tang">tang</a> and
+<a href="https://github.com/latchset/clevis">clevis</a>.</p>
+<p>In essence, an encrypted payload is transformed with some ECDH key exchange magic with
+the tang server and the disk is decrypted automatically. If however the tang server is
+unavailable, this method fails and you must fall back to manually entering a passphrase.</p>
+<p>I decided this is a nice addition to <a href="systemd-decryption-target.html">my systemd decryption target</a>,
+so here's how I implemented it:</p>
+<h2 id="tang-server"><code>tang</code> server</h2>
+<p>First of all, install a release of the <code>tang</code> server. There's a package for CentOS and
+a package in the AUR for Arch Linux. There are probably others, too. But it shouldn't
+be too hard to build it yourself either.</p>
+<div class="codehilite"><pre><span></span><span class="n">yum</span> <span class="n">install</span> <span class="n">tang</span>
 </pre></div>
 
 
-<h2 id="systemd-units">Systemd Units</h2>
-<p>Then you need to add a few unit files to create proper dependencies.</p>
-<h3 id="unlockmetarget"><code>unlockme.target</code></h3>
-<p>Mostly just copy and edit <code>/usr/lib/systemd/system/multi-user.target</code>:</p>
-<div class="codehilite"><pre><span></span><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">System waiting for decryption of disks</span>
-<span class="na">Requires</span><span class="o">=</span><span class="s">basic.target</span>
-<span class="na">Conflicts</span><span class="o">=</span><span class="s">rescue.service rescue.target</span>
-<span class="na">After</span><span class="o">=</span><span class="s">basic.target rescue.service rescue.target</span>
-<span class="na">AllowIsolate</span><span class="o">=</span><span class="s">yes</span>
+<p>I didn't like tang running on port 80 by default, so I changed it with <code>systemctl edit tangd.socket</code>:</p>
+<div class="codehilite"><pre><span></span><span class="k">[Socket]</span>
+<span class="na">ListenStream</span><span class="o">=</span>
+<span class="na">ListenStream</span><span class="o">=</span><span class="s">51653</span>
 </pre></div>
 
 
-<p>Copy wanted symlinks from <code>/usr/lib</code>:</p>
-<div class="codehilite"><pre><span></span><span class="nv">mkcd</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">systemd</span><span class="o">/</span><span class="nv">system</span><span class="o">/</span><span class="nv">unlockme</span>.<span class="nv">target</span>.<span class="nv">wants</span><span class="o">/</span>
-<span class="k">for</span> <span class="nv">w</span> <span class="nv">in</span> <span class="o">/</span><span class="nv">usr</span><span class="o">/</span><span class="nv">lib</span><span class="o">/</span><span class="nv">systemd</span><span class="o">/</span><span class="nv">system</span><span class="o">/</span><span class="nv">multi</span><span class="o">-</span><span class="nv">user</span>.<span class="nv">target</span>.<span class="nv">wants</span><span class="cm">/*; do</span>
-<span class="cm">  ln -s $(readlink -f $w)</span>
-<span class="cm">done</span>
+<p>Start and enable the service. Make sure to open the firewall on that port.</p>
+<div class="codehilite"><pre><span></span><span class="n">systemctl</span> <span class="n">enable</span> <span class="c1">--now tangd.socket</span>
 </pre></div>
 
 
-<p>And add any services that you might require to be able to login via <code>ssh</code>:</p>
-<div class="admonition warning">
-<p class="admonition-title">Warning</p>
-<p>Do not forget required networking services!</p>
-</div>
-<div class="codehilite"><pre><span></span><span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="k">system</span><span class="o">/</span><span class="n">sshd</span><span class="p">.</span><span class="n">service</span>
-<span class="n">ln</span> <span class="o">-</span><span class="n">s</span> <span class="o">/</span><span class="n">usr</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">systemd</span><span class="o">/</span><span class="k">system</span><span class="o">/</span><span class="n">NetworkManager</span><span class="p">.</span><span class="n">service</span>
+<p>You can now make sure that a key is present and print the public key:</p>
+<div class="codehilite"><pre><span></span><span class="nv">tang</span><span class="o">-</span><span class="k">show</span><span class="o">-</span><span class="nv">keys</span> <span class="mi">51653</span>
+<span class="mi">4</span><span class="nv">yWvhO4ZthpAGHDmdMn78Pe2Bg0</span>
 </pre></div>
 
 
-<h3 id="unlockedtarget"><code>unlocked.target</code></h3>
-<p>This target depends on all disks to be decrypted. The service's instance name is the <code>&lt;name&gt;</code> from
-your crypttab.</p>
-<div class="codehilite"><pre><span></span><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">Decrypted all disks</span>
-
-<span class="na">Conflicts</span><span class="o">=</span><span class="s">systemd-ask-password-console.path systemd-ask-password-console.service</span>
-<span class="na">Conflicts</span><span class="o">=</span><span class="s">systemd-ask-password-plymouth.path systemd-ask-password-plymouth.service</span>
-
-<span class="na">Requires</span><span class="o">=</span><span class="s">unlockme.target \</span>
-<span class="s">  systemd-cryptsetup@HGST_HDN724040ALE640_PK1334PEHK98JS_LUKS.service \</span>
-<span class="s">  systemd-cryptsetup@HGST_HDN724040ALE640_PK1334PEHLZA1S_LUKS.service \</span>
-<span class="s">  systemd-cryptsetup@WDC_WD40EZRX\x2d00SPEB0_WD\x2dWCC4E0284683_LUKS.service \</span>
-<span class="s">  systemd-cryptsetup@WDC_WD40EZRX\x2d00SPEB0_WD\x2dWCC4E0496927_LUKS.service</span>
+<h2 id="clevis-client"><code>clevis</code> client</h2>
+<p>Now for the client part on my fileserver. There is a nice <a href="https://www.redhat.com/en/blog/easier-way-manage-disk-decryption-boot-red-hat-enterprise-linux-75-using-nbde">post</a> on the RedHat blog
+describing the entire procedure. I'm assuming you already have some encrypted disks that you want
+to set up for network-bound decryption. First, install clevis:</p>
+<div class="codehilite"><pre><span></span><span class="n">yum</span> <span class="n">install</span> <span class="n">clevis</span> <span class="n">clevis</span><span class="o">-</span><span class="n">luks</span>
 </pre></div>
 
 
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>Remember to escape any names which might contain special characters in systemd's sense, i.e.
-run names though <code>systemd-escape</code> first.</p>
-</div>
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>I needed a little override in <code>/etc/systemd/system/systemd-cryptsetup@.service.d/dependencies.conf</code>
-to make sure that this target properly waits for all <code>systemd-cryptsetup@***.service</code> units without
-specifying them all in <code>After=</code> manually:</p>
-<div class="codehilite"><pre><span></span><span class="k">[Unit]</span>
-<span class="na">DefaultDependencies</span><span class="o">=</span><span class="s">yes</span>
+<p>And make sure that you can reach your tang server:</p>
+<div class="codehilite"><pre><span></span><span class="n">curl</span> <span class="o">-</span><span class="n">f</span> <span class="n">tang</span><span class="p">.</span><span class="n">yourdomain</span><span class="p">:</span><span class="mi">51653</span><span class="o">/</span><span class="n">adv</span> <span class="o">|</span> <span class="n">jq</span> <span class="p">.</span>
 </pre></div>
 
 
-</div>
-<h3 id="continueservice"><code>continue.service</code></h3>
-<p>Add the service which depends on those targets and then kicks off the rest of the startup
-procedures:</p>
-<div class="codehilite"><pre><span></span><span class="k">[Unit]</span>
-<span class="na">Description</span><span class="o">=</span><span class="s">Continue system startup after disk decryption</span>
-<span class="na">Requires</span><span class="o">=</span><span class="s">unlocked.target</span>
-<span class="na">After</span><span class="o">=</span><span class="s">unlocked.target</span>
-
-<span class="k">[Service]</span>
-<span class="na">Type</span><span class="o">=</span><span class="s">oneshot</span>
-<span class="na">ExecStart</span><span class="o">=</span><span class="s">/usr/bin/systemctl --no-block start multi-user.target</span>
+<p>Now we bind a secret to this tang server and add it as a new key on our LUKS disks. This will
+use the luksmeta storage, so you might want to take header backups on all disks to avoid data loss:</p>
+<div class="codehilite"><pre><span></span><span class="n">cryptsetup</span> <span class="n">luksHeaderBackup</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk</span><span class="o">/</span><span class="k">by</span><span class="o">-</span><span class="n">id</span><span class="o">/</span><span class="n">ata</span><span class="o">-</span><span class="p">...</span> <span class="c1">--header-backup-file ...</span>
 </pre></div>
 
 
-<h2 id="change-default-target">Change Default Target</h2>
-<p>Finally, change your default target to <code>unlockme.target</code> to use this procedure:</p>
-<div class="codehilite"><pre><span></span><span class="n">systemctl</span> <span class="k">set</span><span class="o">-</span><span class="k">default</span> <span class="n">unlockme</span><span class="p">.</span><span class="n">target</span>
+<p>Then bind the disks to the tang server:</p>
+<div class="codehilite"><pre><span></span><span class="nv">clevis</span> <span class="nv">luks</span> <span class="nv">bind</span> <span class="o">-</span><span class="nv">d</span> <span class="o">/</span><span class="nv">dev</span><span class="o">/</span><span class="nv">disk</span><span class="o">/</span><span class="nv">by</span><span class="o">-</span><span class="nv">id</span><span class="o">/</span><span class="nv">ata</span><span class="o">-</span>... \
+  <span class="nv">tang</span> <span class="s1">&#39;</span><span class="s">{&quot;url&quot;:&quot;http://tang.yourdomain:51653&quot;}</span><span class="s1">&#39;</span>
+
+<span class="nv">The</span> <span class="nv">advertisement</span> <span class="nv">contains</span> <span class="nv">the</span> <span class="nv">following</span> <span class="nv">signing</span> <span class="nv">keys</span>:
+<span class="mi">4</span><span class="nv">yWvhO4ZthpAGHDmdMn78Pe2Bg0</span>
+
+<span class="k">Do</span> <span class="nv">you</span> <span class="nv">wish</span> <span class="nv">to</span> <span class="nv">trust</span> <span class="nv">these</span> <span class="nv">keys</span>? [<span class="nv">ynYN</span>] <span class="nv">y</span>
+...
 </pre></div>
 
 
-<p>Now reboot, login with <code>ssh</code> and then start the continuation service to unlock your disks and carry
-on:</p>
-<div class="codehilite"><pre><span></span><span class="nv">systemctl</span> <span class="nv">start</span> <span class="k">continue</span>
+<p>Make sure the key matches the <code>tang-show-keys</code> output above! You'll be asked to initialize the LUKS
+metadata storage and must then enter an existing passphrase to add the newly bound secret as a new
+encryption key to your disk.</p>
+<p>I didn't bother to setup automatic decryption on boot since I already have a semi-automatic decryption
+environment in place with my systemd decryption target. I'm fine with decrypting disks with <code>clevis</code>
+manually:</p>
+<div class="codehilite"><pre><span></span><span class="n">clevis</span> <span class="n">luks</span> <span class="n">unlock</span> <span class="o">-</span><span class="n">d</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk</span><span class="o">/</span><span class="k">by</span><span class="o">-</span><span class="n">id</span><span class="o">/</span><span class="n">ata</span><span class="o">-</span><span class="p">...</span> <span class="o">-</span><span class="n">n</span> <span class="n">mappername</span>
 </pre></div>
 
 
-<p>You should be asked to enter the passwords on the commandline directly.</p>
-<div class="admonition hint">
-<p class="admonition-title">Hint</p>
-<p>If you have trouble booting after any changes, apped <code>init=/sysroot/bin/sh</code> to your kernel
-commandline!</p>
-</div>
+<p>However, I automated this for all four disks in my array with a small script, which reads the disks and
+names from <code>/etc/crypttab</code> and then starts <a href="systemd-decryption-target.html#continueservice"><code>continue.service</code></a>:</p>
+<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre> 1
+ 2
+ 3
+ 4
+ 5
+ 6
+ 7
+ 8
+ 9
+10
+11
+12
+13</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="ch">#!/bin/sh</span>
+
+<span class="c1"># unlock disks with tang and clevis</span>
+<span class="nb">echo</span> <span class="s2">&quot;+ unlock disks&quot;</span>
+<span class="k">while</span> <span class="nb">read</span> name disk opts<span class="p">;</span> <span class="k">do</span>
+  <span class="nb">echo</span> <span class="s2">&quot;  </span><span class="nv">$disk</span><span class="s2">&quot;</span>
+  clevis luks unlock -d <span class="s2">&quot;</span><span class="nv">$disk</span><span class="s2">&quot;</span> -n <span class="s2">&quot;</span><span class="nv">$name</span><span class="s2">&quot;</span>
+<span class="k">done</span> &lt; /etc/crypttab
+
+<span class="c1"># continue system startup</span>
+sleep <span class="m">2</span>
+<span class="nb">echo</span> <span class="s2">&quot;+ continue startup&quot;</span>
+systemctl start <span class="k">continue</span>.service
+</pre></div>
+</td></tr></table>
                 
                   
                 
@@ -1037,7 +961,7 @@ commandline!</p>
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="secureboot.html" title="Secureboot" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="../rechenzentrum/tls-host-aliases.html" title="TLS for Host Aliases" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -1046,19 +970,19 @@ commandline!</p>
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                Secureboot
+                TLS for Host Aliases
               </span>
             </div>
           </a>
         
         
-          <a href="zfs-in-place-encryption.html" title="ZFS in-place Encryption" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="secureboot.html" title="Secureboot" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                ZFS in-place Encryption
+                Secureboot
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">

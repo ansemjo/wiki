@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/secureboot.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
           Security
         </a>
       
@@ -501,6 +501,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
         
           
           
@@ -829,28 +841,28 @@
 instead of specifying the repository with <code>-r &lt;repo&gt;</code> and entering the password interactively.</p>
 <h2 id="restore-a-single-file">Restore a single file</h2>
 <p>List your snapshots:</p>
-<div class="codehilite"><pre><span></span>restic snapshots
+<div class="codehilite"><pre><span></span><span class="n">restic</span> <span class="n">snapshots</span>
 </pre></div>
 
 
 <p>Fetch a list of files within a snapshot or search for one:</p>
-<div class="codehilite"><pre><span></span>restic ls -l {latest|snapshot-id}
-restic find
+<div class="codehilite"><pre><span></span><span class="n">restic</span> <span class="n">ls</span> <span class="o">-</span><span class="n">l</span> <span class="err">{</span><span class="n">latest</span><span class="o">|</span><span class="n">snapshot</span><span class="o">-</span><span class="n">id</span><span class="err">}</span>
+<span class="n">restic</span> <span class="n">find</span>
 </pre></div>
 
 
 <p>Restore a single file matching a pattern:</p>
-<div class="codehilite"><pre><span></span>restic restore \
-    --target /restore/path \
-    --include filename_or_pattern \
-    {latest|snapshot-id}
+<div class="codehilite"><pre><span></span><span class="nv">restic</span> <span class="nv">restore</span> \
+    <span class="o">--</span><span class="nv">target</span> <span class="o">/</span><span class="nv">restore</span><span class="o">/</span><span class="nv">path</span> \
+    <span class="o">--</span><span class="k">include</span> <span class="nv">filename_or_pattern</span> \
+    {<span class="nv">latest</span><span class="o">|</span><span class="nv">snapshot</span><span class="o">-</span><span class="nv">id</span>}
 </pre></div>
 
 
 <h2 id="mount-and-browse-a-snapshot">Mount and browse a snapshot</h2>
 <p>Or mount a snapshot and browse inside interactively:</p>
-<div class="codehilite"><pre><span></span>restic mount /mount/path
-ls -la /mount/path
+<div class="codehilite"><pre><span></span><span class="n">restic</span> <span class="n">mount</span> <span class="o">/</span><span class="n">mount</span><span class="o">/</span><span class="n">path</span>
+<span class="n">ls</span> <span class="o">-</span><span class="n">la</span> <span class="o">/</span><span class="n">mount</span><span class="o">/</span><span class="n">path</span>
 </pre></div>
                 
                   

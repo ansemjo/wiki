@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/secureboot.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
           Security
         </a>
       
@@ -629,6 +629,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../security/secureboot.html" title="Secureboot" class="md-nav__link">
       Secureboot
     </a>
@@ -977,9 +989,9 @@
 <p>The following steps are designed for a CentOS 7.6 hypervisor.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>First of all, we need to prepare our hypervisor, so install QEMU and libvirt.</p>
-<div class="codehilite"><pre><span></span>yum install qemu-kvm libvirt
-modprobe kvm
-systemctl enable --now libvirtd
+<div class="codehilite"><pre><span></span><span class="n">yum</span> <span class="n">install</span> <span class="n">qemu</span><span class="o">-</span><span class="n">kvm</span> <span class="n">libvirt</span>
+<span class="n">modprobe</span> <span class="n">kvm</span>
+<span class="n">systemctl</span> <span class="n">enable</span> <span class="c1">--now libvirtd</span>
 </pre></div>
 
 
@@ -1006,7 +1018,7 @@ console on the hypervisor itself, you can download and run the CoreOS <code>vmli
 <p>Remember to append a <code>--connect</code> string if you are connecting to a remote libvirt socket.</p>
 </div>
 <p>If you prefer to download and verify <a href="https://stable.release.core-os.net/amd64-usr/current/coreos_production_iso_image.iso">an ISO</a> locally instead, you can substitute:</p>
-<div class="codehilite"><pre><span></span>  --location /tmp/coreos.iso,kernel=/coreos/vmlinuz,initrd=/coreos/cpio.gz \
+<div class="codehilite"><pre><span></span>  <span class="c1">--location /tmp/coreos.iso,kernel=/coreos/vmlinuz,initrd=/coreos/cpio.gz \</span>
 </pre></div>
 
 
@@ -1017,24 +1029,24 @@ console on the hypervisor itself, you can download and run the CoreOS <code>vmli
 <h3 id="via-vnc-viewer">Via VNC Viewer</h3>
 <p>Apart from using VNC, we are going to use <a href="https://netboot.xyz">netboot.xyt</a> in this approach. This is possible with <code>virt-install</code> version 1.5.0 on CentOS 7.</p>
 <p>First, download the netboot image:</p>
-<div class="codehilite"><pre><span></span>cd /var/lib/libvirt/boot
-curl -LO https://boot.netboot.xyz/ipxe/netboot.xyz.iso
+<div class="codehilite"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">boot</span>
+<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">boot</span><span class="p">.</span><span class="n">netboot</span><span class="p">.</span><span class="n">xyz</span><span class="o">/</span><span class="n">ipxe</span><span class="o">/</span><span class="n">netboot</span><span class="p">.</span><span class="n">xyz</span><span class="p">.</span><span class="n">iso</span>
 </pre></div>
 
 
 <p>Now create the virtual machine with <code>virt-install</code>:</p>
-<div class="codehilite"><pre><span></span>virt-install --name runner --memory 4096 --vcpus 4 \
-  --disk size=20,bus=virtio --hvm --rng /dev/urandom \
-  --autostart --cdrom /var/lib/libvirt/boot/netboot.xyz.iso \
-  --graphics vnc,listen=0.0.0.0 --noautoconsole \
-  --os-variant virtio26
+<div class="codehilite"><pre><span></span><span class="n">virt</span><span class="o">-</span><span class="n">install</span> <span class="c1">--name runner --memory 4096 --vcpus 4 \</span>
+  <span class="c1">--disk size=20,bus=virtio --hvm --rng /dev/urandom \</span>
+  <span class="c1">--autostart --cdrom /var/lib/libvirt/boot/netboot.xyz.iso \</span>
+  <span class="c1">--graphics vnc,listen=0.0.0.0 --noautoconsole \</span>
+  <span class="c1">--os-variant virtio26</span>
 </pre></div>
 
 
 <p>This should start the installation process and enable a VNC console. You can check the port with
 <code>virsh vncdisplay runner</code> and verify with <code>ss -tln</code>. In my case <code>:0</code> corresponds to port 5900 on the
 host, so temporarily open that port in the firewall:</p>
-<div class="codehilite"><pre><span></span>firewall-cmd --add-port 5900/tcp
+<div class="codehilite"><pre><span></span><span class="n">firewall</span><span class="o">-</span><span class="n">cmd</span> <span class="c1">--add-port 5900/tcp</span>
 </pre></div>
 
 
@@ -1108,11 +1120,11 @@ virsh net-update default add-last ip-dhcp-host <span class="se">\</span>
 
 <h3 id="ssh-client-configuration">SSH Client Configuration</h3>
 <p>Add an appropriate SSH config on the hypervisor:</p>
-<div class="codehilite"><pre><span></span>Host runner
-  User core
-  HostName 192.168.122.2
-  StrictHostKeyChecking no
-  UserKnownHostsFile /dev/null
+<div class="codehilite"><pre><span></span><span class="k">Host</span> <span class="n">runner</span>
+  <span class="k">User</span> <span class="n">core</span>
+  <span class="n">HostName</span> <span class="mi">192</span><span class="p">.</span><span class="mi">168</span><span class="p">.</span><span class="mi">122</span><span class="p">.</span><span class="mi">2</span>
+  <span class="n">StrictHostKeyChecking</span> <span class="k">no</span>
+  <span class="n">UserKnownHostsFile</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="k">null</span>
 </pre></div>
                 
                   

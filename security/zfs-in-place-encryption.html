@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="secureboot.html" title="Security" class="md-tabs__link md-tabs__link--active">
+        <a href="net-disk-decryption.html" title="Security" class="md-tabs__link md-tabs__link--active">
           Security
         </a>
       
@@ -503,6 +503,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
         
           
           
@@ -946,13 +958,13 @@ here).</p>
 </table>
 <h3 id="rinse-repeat">Rinse &amp; Repeat</h3>
 <p>Assume the original pool looked like this:</p>
-<div class="codehilite"><pre><span></span>kourier
-  mirror-0                                                          ONLINE
-    /dev/disk/by-id/ata-WDC_WD40EZRX-00SPEB0_WD-WCC4E0496927-part2  ONLINE
-    /dev/disk/by-id/ata-HGST_HDN724040ALE640_PK1334PEHLZA1S-part2   ONLINE
-  mirror-1                                                          ONLINE
-    /dev/disk/by-id/ata-WDC_WD40EZRX-00SPEB0_WD-WCC4E0284683-part2  ONLINE
-    /dev/disk/by-id/ata-HGST_HDN724040ALE640_PK1334PEHK98JS-part2   ONLINE
+<div class="codehilite"><pre><span></span><span class="n">kourier</span>
+  <span class="n">mirror</span><span class="o">-</span><span class="mi">0</span>                                                          <span class="n">ONLINE</span>
+    <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk</span><span class="o">/</span><span class="k">by</span><span class="o">-</span><span class="n">id</span><span class="o">/</span><span class="n">ata</span><span class="o">-</span><span class="n">WDC_WD40EZRX</span><span class="o">-</span><span class="mi">00</span><span class="n">SPEB0_WD</span><span class="o">-</span><span class="n">WCC4E0496927</span><span class="o">-</span><span class="n">part2</span>  <span class="n">ONLINE</span>
+    <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk</span><span class="o">/</span><span class="k">by</span><span class="o">-</span><span class="n">id</span><span class="o">/</span><span class="n">ata</span><span class="o">-</span><span class="n">HGST_HDN724040ALE640_PK1334PEHLZA1S</span><span class="o">-</span><span class="n">part2</span>   <span class="n">ONLINE</span>
+  <span class="n">mirror</span><span class="o">-</span><span class="mi">1</span>                                                          <span class="n">ONLINE</span>
+    <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk</span><span class="o">/</span><span class="k">by</span><span class="o">-</span><span class="n">id</span><span class="o">/</span><span class="n">ata</span><span class="o">-</span><span class="n">WDC_WD40EZRX</span><span class="o">-</span><span class="mi">00</span><span class="n">SPEB0_WD</span><span class="o">-</span><span class="n">WCC4E0284683</span><span class="o">-</span><span class="n">part2</span>  <span class="n">ONLINE</span>
+    <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">disk</span><span class="o">/</span><span class="k">by</span><span class="o">-</span><span class="n">id</span><span class="o">/</span><span class="n">ata</span><span class="o">-</span><span class="n">HGST_HDN724040ALE640_PK1334PEHK98JS</span><span class="o">-</span><span class="n">part2</span>   <span class="n">ONLINE</span>
 </pre></div>
 
 
@@ -963,7 +975,7 @@ zpool offline kourier ata-<span class="cp">${</span><span class="n">DISK</span><
 
 
 <p>Overwrite with zeroes or random data:</p>
-<div class="codehilite"><pre><span></span>dd if=/dev/zero of=/dev/disk/by-id/ata-<span class="cp">${</span><span class="n">DISK</span><span class="cp">}</span> status=progress bs=1M
+<div class="codehilite"><pre><span></span><span class="nv">dd</span> <span class="k">if</span><span class="o">=/</span><span class="nv">dev</span><span class="o">/</span><span class="nv">zero</span> <span class="nv">of</span><span class="o">=/</span><span class="nv">dev</span><span class="o">/</span><span class="nv">disk</span><span class="o">/</span><span class="nv">by</span><span class="o">-</span><span class="nv">id</span><span class="o">/</span><span class="nv">ata</span><span class="o">-</span>${<span class="nv">DISK</span>} <span class="nv">status</span><span class="o">=</span><span class="nv">progress</span> <span class="nv">bs</span><span class="o">=</span><span class="mi">1</span><span class="nv">M</span>
 </pre></div>
 
 
@@ -989,13 +1001,13 @@ watch -d zpool status -P
 
 
 <p>Rinse and repeat with all four disks. This is what my pool looks like now:</p>
-<div class="codehilite"><pre><span></span>kourier
-  mirror-0                                                 ONLINE
-    /dev/mapper/WDC_WD40EZRX-00SPEB0_WD-WCC4E0496927_LUKS  ONLINE
-    /dev/mapper/HGST_HDN724040ALE640_PK1334PEHLZA1S_LUKS   ONLINE
-  mirror-1                                                 ONLINE
-    /dev/mapper/WDC_WD40EZRX-00SPEB0_WD-WCC4E0284683_LUKS  ONLINE
-    /dev/mapper/HGST_HDN724040ALE640_PK1334PEHK98JS_LUKS   ONLINE
+<div class="codehilite"><pre><span></span><span class="n">kourier</span>
+  <span class="n">mirror</span><span class="o">-</span><span class="mi">0</span>                                                 <span class="n">ONLINE</span>
+    <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">WDC_WD40EZRX</span><span class="o">-</span><span class="mi">00</span><span class="n">SPEB0_WD</span><span class="o">-</span><span class="n">WCC4E0496927_LUKS</span>  <span class="n">ONLINE</span>
+    <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">HGST_HDN724040ALE640_PK1334PEHLZA1S_LUKS</span>   <span class="n">ONLINE</span>
+  <span class="n">mirror</span><span class="o">-</span><span class="mi">1</span>                                                 <span class="n">ONLINE</span>
+    <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">WDC_WD40EZRX</span><span class="o">-</span><span class="mi">00</span><span class="n">SPEB0_WD</span><span class="o">-</span><span class="n">WCC4E0284683_LUKS</span>  <span class="n">ONLINE</span>
+    <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="n">mapper</span><span class="o">/</span><span class="n">HGST_HDN724040ALE640_PK1334PEHK98JS_LUKS</span>   <span class="n">ONLINE</span>
 </pre></div>
 
 

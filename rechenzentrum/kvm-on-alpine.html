@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/secureboot.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
           Security
         </a>
       
@@ -569,6 +569,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../security/secureboot.html" title="Secureboot" class="md-nav__link">
       Secureboot
     </a>
@@ -858,13 +870,13 @@
 as the disktype.</p>
 <h2 id="packages">Packages</h2>
 <p>Install KVM packages:</p>
-<div class="codehilite"><pre><span></span>apk add qemu-system-x86_64 libvirt libvirt-daemon dbus polkit qemu-img
+<div class="codehilite"><pre><span></span><span class="n">apk</span> <span class="k">add</span> <span class="n">qemu</span><span class="o">-</span><span class="k">system</span><span class="o">-</span><span class="n">x86_64</span> <span class="n">libvirt</span> <span class="n">libvirt</span><span class="o">-</span><span class="n">daemon</span> <span class="n">dbus</span> <span class="n">polkit</span> <span class="n">qemu</span><span class="o">-</span><span class="n">img</span>
 </pre></div>
 
 
 <h2 id="load-modules">Load Modules</h2>
 <p>Reboot or just load necessary kernel modules:</p>
-<div class="codehilite"><pre><span></span>modprobe kvm-intel br_netfilter
+<div class="codehilite"><pre><span></span><span class="n">modprobe</span> <span class="n">kvm</span><span class="o">-</span><span class="n">intel</span> <span class="n">br_netfilter</span>
 </pre></div>
 
 
@@ -874,16 +886,16 @@ as the disktype.</p>
 </div>
 <h2 id="bridge-interface">Bridge Interface</h2>
 <p>Add a bridge configuration in <code>/etc/network/interfaces</code>:</p>
-<div class="codehilite"><pre><span></span>auto lo
-iface lo inet loopback
+<div class="codehilite"><pre><span></span><span class="n">auto</span> <span class="n">lo</span>
+<span class="n">iface</span> <span class="n">lo</span> <span class="n">inet</span> <span class="n">loopback</span>
 
-auto br0
-iface br0 inet dhcp
-    pre-up modprobe br_netfilter
-    pre-up echo 0 &gt; /proc/sys/net/bridge/bridge-nf-call-arptables
-    pre-up echo 0 &gt; /proc/sys/net/bridge/bridge-nf-call-iptables
-    pre-up echo 0 &gt; /proc/sys/net/bridge/bridge-nf-call-ip6tables
-    bridge_ports eth0
+<span class="n">auto</span> <span class="n">br0</span>
+<span class="n">iface</span> <span class="n">br0</span> <span class="n">inet</span> <span class="n">dhcp</span>
+    <span class="n">pre</span><span class="o">-</span><span class="n">up</span> <span class="n">modprobe</span> <span class="n">br_netfilter</span>
+    <span class="n">pre</span><span class="o">-</span><span class="n">up</span> <span class="n">echo</span> <span class="mi">0</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">net</span><span class="o">/</span><span class="n">bridge</span><span class="o">/</span><span class="n">bridge</span><span class="o">-</span><span class="n">nf</span><span class="o">-</span><span class="k">call</span><span class="o">-</span><span class="n">arptables</span>
+    <span class="n">pre</span><span class="o">-</span><span class="n">up</span> <span class="n">echo</span> <span class="mi">0</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">net</span><span class="o">/</span><span class="n">bridge</span><span class="o">/</span><span class="n">bridge</span><span class="o">-</span><span class="n">nf</span><span class="o">-</span><span class="k">call</span><span class="o">-</span><span class="n">iptables</span>
+    <span class="n">pre</span><span class="o">-</span><span class="n">up</span> <span class="n">echo</span> <span class="mi">0</span> <span class="o">&gt;</span> <span class="o">/</span><span class="n">proc</span><span class="o">/</span><span class="n">sys</span><span class="o">/</span><span class="n">net</span><span class="o">/</span><span class="n">bridge</span><span class="o">/</span><span class="n">bridge</span><span class="o">-</span><span class="n">nf</span><span class="o">-</span><span class="k">call</span><span class="o">-</span><span class="n">ip6tables</span>
+    <span class="n">bridge_ports</span> <span class="n">eth0</span>
 </pre></div>
                 
                   

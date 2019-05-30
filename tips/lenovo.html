@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/secureboot.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
           Security
         </a>
       
@@ -501,6 +501,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
         
           
           
@@ -816,18 +828,18 @@ for machines without Windows is a bootable .iso image though. What now?</p>
 <p>Turns out inside that image there is another bootable format: an El Torito
 image. You can extract that with a script called
 <a href="/assets/geteltorito.pl"><code>geteltorito.pl</code></a> and flash it to a USB stick.</p>
-<div class="codehilite"><pre><span></span># ./geteltorito.pl -o n10ur17w-usb.img n10ur17w.iso
-Booting catalog starts at sector: 20
-Manufacturer of CD: NERO BURNING ROM
-Image architecture: x86
-Boot media type is: harddisk
-El Torito image starts at sector 27 and has 47104 sector(s) of 512 Bytes
+<div class="codehilite"><pre><span></span># .<span class="o">/</span><span class="nv">geteltorito</span>.<span class="nv">pl</span> <span class="o">-</span><span class="nv">o</span> <span class="nv">n10ur17w</span><span class="o">-</span><span class="nv">usb</span>.<span class="nv">img</span> <span class="nv">n10ur17w</span>.<span class="nv">iso</span>
+<span class="nv">Booting</span> <span class="nv">catalog</span> <span class="nv">starts</span> <span class="nv">at</span> <span class="nv">sector</span>: <span class="mi">20</span>
+<span class="nv">Manufacturer</span> <span class="nv">of</span> <span class="nv">CD</span>: <span class="nv">NERO</span> <span class="nv">BURNING</span> <span class="nv">ROM</span>
+<span class="nv">Image</span> <span class="nv">architecture</span>: <span class="nv">x86</span>
+<span class="nv">Boot</span> <span class="nv">media</span> <span class="nv">type</span> <span class="nv">is</span>: <span class="nv">harddisk</span>
+<span class="nv">El</span> <span class="nv">Torito</span> <span class="nv">image</span> <span class="nv">starts</span> <span class="nv">at</span> <span class="nv">sector</span> <span class="mi">27</span> <span class="nv">and</span> <span class="nv">has</span> <span class="mi">47104</span> <span class="nv">sector</span><span class="ss">(</span><span class="nv">s</span><span class="ss">)</span> <span class="nv">of</span> <span class="mi">512</span> <span class="nv">Bytes</span>
 
-Image has been written to file &quot;n10ur17w-usb.img&quot;.
-# dd if=n10ur17w-usb.img of=/dev/sdb bs=1M
-23+0 records in
-23+0 records out
-24117248 bytes (24 MB, 23 MiB) copied, 0.354471 s, 68.0 MB/s
+<span class="nv">Image</span> <span class="nv">has</span> <span class="nv">been</span> <span class="nv">written</span> <span class="nv">to</span> <span class="nv">file</span> <span class="s2">&quot;</span><span class="s">n10ur17w-usb.img</span><span class="s2">&quot;</span>.
+# <span class="nv">dd</span> <span class="k">if</span><span class="o">=</span><span class="nv">n10ur17w</span><span class="o">-</span><span class="nv">usb</span>.<span class="nv">img</span> <span class="nv">of</span><span class="o">=/</span><span class="nv">dev</span><span class="o">/</span><span class="nv">sdb</span> <span class="nv">bs</span><span class="o">=</span><span class="mi">1</span><span class="nv">M</span>
+<span class="mi">23</span><span class="o">+</span><span class="mi">0</span> <span class="nv">records</span> <span class="nv">in</span>
+<span class="mi">23</span><span class="o">+</span><span class="mi">0</span> <span class="nv">records</span> <span class="nv">out</span>
+<span class="mi">24117248</span> <span class="nv">bytes</span> <span class="ss">(</span><span class="mi">24</span> <span class="nv">MB</span>, <span class="mi">23</span> <span class="nv">MiB</span><span class="ss">)</span> <span class="nv">copied</span>, <span class="mi">0</span>.<span class="mi">354471</span> <span class="nv">s</span>, <span class="mi">68</span>.<span class="mi">0</span> <span class="nv">MB</span><span class="o">/</span><span class="nv">s</span>
 </pre></div>
 
 

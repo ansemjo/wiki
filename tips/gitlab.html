@@ -237,7 +237,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/secureboot.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
           Security
         </a>
       
@@ -501,6 +501,18 @@
       </label>
       <ul class="md-nav__list" data-md-scrollfix>
         
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
+      Network Disk Decryption
+    </a>
+  </li>
+
         
           
           
@@ -908,11 +920,11 @@
 <p>First <a href="../rechenzentrum/docker-in-kvm.html">deploy CoreOS in a virtual machine</a>.</p>
 <p>Then deploy the Gitlab Runner as a Docker container itself. Following the
 <a href="https://docs.gitlab.com/runner/install/docker.html">documentation</a>:</p>
-<div class="codehilite"><pre><span></span>docker run -d --name runner --restart always \
-  -v /etc/gitlab-runner:/etc/gitlab-runner \
-  -v /var/run/docker.sock:/var/run/docker.sock \
-  gitlab/gitlab-runner:alpine
-docker exec -it runner register
+<div class="codehilite"><pre><span></span><span class="nv">docker</span> <span class="nv">run</span> <span class="o">-</span><span class="nv">d</span> <span class="o">--</span><span class="nv">name</span> <span class="nv">runner</span> <span class="o">--</span><span class="nv">restart</span> <span class="nv">always</span> \
+  <span class="o">-</span><span class="nv">v</span> <span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">gitlab</span><span class="o">-</span><span class="nv">runner</span>:<span class="o">/</span><span class="nv">etc</span><span class="o">/</span><span class="nv">gitlab</span><span class="o">-</span><span class="nv">runner</span> \
+  <span class="o">-</span><span class="nv">v</span> <span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">run</span><span class="o">/</span><span class="nv">docker</span>.<span class="nv">sock</span>:<span class="o">/</span><span class="nv">var</span><span class="o">/</span><span class="nv">run</span><span class="o">/</span><span class="nv">docker</span>.<span class="nv">sock</span> \
+  <span class="nv">gitlab</span><span class="o">/</span><span class="nv">gitlab</span><span class="o">-</span><span class="nv">runner</span>:<span class="nv">alpine</span>
+<span class="nv">docker</span> <span class="k">exec</span> <span class="o">-</span><span class="nv">it</span> <span class="nv">runner</span> <span class="nv">register</span>
 </pre></div>
 
 
@@ -920,12 +932,12 @@ docker exec -it runner register
 <p class="admonition-title">Hint</p>
 <p>You may need to install your CA certificate both on the CoreOS VM as well as in the
 runner configuration first:</p>
-<div class="codehilite"><pre><span></span>scp /etc/ipa/ca.crt runner:
-ssh runner
-sudo mv ca.crt /etc/ssl/certs/my-ca.pem
-sudo update-ca-certificates
-sudo mkdir -p /etc/gitlab-runner/certs
-sudo cp /etc/ssl/certs/my-ca.pem /etc/gitlab-runner/certs/ca.crt
+<div class="codehilite"><pre><span></span><span class="n">scp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ipa</span><span class="o">/</span><span class="n">ca</span><span class="p">.</span><span class="n">crt</span> <span class="n">runner</span><span class="p">:</span>
+<span class="n">ssh</span> <span class="n">runner</span>
+<span class="n">sudo</span> <span class="n">mv</span> <span class="n">ca</span><span class="p">.</span><span class="n">crt</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">ca</span><span class="p">.</span><span class="n">pem</span>
+<span class="n">sudo</span> <span class="k">update</span><span class="o">-</span><span class="n">ca</span><span class="o">-</span><span class="n">certificates</span>
+<span class="n">sudo</span> <span class="n">mkdir</span> <span class="o">-</span><span class="n">p</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">gitlab</span><span class="o">-</span><span class="n">runner</span><span class="o">/</span><span class="n">certs</span>
+<span class="n">sudo</span> <span class="n">cp</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">ssl</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">my</span><span class="o">-</span><span class="n">ca</span><span class="p">.</span><span class="n">pem</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">gitlab</span><span class="o">-</span><span class="n">runner</span><span class="o">/</span><span class="n">certs</span><span class="o">/</span><span class="n">ca</span><span class="p">.</span><span class="n">crt</span>
 </pre></div>
 
 
@@ -950,7 +962,7 @@ API routes.</p>
 
 <p>Then export your <a href="https://git.rz.semjonov.de/profile/personal_access_tokens">personal access token</a>
 to env:</p>
-<div class="codehilite"><pre><span></span>read TOKEN &amp;&amp; export TOKEN
+<div class="codehilite"><pre><span></span><span class="k">read</span> <span class="n">TOKEN</span> <span class="o">&amp;&amp;</span> <span class="n">export</span> <span class="n">TOKEN</span>
 </pre></div>
 
 
