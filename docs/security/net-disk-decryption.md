@@ -11,7 +11,7 @@ In essence, an encrypted payload is transformed with some ECDH key exchange magi
 the tang server and the disk is decrypted automatically. If however the tang server is
 unavailable, this method fails and you must fall back to manually entering a passphrase.
 
-I decided this is a nice addition to [my systemd decryption target](systemd-disk-decryption-target.md),
+I decided this is a nice addition to [my systemd decryption target](systemd-decryption-target.md),
 so here's how I implemented it:
 
 ## `tang` server
