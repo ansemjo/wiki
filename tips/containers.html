@@ -36,7 +36,7 @@
     
     
       
-        <title>Docker - ansemjo's docs</title>
+        <title>Containers - ansemjo's docs</title>
       
     
     
@@ -90,7 +90,7 @@
     <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
     <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
     
-      <a href="#docker" tabindex="1" class="md-skip">
+      <a href="#containers" tabindex="1" class="md-skip">
         Skip to content
       </a>
     
@@ -116,7 +116,7 @@
                 ansemjo's docs
               </span>
               <span class="md-header-nav__topic">
-                Docker
+                Containers
               </span>
             
           
@@ -604,18 +604,6 @@
           
           
 
-
-  <li class="md-nav__item">
-    <a href="coreos.html" title="CoreOS" class="md-nav__link">
-      CoreOS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
   
 
 
@@ -627,11 +615,11 @@
     
     
       <label class="md-nav__link md-nav__link--active" for="__toc">
-        Docker
+        Containers
       </label>
     
-    <a href="docker.html" title="Docker" class="md-nav__link md-nav__link--active">
-      Docker
+    <a href="containers.html" title="Containers" class="md-nav__link md-nav__link--active">
+      Containers
     </a>
     
       
@@ -645,8 +633,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#firewalling" title="Firewalling" class="md-nav__link">
-    Firewalling
+  <a href="#docker-firewalling" title="Docker Firewalling" class="md-nav__link">
+    Docker Firewalling
   </a>
   
     <nav class="md-nav">
@@ -664,6 +652,13 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#full-systemd-in-container" title="Full systemd in container" class="md-nav__link">
+    Full systemd in container
+  </a>
+  
+</li>
+      
       
       
       
@@ -672,6 +667,18 @@
   
 </nav>
     
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
+    <a href="coreos.html" title="CoreOS" class="md-nav__link">
+      CoreOS
+    </a>
   </li>
 
         
@@ -821,8 +828,8 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#firewalling" title="Firewalling" class="md-nav__link">
-    Firewalling
+  <a href="#docker-firewalling" title="Docker Firewalling" class="md-nav__link">
+    Docker Firewalling
   </a>
   
     <nav class="md-nav">
@@ -837,6 +844,13 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#full-systemd-in-container" title="Full systemd in container" class="md-nav__link">
+    Full systemd in container
+  </a>
   
 </li>
       
@@ -856,11 +870,11 @@
             <article class="md-content__inner md-typeset">
               
                 
-                  <a href="https://github.com/ansemjo/wiki/edit/master/docs/tips/docker.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
+                  <a href="https://github.com/ansemjo/wiki/edit/master/docs/tips/containers.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
                 
                 
-                <h1 id="docker">Docker</h1>
-<h2 id="firewalling">Firewalling</h2>
+                <h1 id="containers">Containers</h1>
+<h2 id="docker-firewalling">Docker Firewalling</h2>
 <p>By default, <code>docker</code> seems to start with <code>--iptables=true</code> everywhere. That means that the docker
 daemon will insert its own iptables rules to enable inter-container communication and publish ports.
 <em>However</em> that means that published ports will be published <strong>publicly</strong> by default.</p>
@@ -887,6 +901,31 @@ outside world anymore. To reenable the forwarding with <code>firewalld</code> us
 <div class="codehilite"><pre><span></span><span class="o">-</span><span class="n">A</span> <span class="k">FORWARD</span> <span class="o">-</span><span class="n">i</span> <span class="n">docker0</span> <span class="o">-</span><span class="n">o</span> <span class="n">eth0</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
 <span class="o">-</span><span class="n">A</span> <span class="k">FORWARD</span> <span class="o">-</span><span class="n">i</span> <span class="n">eth0</span> <span class="o">-</span><span class="n">o</span> <span class="n">docker0</span> <span class="o">-</span><span class="n">j</span> <span class="n">ACCEPT</span>
 </pre></div>
+
+
+<h2 id="full-systemd-in-container">Full systemd in container</h2>
+<p>Podman introduced some fixes that enable you running a full systemd init process inside of
+a <strong>rootless</strong> container. That way you can start a normal CentOS image with
+<code>podman run ... centos init</code> and login like you would in a virtual machine, enable systemd
+services etc.</p>
+<p>To properly login you need two small fixes however. First you need a known password. Since
+moust images have passwords disabled or empty for all accounts you'll need to mount an
+edited <code>/etc/shadow</code>. The following line for example sets the <code>root</code> password to literally
+<code>password</code>:</p>
+<div class="codehilite"><pre><span></span><span class="n">root</span><span class="p">:</span><span class="err">$</span><span class="mi">6</span><span class="err">$</span><span class="mi">1</span><span class="n">xZg0v5W$XgEfFIUlHB3EIGsxJvABkytPaUITLEfTb7WocHoeFaAwBFfui2tIKZq1l</span><span class="o">/</span><span class="n">MoKtZHMQ7Q</span><span class="o">/</span><span class="mi">23</span><span class="n">Dnr</span><span class="p">.</span><span class="n">qLhGfzz4VH</span><span class="o">/</span><span class="p">:</span><span class="mi">18061</span><span class="p">:</span><span class="mi">0</span><span class="p">:</span><span class="mi">99999</span><span class="p">:</span><span class="mi">7</span><span class="p">:::</span>
+</pre></div>
+
+
+<p>Another fix is required for PAM, since the console accepts your password but PAM fails to
+<a href="https://stackoverflow.com/questions/43323754/cannot-make-remove-an-entry-for-the-specified-session-cron">create a session for you</a>. The fix is simple:</p>
+<div class="codehilite"><pre><span></span><span class="n">sed</span> <span class="o">-</span><span class="n">i</span> <span class="s1">&#39;/^session.*pam_loginuid.so/s/^/#/&#39;</span> <span class="o">/</span><span class="n">etc</span><span class="o">/</span><span class="n">pam</span><span class="p">.</span><span class="n">d</span><span class="o">/</span><span class="n">login</span>
+</pre></div>
+
+
+<p>Mount these two files inside the container and
+<a href="https://asciinema.org/a/251687">finally start it</a> with:</p>
+<div class="codehilite"><pre><span></span><span class="n">podman</span> <span class="n">run</span> <span class="c1">--rm -it -v ... centos:latest init</span>
+</pre></div>
                 
                   
                 
@@ -907,7 +946,7 @@ outside world anymore. To reenable the forwarding with <code>firewalld</code> us
     <div class="md-footer-nav">
       <nav class="md-footer-nav__inner md-grid">
         
-          <a href="coreos.html" title="CoreOS" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
+          <a href="backblaze.html" title="Backblaze" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
             <div class="md-flex__cell md-flex__cell--shrink">
               <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
             </div>
@@ -916,19 +955,19 @@ outside world anymore. To reenable the forwarding with <code>firewalld</code> us
                 <span class="md-footer-nav__direction">
                   Previous
                 </span>
-                CoreOS
+                Backblaze
               </span>
             </div>
           </a>
         
         
-          <a href="documentscan.html" title="Document Scanning" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
+          <a href="coreos.html" title="CoreOS" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
             <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
               <span class="md-flex__ellipsis">
                 <span class="md-footer-nav__direction">
                   Next
                 </span>
-                Document Scanning
+                CoreOS
               </span>
             </div>
             <div class="md-flex__cell md-flex__cell--shrink">
