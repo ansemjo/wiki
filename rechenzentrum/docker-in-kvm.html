@@ -32,7 +32,7 @@
         <meta name="lang:search.tokenizer" content="[\s\-]+">
       
       <link rel="shortcut icon" href="../assets/planet.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.0">
+      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
     
     
       
@@ -40,7 +40,7 @@
       
     
     
-      <link rel="stylesheet" href="../assets/stylesheets/application.0284f74d.css">
+      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
       
       
     
@@ -176,7 +176,7 @@
         
   <li class="md-tabs__item">
     
-      <a href="../index.html" title="Home" class="md-tabs__link">
+      <a href="../index.html" class="md-tabs__link">
         Home
       </a>
     
@@ -190,7 +190,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../personal/löschungsantrag.html" title="Personal" class="md-tabs__link">
+        <a href="../personal/löschungsantrag.html" class="md-tabs__link">
           Personal
         </a>
       
@@ -203,7 +203,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="index.html" title="Rechenzentrum" class="md-tabs__link md-tabs__link--active">
+        <a href="index.html" class="md-tabs__link md-tabs__link--active">
           Rechenzentrum
         </a>
       
@@ -216,7 +216,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../security/net-disk-decryption.html" title="Security" class="md-tabs__link">
+        <a href="../security/net-disk-decryption.html" class="md-tabs__link">
           Security
         </a>
       
@@ -229,7 +229,7 @@
   
     <li class="md-tabs__item">
       
-        <a href="../tips/ansible.html" title="Tips" class="md-tabs__link">
+        <a href="../tips/ansible.html" class="md-tabs__link">
           Tips
         </a>
       
@@ -241,7 +241,7 @@
   </div>
 </nav>
       
-      <main class="md-main">
+      <main class="md-main" role="main">
         <div class="md-main__inner md-grid" data-md-component="container">
           
             
@@ -430,29 +430,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" title="Prerequisites" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#boot-a-virtual-machine" title="Boot a Virtual Machine" class="md-nav__link">
-    Boot a Virtual Machine
+  <a href="#boot-a-coreos-virtual-machine" class="md-nav__link">
+    Boot a CoreOS Virtual Machine
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#via-text-console" title="Via Text Console" class="md-nav__link">
-    Via Text Console
+  <a href="#via-text-console-modern-virt-install" class="md-nav__link">
+    Via Text Console (modern virt-install)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#via-vnc-viewer" title="Via VNC Viewer" class="md-nav__link">
+  <a href="#via-text-console-older-virt-install" class="md-nav__link">
+    Via Text Console (older virt-install)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#via-vnc-viewer" class="md-nav__link">
     Via VNC Viewer
   </a>
   
@@ -464,7 +471,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-coreos-to-disk" title="Install CoreOS to Disk" class="md-nav__link">
+  <a href="#install-coreos-to-disk" class="md-nav__link">
     Install CoreOS to Disk
   </a>
   
@@ -472,14 +479,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prepare-ignition" title="Prepare Ignition" class="md-nav__link">
+  <a href="#prepare-ignition" class="md-nav__link">
     Prepare Ignition
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#installation" title="Installation" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     Installation
   </a>
   
@@ -491,7 +498,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#miscellaneous" title="Miscellaneous" class="md-nav__link">
+  <a href="#miscellaneous" class="md-nav__link">
     Miscellaneous
   </a>
   
@@ -499,14 +506,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#fixed-dhcp-address" title="Fixed DHCP Address" class="md-nav__link">
+  <a href="#fixed-dhcp-address" class="md-nav__link">
     Fixed DHCP Address
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ssh-client-configuration" title="SSH Client Configuration" class="md-nav__link">
+  <a href="#ssh-client-configuration" class="md-nav__link">
     SSH Client Configuration
   </a>
   
@@ -858,6 +865,18 @@
 
 
   <li class="md-nav__item">
+    <a href="../tips/serialdevices.html" title="Serial" class="md-nav__link">
+      Serial
+    </a>
+  </li>
+
+        
+          
+          
+          
+
+
+  <li class="md-nav__item">
     <a href="../tips/tor.html" title="Tor" class="md-nav__link">
       Tor
     </a>
@@ -890,29 +909,36 @@
     <ul class="md-nav__list" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#prerequisites" title="Prerequisites" class="md-nav__link">
+  <a href="#prerequisites" class="md-nav__link">
     Prerequisites
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#boot-a-virtual-machine" title="Boot a Virtual Machine" class="md-nav__link">
-    Boot a Virtual Machine
+  <a href="#boot-a-coreos-virtual-machine" class="md-nav__link">
+    Boot a CoreOS Virtual Machine
   </a>
   
     <nav class="md-nav">
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#via-text-console" title="Via Text Console" class="md-nav__link">
-    Via Text Console
+  <a href="#via-text-console-modern-virt-install" class="md-nav__link">
+    Via Text Console (modern virt-install)
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#via-vnc-viewer" title="Via VNC Viewer" class="md-nav__link">
+  <a href="#via-text-console-older-virt-install" class="md-nav__link">
+    Via Text Console (older virt-install)
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#via-vnc-viewer" class="md-nav__link">
     Via VNC Viewer
   </a>
   
@@ -924,7 +950,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#install-coreos-to-disk" title="Install CoreOS to Disk" class="md-nav__link">
+  <a href="#install-coreos-to-disk" class="md-nav__link">
     Install CoreOS to Disk
   </a>
   
@@ -932,14 +958,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#prepare-ignition" title="Prepare Ignition" class="md-nav__link">
+  <a href="#prepare-ignition" class="md-nav__link">
     Prepare Ignition
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#installation" title="Installation" class="md-nav__link">
+  <a href="#installation" class="md-nav__link">
     Installation
   </a>
   
@@ -951,7 +977,7 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#miscellaneous" title="Miscellaneous" class="md-nav__link">
+  <a href="#miscellaneous" class="md-nav__link">
     Miscellaneous
   </a>
   
@@ -959,14 +985,14 @@
       <ul class="md-nav__list">
         
           <li class="md-nav__item">
-  <a href="#fixed-dhcp-address" title="Fixed DHCP Address" class="md-nav__link">
+  <a href="#fixed-dhcp-address" class="md-nav__link">
     Fixed DHCP Address
   </a>
   
 </li>
         
           <li class="md-nav__item">
-  <a href="#ssh-client-configuration" title="SSH Client Configuration" class="md-nav__link">
+  <a href="#ssh-client-configuration" class="md-nav__link">
     SSH Client Configuration
   </a>
   
@@ -999,66 +1025,95 @@
                 <h1 id="docker-in-qemukvm">Docker in QEMU/KVM</h1>
 <p>Some applications may require a properly isolated Docker engine where users of the API have every freedom but when they must not be able to compromise the host security. Since access to the Docker socket is equivalent to being <code>root</code> (<a href="https://opensource.com/article/18/10/podman-more-secure-way-run-containers">or worse</a>) we must preferably run the engine on a seperate machine.</p>
 <p>Long story short: virtualization with QEMU/KVM provides all the required isolation and CoreOS is easy to deploy and bundles Docker by default.</p>
-<p>The following steps are designed for a CentOS 7.6 hypervisor.</p>
+<p>The following steps are designed for a CentOS 7 hypervisor.</p>
 <h2 id="prerequisites">Prerequisites</h2>
 <p>First of all, we need to prepare our hypervisor, so install QEMU and libvirt.</p>
-<div class="codehilite"><pre><span></span><span class="n">yum</span> <span class="n">install</span> <span class="n">qemu</span><span class="o">-</span><span class="n">kvm</span> <span class="n">libvirt</span>
+<div class="codehilite"><pre><span></span><span class="n">yum</span> <span class="n">install</span> <span class="n">qemu</span><span class="o">-</span><span class="n">kvm</span> <span class="n">libvirt</span> <span class="n">virt</span><span class="o">-</span><span class="n">install</span>
 <span class="n">modprobe</span> <span class="n">kvm</span>
 <span class="n">systemctl</span> <span class="n">enable</span> <span class="c1">--now libvirtd</span>
 </pre></div>
 
 
+<p>Make sure you have hardware virtualization available. If you're running in a virtual machine already you may need to enable passthrough explicitly. On an Intel machine you should have a module <code>kvm_intel</code> loaded as well.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>We are going to use <code>virt-install</code> as well, however the version in EPEL is not recent enough to use the <code>kernel=</code> and<code>initrd=</code> arguments with <code>--location</code>. Thus prefer a local manager and append <code>--connect qemu+ssh://root@hypervisor/system</code> to <code>virsh</code> or <code>virt-install</code> commands.</p>
 </div>
-<h2 id="boot-a-virtual-machine">Boot a Virtual Machine</h2>
-<p>There is <a href="https://coreos.com/os/docs/latest/booting-with-libvirt.html">a guide</a> on how to boot CoreOS with libvirt but I prefer to perform a clean installation to disk. Therefore we need to boot CoreOS to RAM and deploy using an Ignition configuration.</p>
-<h3 id="via-text-console">Via Text Console</h3>
-<p>If you don't want to bother with VNC connections and would prefer to install via a text
-console on the hypervisor itself, you can download and run the CoreOS <code>vmlinuz</code> and <code>cpio.gz</code> directly:</p>
-<div class="codehilite"><pre><span></span>virt-install --name runner --memory <span class="m">4096</span> --vcpus <span class="m">4</span> <span class="se">\</span>
-  --disk <span class="nv">size</span><span class="o">=</span><span class="m">20</span>,bus<span class="o">=</span>virtio --hvm --rng /dev/urandom <span class="se">\</span>
-  --autostart --nographics --console pty,target_type<span class="o">=</span>virtio <span class="se">\</span>
+<h2 id="boot-a-coreos-virtual-machine">Boot a CoreOS Virtual Machine</h2>
+<p>There is <a href="https://coreos.com/os/docs/latest/booting-with-libvirt.html">a guide</a> on how to boot CoreOS with <code>libvirt</code> but I prefer to perform a clean installation to disk. Therefore we need to boot CoreOS to RAM and deploy using an Ignition configuration. Preferably, this is done with the provided PXE images.</p>
+<p>Depending on your version of <code>virt-install</code> there are different installation methods available: in the terminal via text console or remotely over VNC.</p>
+<h3 id="via-text-console-modern-virt-install">Via Text Console (modern <code>virt-install</code>)</h3>
+<p>If you don't want to bother with VNC connections and would prefer to install via a text console on the hypervisor itself, you can download and run the CoreOS <code>vmlinuz</code> and <code>cpio.gz</code> directly by specifying them in the <code>--location</code> argument:</p>
+<div class="codehilite"><pre><span></span>virt-install --name core --memory <span class="m">2048</span> --vcpus <span class="m">2</span> <span class="se">\</span>
+  --accelerate --rng /dev/urandom --autostart --graphics none <span class="se">\</span>
+  --disk <span class="nv">size</span><span class="o">=</span><span class="m">20</span>,bus<span class="o">=</span>virtio --os-variant virtio26 <span class="se">\</span>
   --location <span class="s2">&quot;https://stable.release.core-os.net/amd64-usr/current/,kernel=coreos_production_pxe.vmlinuz,initrd=coreos_production_pxe_image.cpio.gz&quot;</span> <span class="se">\</span>
-  --extra-args <span class="s2">&quot;coreos.autologin console=ttyS0&quot;</span> <span class="se">\</span>
-  --os-variant virtio26
+  --extra-args <span class="s2">&quot;coreos.autologin console=ttyS0&quot;</span>
 </pre></div>
 
 
-<div class="admonition note">
-<p class="admonition-title">Note</p>
-<p>Remember to append a <code>--connect</code> string if you are connecting to a remote libvirt socket.</p>
-</div>
-<p>If you prefer to download and verify <a href="https://stable.release.core-os.net/amd64-usr/current/coreos_production_iso_image.iso">an ISO</a> locally instead, you can substitute:</p>
-<div class="codehilite"><pre><span></span>  <span class="c1">--location /tmp/coreos.iso,kernel=/coreos/vmlinuz,initrd=/coreos/cpio.gz \</span>
+<p>If you prefer to download and verify <a href="https://stable.release.core-os.net/amd64-usr/current/coreos_production_iso_image.iso">an ISO</a> locally instead, you can substitute the <code>--location</code> argument:</p>
+<div class="codehilite"><pre><span></span>  --location ../path/to/coreos.iso,kernel<span class="o">=</span>/coreos/vmlinuz,initrd<span class="o">=</span>/coreos/cpio.gz <span class="se">\</span>
 </pre></div>
 
 
+<p>This is useful when you're doing many installs to avoid the repeated downloads.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>You can find files inside an ISO with <code>isoinfo -Jf -i /path/to/iso</code>.</p>
+<p>You can find files inside an ISO with <code>isoinfo -Jf -i /path/to/disc.iso</code>.</p>
 </div>
+<h3 id="via-text-console-older-virt-install">Via Text Console (older <code>virt-install</code>)</h3>
+<p>Older versions of <code>virt-install</code> -- among them version 1.5.0 that is shipped with CentOS 7 -- do not support the <code>--location ...,kernel=...,initrd=...</code> syntax and complain about unreachable URLs. In this case you can download the files and fake a Debain installation directory that is autodetected simply by passing the directory path to <code>virt-install</code>.</p>
+<p>Download and verify the PXE image as per the CoreOS docs:</p>
+<div class="codehilite"><pre><span></span><span class="nb">cd</span> /var/lib/libvirt/images
+mkdir -p coreos <span class="o">&amp;&amp;</span> <span class="nb">cd</span> coreos
+<span class="nv">stable</span><span class="o">=</span>https://stable.release.core-os.net/amd64-usr/current/
+wget <span class="nv">$stable</span>/coreos_production_pxe.vmlinuz
+wget <span class="nv">$stable</span>/coreos_production_pxe.vmlinuz.sig
+wget <span class="nv">$stable</span>/coreos_production_pxe_image.cpio.gz
+wget <span class="nv">$stable</span>/coreos_production_pxe_image.cpio.gz.sig
+gpg --verify coreos_production_pxe.vmlinuz.sig
+gpg --verify coreos_production_pxe_image.cpio.gz.sig
+</pre></div>
+
+
+<p>Create a fake <code>MANIFEST</code> and a directory structure that mimics a Debian netboot installer:</p>
+<div class="codehilite"><pre><span></span>mkdir -p amd64/current/images/netboot/debian-installer/amd64/
+<span class="nb">echo</span> debian-installer &gt; amd64/current/images/MANIFEST
+ln -sr coreos_production_pxe.vmlinuz amd64/current/images/netboot/debian-installer/amd64/linux
+ln -sr coreos_production_pxe_image.cpio.gz amd64/current/images/netboot/debian-installer/amd64/initrd.gz
+</pre></div>
+
+
+<p>Pass the <code>amd64</code> subdirectory as the installer location:</p>
+<div class="codehilite"><pre><span></span>virt-install --name core --memory <span class="m">2048</span> --vcpus <span class="m">2</span> <span class="se">\</span>
+  --accelerate --rng /dev/urandom --autostart --graphics none <span class="se">\</span>
+  --disk <span class="nv">size</span><span class="o">=</span><span class="m">20</span>,bus<span class="o">=</span>virtio --os-variant virtio26 <span class="se">\</span>
+  --location /var/lib/libvirt/images/coreos/amd64 <span class="se">\</span>
+  --extra-args <span class="s2">&quot;coreos.autologin console=ttyS0&quot;</span>
+</pre></div>
+
+
+<p>This method is probably useful for other distributions that don't get detected automatically either as well.</p>
 <h3 id="via-vnc-viewer">Via VNC Viewer</h3>
-<p>Apart from using VNC, we are going to use <a href="https://netboot.xyz">netboot.xyt</a> in this approach. This is possible with <code>virt-install</code> version 1.5.0 on CentOS 7.</p>
-<p>First, download the netboot image:</p>
+<p>Sometimes an installer may just refuse to start on the serial console or you're more confident in a graphical installer. This method also applies when you want to use an ISO image without specifying additional kernel parameters.
+As an example, this section uses an image of <a href="https://netboot.xyz">netboot.xyz</a>, which can be used to interactively boot many different distributions.</p>
+<p>First, download the <code>netboot.xyz</code> image:</p>
 <div class="codehilite"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">boot</span>
 <span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">boot</span><span class="p">.</span><span class="n">netboot</span><span class="p">.</span><span class="n">xyz</span><span class="o">/</span><span class="n">ipxe</span><span class="o">/</span><span class="n">netboot</span><span class="p">.</span><span class="n">xyz</span><span class="p">.</span><span class="n">iso</span>
 </pre></div>
 
 
-<p>Now create the virtual machine with <code>virt-install</code>:</p>
-<div class="codehilite"><pre><span></span><span class="n">virt</span><span class="o">-</span><span class="n">install</span> <span class="c1">--name runner --memory 4096 --vcpus 4 \</span>
-  <span class="c1">--disk size=20,bus=virtio --hvm --rng /dev/urandom \</span>
-  <span class="c1">--autostart --cdrom /var/lib/libvirt/boot/netboot.xyz.iso \</span>
+<p>Now create the virtual machine with <code>virt-install</code>, specifying the ISO with the <code>--cdrom</code> argument:</p>
+<div class="codehilite"><pre><span></span><span class="n">virt</span><span class="o">-</span><span class="n">install</span> <span class="c1">--name core --memory 2048 --vcpus 2 \</span>
+  <span class="c1">--accelerate --rng /dev/urandom --autostart \</span>
+  <span class="c1">--disk size=20,bus=virtio --os-variant virtio26 \</span>
   <span class="c1">--graphics vnc,listen=0.0.0.0 --noautoconsole \</span>
-  <span class="c1">--os-variant virtio26</span>
+  <span class="c1">--cdrom /var/lib/libvirt/boot/netboot.xyz.iso</span>
 </pre></div>
 
 
-<p>This should start the installation process and enable a VNC console. You can check the port with
-<code>virsh vncdisplay runner</code> and verify with <code>ss -tln</code>. In my case <code>:0</code> corresponds to port 5900 on the
-host, so temporarily open that port in the firewall:</p>
+<p>This should start the installation process and enable a VNC console. You can check the port with <code>virsh vncdisplay runner</code> and verify with <code>ss -tln</code> if in doubt. In my case a default of <code>:0</code> corresponds to port 5900 on the host, so temporarily open that port in the firewall:</p>
 <div class="codehilite"><pre><span></span><span class="n">firewall</span><span class="o">-</span><span class="n">cmd</span> <span class="c1">--add-port 5900/tcp</span>
 </pre></div>
 
@@ -1212,7 +1267,7 @@ virsh net-update default add-last ip-dhcp-host <span class="se">\</span>
       
     </div>
     
-      <script src="../assets/javascripts/application.245445c6.js"></script>
+      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
       
       <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
