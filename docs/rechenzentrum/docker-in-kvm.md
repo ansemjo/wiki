@@ -4,67 +4,110 @@ Some applications may require a properly isolated Docker engine where users of t
 
 Long story short: virtualization with QEMU/KVM provides all the required isolation and CoreOS is easy to deploy and bundles Docker by default.
 
-The following steps are designed for a CentOS 7.6 hypervisor.
+The following steps are designed for a CentOS 7 hypervisor.
 
 ## Prerequisites
 
 First of all, we need to prepare our hypervisor, so install QEMU and libvirt.
 
-    yum install qemu-kvm libvirt
+    yum install qemu-kvm libvirt virt-install
     modprobe kvm
     systemctl enable --now libvirtd
+
+Make sure you have hardware virtualization available. If you're running in a virtual machine already you may need to enable passthrough explicitly. On an Intel machine you should have a module `kvm_intel` loaded as well.
 
 !!! info
     We are going to use `virt-install` as well, however the version in EPEL is not recent enough to use the `kernel=` and`initrd=` arguments with `--location`. Thus prefer a local manager and append `--connect qemu+ssh://root@hypervisor/system` to `virsh` or `virt-install` commands.
 
-## Boot a Virtual Machine
+## Boot a CoreOS Virtual Machine
 
-There is [a guide](https://coreos.com/os/docs/latest/booting-with-libvirt.html) on how to boot CoreOS with libvirt but I prefer to perform a clean installation to disk. Therefore we need to boot CoreOS to RAM and deploy using an Ignition configuration.
+There is [a guide](https://coreos.com/os/docs/latest/booting-with-libvirt.html) on how to boot CoreOS with `libvirt` but I prefer to perform a clean installation to disk. Therefore we need to boot CoreOS to RAM and deploy using an Ignition configuration. Preferably, this is done with the provided PXE images.
 
-### Via Text Console
+Depending on your version of `virt-install` there are different installation methods available: in the terminal via text console or remotely over VNC.
 
-If you don't want to bother with VNC connections and would prefer to install via a text
-console on the hypervisor itself, you can download and run the CoreOS `vmlinuz` and `cpio.gz` directly:
+### Via Text Console (modern `virt-install`)
+
+If you don't want to bother with VNC connections and would prefer to install via a text console on the hypervisor itself, you can download and run the CoreOS `vmlinuz` and `cpio.gz` directly by specifying them in the `--location` argument:
 
 ```sh
-virt-install --name runner --memory 4096 --vcpus 4 \
-  --disk size=20,bus=virtio --hvm --rng /dev/urandom \
-  --autostart --nographics --console pty,target_type=virtio \
+virt-install --name core --memory 2048 --vcpus 2 \
+  --accelerate --rng /dev/urandom --autostart --graphics none \
+  --disk size=20,bus=virtio --os-variant virtio26 \
   --location "https://stable.release.core-os.net/amd64-usr/current/,kernel=coreos_production_pxe.vmlinuz,initrd=coreos_production_pxe_image.cpio.gz" \
-  --extra-args "coreos.autologin console=ttyS0" \
-  --os-variant virtio26
+  --extra-args "coreos.autologin console=ttyS0"
 ```
 
-!!! note
-    Remember to append a `--connect` string if you are connecting to a remote libvirt socket.
+If you prefer to download and verify [an ISO](https://stable.release.core-os.net/amd64-usr/current/coreos_production_iso_image.iso) locally instead, you can substitute the `--location` argument:
 
-If you prefer to download and verify [an ISO](https://stable.release.core-os.net/amd64-usr/current/coreos_production_iso_image.iso) locally instead, you can substitute:
+```sh
+  --location ../path/to/coreos.iso,kernel=/coreos/vmlinuz,initrd=/coreos/cpio.gz \
+```
 
-      --location /tmp/coreos.iso,kernel=/coreos/vmlinuz,initrd=/coreos/cpio.gz \
+This is useful when you're doing many installs to avoid the repeated downloads.
 
 !!! hint
-    You can find files inside an ISO with `isoinfo -Jf -i /path/to/iso`.
+    You can find files inside an ISO with `isoinfo -Jf -i /path/to/disc.iso`.
+
+### Via Text Console (older `virt-install`)
+
+Older versions of `virt-install` -- among them version 1.5.0 that is shipped with CentOS 7 -- do not support the `--location ...,kernel=...,initrd=...` syntax and complain about unreachable URLs. In this case you can download the files and fake a Debain installation directory that is autodetected simply by passing the directory path to `virt-install`.
+
+Download and verify the PXE image as per the CoreOS docs:
+
+```sh
+cd /var/lib/libvirt/images
+mkdir -p coreos && cd coreos
+stable=https://stable.release.core-os.net/amd64-usr/current/
+wget $stable/coreos_production_pxe.vmlinuz
+wget $stable/coreos_production_pxe.vmlinuz.sig
+wget $stable/coreos_production_pxe_image.cpio.gz
+wget $stable/coreos_production_pxe_image.cpio.gz.sig
+gpg --verify coreos_production_pxe.vmlinuz.sig
+gpg --verify coreos_production_pxe_image.cpio.gz.sig
+```
+
+Create a fake `MANIFEST` and a directory structure that mimics a Debian netboot installer:
+
+```sh
+mkdir -p amd64/current/images/netboot/debian-installer/amd64/
+echo debian-installer > amd64/current/images/MANIFEST
+ln -sr coreos_production_pxe.vmlinuz amd64/current/images/netboot/debian-installer/amd64/linux
+ln -sr coreos_production_pxe_image.cpio.gz amd64/current/images/netboot/debian-installer/amd64/initrd.gz
+```
+
+Pass the `amd64` subdirectory as the installer location:
+
+```sh
+virt-install --name core --memory 2048 --vcpus 2 \
+  --accelerate --rng /dev/urandom --autostart --graphics none \
+  --disk size=20,bus=virtio --os-variant virtio26 \
+  --location /var/lib/libvirt/images/coreos/amd64 \
+  --extra-args "coreos.autologin console=ttyS0"
+```
+
+This method is probably useful for other distributions that don't get detected automatically either as well.
 
 ### Via VNC Viewer
 
-Apart from using VNC, we are going to use [netboot.xyt](https://netboot.xyz) in this approach. This is possible with `virt-install` version 1.5.0 on CentOS 7.
+Sometimes an installer may just refuse to start on the serial console or you're more confident in a graphical installer. This method also applies when you want to use an ISO image without specifying additional kernel parameters.
+As an example, this section uses an image of [netboot.xyz](https://netboot.xyz), which can be used to interactively boot many different distributions.
 
-First, download the netboot image:
+First, download the `netboot.xyz` image:
 
     cd /var/lib/libvirt/boot
     curl -LO https://boot.netboot.xyz/ipxe/netboot.xyz.iso
 
-Now create the virtual machine with `virt-install`:
+Now create the virtual machine with `virt-install`, specifying the ISO with the `--cdrom` argument:
 
-    virt-install --name runner --memory 4096 --vcpus 4 \
-      --disk size=20,bus=virtio --hvm --rng /dev/urandom \
-      --autostart --cdrom /var/lib/libvirt/boot/netboot.xyz.iso \
-      --graphics vnc,listen=0.0.0.0 --noautoconsole \
-      --os-variant virtio26
+```
+virt-install --name core --memory 2048 --vcpus 2 \
+  --accelerate --rng /dev/urandom --autostart \
+  --disk size=20,bus=virtio --os-variant virtio26 \
+  --graphics vnc,listen=0.0.0.0 --noautoconsole \
+  --cdrom /var/lib/libvirt/boot/netboot.xyz.iso
+```
 
-This should start the installation process and enable a VNC console. You can check the port with
-`virsh vncdisplay runner` and verify with `ss -tln`. In my case `:0` corresponds to port 5900 on the
-host, so temporarily open that port in the firewall:
+This should start the installation process and enable a VNC console. You can check the port with `virsh vncdisplay runner` and verify with `ss -tln` if in doubt. In my case a default of `:0` corresponds to port 5900 on the host, so temporarily open that port in the firewall:
 
     firewall-cmd --add-port 5900/tcp
 
