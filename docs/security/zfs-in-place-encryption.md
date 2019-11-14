@@ -65,10 +65,10 @@ Overwrite with zeroes or random data:
 Create a new partition table and one partition with your desired size (the UUID sets the partition
 type to `FreeBSD ZFS`):
 
-    printf '%s\n' \
-      "label: gpt" \
-      "4096,+7811076096,516E7CBA-6ECF-11D6-8FF8-00022D09712B" \
-      | ./sfdisk-2.33 /dev/disk/by-id/ata-${DISK}
+    sfdisk /dev/disk/by-id/ata-${DISK} <<EOF
+    label: gpt
+    start=2M size=7811076096 type=516E7CBA-6ECF-11D6-8FF8-00022D09712B
+    EOF
 
 Create and open the LUKS container with your desired cipher / hash / keysize settings:
 
