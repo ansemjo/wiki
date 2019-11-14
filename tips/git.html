@@ -1,1079 +1,387 @@
-
-
-
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
-      
-      
-      
-      
-        <meta name="lang:clipboard.copy" content="Copy to clipboard">
-      
-        <meta name="lang:clipboard.copied" content="Copied to clipboard">
-      
-        <meta name="lang:search.language" content="en">
-      
-        <meta name="lang:search.pipeline.stopwords" content="True">
-      
-        <meta name="lang:search.pipeline.trimmer" content="True">
-      
-        <meta name="lang:search.result.none" content="No matching documents">
-      
-        <meta name="lang:search.result.one" content="1 matching document">
-      
-        <meta name="lang:search.result.other" content="# matching documents">
-      
-        <meta name="lang:search.tokenizer" content="[\s\-]+">
-      
-      <link rel="shortcut icon" href="../assets/planet.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
-    
-    
-      
-        <title>Git - ansemjo's docs</title>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
-      
-      
-    
-    
-      <script src="../assets/javascripts/modernizr.74668098.js"></script>
-    
-    
-      
-    
-    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
-    
-    
-    
-      
-    
-    
-  </head>
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <body dir="ltr">
+  <meta name="author" content="Anton Semjonov">
+  <link rel="shortcut icon" href="../assets/planet.png">
   
-    <svg class="md-svg">
-      <defs>
-        
-        
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
-        
-      </defs>
-    </svg>
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <title>Git - ansemjo's docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Git";
+    var mkdocs_page_input_path = "tips/git.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
     
-      <a href="#git" tabindex="1" class="md-skip">
-        Skip to content
-      </a>
-    
-    
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid">
-    <div class="md-flex">
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../index.html" title="ansemjo's docs" class="md-header-nav__button md-logo">
-          
-            <i class="md-icon"></i>
-          
-        </a>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-      </div>
-      <div class="md-flex__cell md-flex__cell--stretch">
-        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          
-            <span class="md-header-nav__topic">
-              ansemjo's docs
-            </span>
-            <span class="md-header-nav__topic">
-              
-                Git
-              
-            </span>
-          
-        </div>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        
-          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-          
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="__search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
-          <div class="md-search-result__meta">
-            Type to start searching
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="icon icon-home"> ansemjo's docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
 </div>
-        
       </div>
-      
-        <div class="md-flex__cell md-flex__cell--shrink">
-          <div class="md-header-nav__source">
-            
 
-
-  
-
-<a href="https://github.com/ansemjo/wiki/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    ansemjo/wiki
-  </div>
-</a>
-          </div>
-        </div>
-      
-    </div>
-  </nav>
-</header>
-    
-    <div class="md-container">
-      
-        
-      
-      
-        
-
-  
-
-<nav class="md-tabs md-tabs--active" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  <li class="md-tabs__item">
-    
-      <a href="../index.html" class="md-tabs__link">
-        Home
-      </a>
-    
-  </li>
-
-      
-        
-      
-        
-  
-  
-    <li class="md-tabs__item">
-      
-        <a href="../personal/löschungsantrag.html" class="md-tabs__link">
-          Personal
-        </a>
-      
-    </li>
-  
-
-      
-        
-  
-  
-    <li class="md-tabs__item">
-      
-        <a href="../rechenzentrum/index.html" class="md-tabs__link">
-          Rechenzentrum
-        </a>
-      
-    </li>
-  
-
-      
-        
-  
-  
-    <li class="md-tabs__item">
-      
-        <a href="../security/net-disk-decryption.html" class="md-tabs__link">
-          Security
-        </a>
-      
-    </li>
-  
-
-      
-        
-  
-  
-    <li class="md-tabs__item">
-      
-        <a href="ansible.html" class="md-tabs__link md-tabs__link--active">
-          Tips
-        </a>
-      
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-      
-      <main class="md-main" role="main">
-        <div class="md-main__inner md-grid" data-md-component="container">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../index.html" title="ansemjo's docs" class="md-nav__button md-logo">
-      
-        <i class="md-icon"></i>
-      
-    </a>
-    ansemjo's docs
-  </label>
-  
-    <div class="md-nav__source">
-      
-
-
-  
-
-<a href="https://github.com/ansemjo/wiki/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    ansemjo/wiki
-  </div>
-</a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../index.html" title="Home" class="md-nav__link">
-      Home
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../software.html" title="Software" class="md-nav__link">
-      Software
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
-    <label class="md-nav__link" for="nav-3">
-      Personal
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        Personal
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../personal/löschungsantrag.html" title="DSGVO Löschungsantrag" class="md-nav__link">
-      DSGVO Löschungsantrag
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../personal/versicherungen.html" title="Versicherungen" class="md-nav__link">
-      Versicherungen
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4">
-    
-    <label class="md-nav__link" for="nav-4">
-      Rechenzentrum
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        Rechenzentrum
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../rechenzentrum/index.html" title="Overview" class="md-nav__link">
-      Overview
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../rechenzentrum/bootstrap.html" title="Bootstrap" class="md-nav__link">
-      Bootstrap
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../rechenzentrum/docker-in-kvm.html" title="Docker in QEMU/KVM" class="md-nav__link">
-      Docker in QEMU/KVM
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../rechenzentrum/flynn.html" title="Flynn" class="md-nav__link">
-      Flynn
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../rechenzentrum/kvm-on-alpine.html" title="KVM on Alpine" class="md-nav__link">
-      KVM on Alpine
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../rechenzentrum/netboot.html" title="Network Boot" class="md-nav__link">
-      Network Boot
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../rechenzentrum/tls-host-aliases.html" title="TLS for Host Aliases" class="md-nav__link">
-      TLS for Host Aliases
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
-    
-    <label class="md-nav__link" for="nav-5">
-      Security
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        Security
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
-      Network Disk Decryption
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../security/secureboot.html" title="Secureboot" class="md-nav__link">
-      Secureboot
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../security/systemd-decryption-target.html" title="Systemd Disk Decryption Target" class="md-nav__link">
-      Systemd Disk Decryption Target
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../security/zfs-in-place-encryption.html" title="ZFS in-place Encryption" class="md-nav__link">
-      ZFS in-place Encryption
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6" checked>
-    
-    <label class="md-nav__link" for="nav-6">
-      Tips
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
-        Tips
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="ansible.html" title="Ansible" class="md-nav__link">
-      Ansible
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="backblaze.html" title="Backblaze" class="md-nav__link">
-      Backblaze
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="bash.html" title="Bash" class="md-nav__link">
-      Bash
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="centos.html" title="CentOS" class="md-nav__link">
-      CentOS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="containers.html" title="Containers" class="md-nav__link">
-      Containers
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="coreos.html" title="CoreOS" class="md-nav__link">
-      CoreOS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="documentscan.html" title="Document Scanning" class="md-nav__link">
-      Document Scanning
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="freeipa.html" title="FreeIPA" class="md-nav__link">
-      FreeIPA
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Git
-      </label>
-    
-    <a href="git.html" title="Git" class="md-nav__link md-nav__link--active">
-      Git
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prevent-commits-on-a-branch" class="md-nav__link">
-    Prevent commits on a branch
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#merge-repositories" class="md-nav__link">
-    Merge Repositories
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prepare-repositories" class="md-nav__link">
-    Prepare repositories
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-and-fetch-remotes" class="md-nav__link">
-    Add and fetch remotes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#merge-the-repositories" class="md-nav__link">
-    Merge the repositories
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="gitlab.html" title="Gitlab" class="md-nav__link">
-      Gitlab
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="golang.html" title="Go" class="md-nav__link">
-      Go
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="lenovo.html" title="Lenovo" class="md-nav__link">
-      Lenovo
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="openwrt.html" title="OpenWRT" class="md-nav__link">
-      OpenWRT
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="python.html" title="Python" class="md-nav__link">
-      Python
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="restic.html" title="Restic" class="md-nav__link">
-      Restic
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="serialdevices.html" title="Serial" class="md-nav__link">
-      Serial
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="tor.html" title="Tor" class="md-nav__link">
-      Tor
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../index.html">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../software.html">Software</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Personal</span>
+    <ul class="subnav">
+                <li class="">
                     
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prevent-commits-on-a-branch" class="md-nav__link">
-    Prevent commits on a branch
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#merge-repositories" class="md-nav__link">
-    Merge Repositories
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prepare-repositories" class="md-nav__link">
-    Prepare repositories
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#add-and-fetch-remotes" class="md-nav__link">
-    Add and fetch remotes
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#merge-the-repositories" class="md-nav__link">
-    Merge the repositories
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
+    <a class="" href="../personal/löschungsantrag.html">DSGVO Löschungsantrag</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../personal/versicherungen.html">Versicherungen</a>
+                </li>
     </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
+	    </li>
           
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Rechenzentrum</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../rechenzentrum/index.html">Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rechenzentrum/bootstrap.html">Bootstrap</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rechenzentrum/docker-in-kvm.html">Docker in QEMU/KVM</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rechenzentrum/flynn.html">Flynn</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rechenzentrum/kvm-on-alpine.html">KVM on Alpine</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rechenzentrum/netboot.html">Network Boot</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../rechenzentrum/tls-host-aliases.html">TLS for Host Aliases</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Security</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../security/net-disk-decryption.html">Network Disk Decryption</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../security/secureboot.html">Secureboot</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../security/systemd-decryption-target.html">Systemd Disk Decryption Target</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../security/zfs-in-place-encryption.html">ZFS in-place Encryption</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Tips</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="ansible.html">Ansible</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="backblaze.html">Backblaze</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="bash.html">Bash</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="centos.html">CentOS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="containers.html">Containers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="coreos.html">CoreOS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="documentscan.html">Document Scanning</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="freeipa.html">FreeIPA</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="git.html">Git</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#git">Git</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#prevent-commits-on-a-branch">Prevent commits on a branch</a></li>
+        
+            <li><a class="toctree-l4" href="#merge-repositories">Merge Repositories</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="gitlab.html">Gitlab</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="golang.html">Go</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="lenovo.html">Lenovo</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="openwrt.html">OpenWRT</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="python.html">Python</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="restic.html">Restic</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="serialdevices.html">Serial</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="tor.html">Tor</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ansemjo's docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Tips &raquo;</li>
+        
+      
+    
+    <li>Git</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/ansemjo/wiki/edit/master/docs/tips/git.md"> Edit on ansemjo/wiki</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
               
-                
-                  <a href="https://github.com/ansemjo/wiki/edit/master/docs/tips/git.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
-                
-                
-                <h1 id="git">Git</h1>
-<h2 id="prevent-commits-on-a-branch">Prevent commits on a branch</h2>
+                <h1 id="git">Git<a class="headerlink" href="#git" title="Permanent link">&para;</a></h1>
+<h2 id="prevent-commits-on-a-branch">Prevent commits on a branch<a class="headerlink" href="#prevent-commits-on-a-branch" title="Permanent link">&para;</a></h2>
 <p>You can use a <code>pre-commit</code> hook to check the branch name to which you are commiting your changes. If
 you want to prevent direct changes to <code>master</code> create the following <code>.git/hooks/pre-commit</code>:</p>
-<table class="codehilitetable"><tr><td class="linenos"><div class="linenodiv"><pre>1
-2
-3
-4
-5</pre></div></td><td class="code"><div class="codehilite"><pre><span></span><span class="ch">#!/bin/sh</span>
+<pre class="codehilite"><code class="language-sh">#!/bin/sh
 
-<span class="c1"># prevent commits on master</span>
-<span class="o">[</span> <span class="s2">&quot;</span><span class="k">$(</span>git rev-parse --abbrev-ref --symbolic-full-name HEAD<span class="k">)</span><span class="s2">&quot;</span> <span class="o">==</span> <span class="s2">&quot;master&quot;</span> <span class="o">]</span> <span class="se">\</span>
-  <span class="o">&amp;&amp;</span> <span class="o">{</span> <span class="nb">echo</span> <span class="s2">&quot;you shall not commit on master&quot;</span><span class="p">;</span> <span class="nb">exit</span> <span class="m">1</span><span class="p">;</span> <span class="o">}</span>
-</pre></div>
-</td></tr></table>
+# prevent commits on master
+[ &quot;$(git rev-parse --abbrev-ref --symbolic-full-name HEAD)&quot; == &quot;master&quot; ] \
+  &amp;&amp; { echo &quot;you shall not commit on master&quot;; exit 1; }</code></pre>
+
 
 <p>Make sure the hook script is executable.</p>
-<h2 id="merge-repositories">Merge Repositories</h2>
-<p>I've had a few situations where I started front- and backend as two seperate projects but soon
+<h2 id="merge-repositories">Merge Repositories<a class="headerlink" href="#merge-repositories" title="Permanent link">&para;</a></h2>
+<p>I&rsquo;ve had a few situations where I started front- and backend as two seperate projects but soon
 wished to track both in a single repository - as subdirectories. Last time I was in this situation,
-<a href="https://stackoverflow.com/a/6442034">a stackoverflow answer</a> proved most helpful. Here's the gist:</p>
+<a href="https://stackoverflow.com/a/6442034">a stackoverflow answer</a> proved most helpful. Here&rsquo;s the gist:</p>
 <p>Assume you have two repositories <code>frontend</code> and <code>backend</code>.</p>
-<h3 id="prepare-repositories">Prepare repositories</h3>
+<h3 id="prepare-repositories">Prepare repositories<a class="headerlink" href="#prepare-repositories" title="Permanent link">&para;</a></h3>
 <p>First, you should move all files in each repository into a subdirectory to avoid merge conflicts and
 properly preserve commit history later. It would make sense to put all files in the <code>frontend</code>
 repository into a <code>frontend</code> subdirectory .. etc.</p>
-<div class="codehilite"><pre><span></span><span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="nl">front</span> <span class="p">:</span> <span class="n">master</span><span class="o">=</span> <span class="err">$</span> <span class="n">mkdir</span> <span class="n">frontend</span>
-<span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="nl">front</span> <span class="p">:</span> <span class="n">master</span><span class="o">=</span> <span class="err">$</span> <span class="n">mv</span> <span class="o">!</span><span class="p">(</span><span class="n">frontend</span><span class="p">)</span> <span class="n">frontend</span><span class="o">/</span>
-<span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="nl">front</span> <span class="p">:</span> <span class="n">master</span> <span class="o">*%=</span> <span class="err">$</span> <span class="n">git</span> <span class="n">add</span> <span class="p">.</span>
-<span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="nl">front</span> <span class="p">:</span> <span class="n">master</span> <span class="o">+=</span> <span class="err">$</span> <span class="n">git</span> <span class="n">commit</span>
-<span class="p">[</span><span class="n">master</span> <span class="n">c777b42</span><span class="p">]</span> <span class="n">prepare</span> <span class="n">frontend</span> <span class="k">for</span> <span class="n">merge</span>
- <span class="mi">65</span> <span class="n">files</span> <span class="n">changed</span><span class="p">,</span> <span class="mi">0</span> <span class="n">insertions</span><span class="p">(</span><span class="o">+</span><span class="p">),</span> <span class="mi">0</span> <span class="n">deletions</span><span class="p">(</span><span class="o">-</span><span class="p">)</span>
- <span class="p">[...]</span>
-</pre></div>
+<pre class="codehilite"><code>⦁ project/front : master= $ mkdir frontend
+⦁ project/front : master= $ mv !(frontend) frontend/
+⦁ project/front : master *%= $ git add .
+⦁ project/front : master += $ git commit
+[master c777b42] prepare frontend for merge
+ 65 files changed, 0 insertions(+), 0 deletions(-)
+ [...]</code></pre>
 
 
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>Don't forget about dotfiles, as those are not moved with <code>mv !(frontend) frontend/</code> alone.</p>
+<p>Don&rsquo;t forget about dotfiles, as those are not moved with <code>mv !(frontend) frontend/</code> alone.</p>
 </div>
 <p>Do the same analogously for the <code>backend</code> or any other repository you want to merge.</p>
-<p>Also, create a new repository to hold the merged projects. It helps to create an initial commit --
-even if completely empty -- to indicate that unrelated histories were merged into each other.</p>
-<div class="codehilite"><pre><span></span><span class="err">⦁</span> <span class="n">project</span> <span class="err">$</span> <span class="n">mkdir</span> <span class="n">project</span> <span class="o">&amp;&amp;</span> <span class="n">cd</span> <span class="n">project</span>
-<span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="n">project</span> <span class="err">$</span> <span class="n">git</span> <span class="n">init</span>
-<span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="n">project</span> <span class="p">:</span> <span class="n">master</span> <span class="o">#</span> <span class="err">$</span> <span class="n">git</span> <span class="k">commit</span> <span class="c1">--allow-empty</span>
-</pre></div>
+<p>Also, create a new repository to hold the merged projects. It helps to create an initial commit &ndash;
+even if completely empty &ndash; to indicate that unrelated histories were merged into each other.</p>
+<pre class="codehilite"><code>⦁ project $ mkdir project &amp;&amp; cd project
+⦁ project/project $ git init
+⦁ project/project : master # $ git commit --allow-empty</code></pre>
 
 
-<h3 id="add-and-fetch-remotes">Add and fetch remotes</h3>
+<h3 id="add-and-fetch-remotes">Add and fetch remotes<a class="headerlink" href="#add-and-fetch-remotes" title="Permanent link">&para;</a></h3>
 <p>Add all prepared repositories as remotes and fetch them.</p>
-<div class="codehilite"><pre><span></span><span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="n">project</span> <span class="p">:</span> <span class="n">master</span> <span class="err">$</span> <span class="n">git</span> <span class="n">remote</span> <span class="k">add</span> <span class="o">-</span><span class="n">f</span> <span class="n">frontend</span> <span class="p">..</span><span class="o">/</span><span class="n">frontend</span>
-<span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="n">project</span> <span class="p">:</span> <span class="n">master</span> <span class="err">$</span> <span class="n">git</span> <span class="n">remote</span> <span class="k">add</span> <span class="o">-</span><span class="n">f</span> <span class="n">backend</span> <span class="p">..</span><span class="o">/</span><span class="n">backend</span>
-<span class="p">...</span>
-</pre></div>
+<pre class="codehilite"><code>⦁ project/project : master $ git remote add -f frontend ../frontend
+⦁ project/project : master $ git remote add -f backend ../backend
+...</code></pre>
 
 
-<h3 id="merge-the-repositories">Merge the repositories</h3>
+<h3 id="merge-the-repositories">Merge the repositories<a class="headerlink" href="#merge-the-repositories" title="Permanent link">&para;</a></h3>
 <p>Finally, merge all those remotes into the combined project. Simply repeat this step for every remote
 you want to merge. At this point it pays off to prepare the repositories in order to avoid any merge
 conflicts right away.</p>
-<div class="codehilite"><pre><span></span><span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="n">project</span> <span class="p">:</span> <span class="n">master</span> <span class="err">$</span> <span class="n">git</span> <span class="n">merge</span> <span class="o">-</span><span class="n">s</span> <span class="n">ours</span> <span class="c1">--no-commit --allow-unrelated-histories frontend/master</span>
-<span class="n">Automatic</span> <span class="n">merge</span> <span class="n">went</span> <span class="n">well</span><span class="p">;</span> <span class="n">stopped</span> <span class="k">before</span> <span class="n">committing</span> <span class="k">as</span> <span class="n">requested</span>
-<span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="n">project</span> <span class="p">:</span> <span class="n">master</span><span class="o">|</span><span class="n">MERGING</span> <span class="err">$</span> <span class="n">git</span> <span class="k">read</span><span class="o">-</span><span class="n">tree</span> <span class="c1">--prefix= -u frontend/master</span>
-<span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="n">project</span> <span class="p">:</span> <span class="n">master</span> <span class="o">+|</span><span class="n">MERGING</span> <span class="err">$</span> <span class="n">git</span> <span class="k">commit</span> <span class="o">-</span><span class="n">a</span>
-<span class="p">[</span><span class="n">master</span> <span class="mi">96012</span><span class="n">d4</span><span class="p">]</span> <span class="n">Merge</span> <span class="n">remote</span><span class="o">-</span><span class="n">tracking</span> <span class="n">branch</span> <span class="s1">&#39;frontend/master&#39;</span>
-</pre></div>
+<pre class="codehilite"><code>⦁ project/project : master $ git merge -s ours --no-commit --allow-unrelated-histories frontend/master
+Automatic merge went well; stopped before committing as requested
+⦁ project/project : master|MERGING $ git read-tree --prefix= -u frontend/master
+⦁ project/project : master +|MERGING $ git commit -a
+[master 96012d4] Merge remote-tracking branch 'frontend/master'</code></pre>
 
 
 <p>You will end up with a repository where history looks somewhat like this:</p>
-<div class="codehilite"><pre><span></span><span class="err">⦁</span> <span class="n">project</span><span class="o">/</span><span class="nl">project</span> <span class="p">:</span> <span class="n">master</span> <span class="err">$</span> <span class="n">git</span> <span class="n">log</span> <span class="o">--</span><span class="n">graph</span>
-<span class="o">*</span>   <span class="mi">7</span><span class="n">a53ff5</span> <span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">19</span> <span class="mi">11</span><span class="o">:</span><span class="mi">28</span><span class="o">:</span><span class="mi">15</span> <span class="o">+</span><span class="mo">0100</span> <span class="n">N</span> <span class="n">Merge</span> <span class="n">remote</span><span class="o">-</span><span class="n">tracking</span> <span class="n">branch</span> <span class="err">&#39;</span><span class="n">backend</span><span class="o">/</span><span class="n">master</span><span class="err">&#39;</span> <span class="p">(</span><span class="n">HEAD</span> <span class="o">-&gt;</span> <span class="n">master</span><span class="p">)</span> <span class="p">[</span><span class="n">Anton</span> <span class="n">Semjonov</span><span class="p">]</span>
-<span class="o">|</span>\
-<span class="o">|</span> <span class="o">*</span> <span class="n">f89bfa3</span> <span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">18</span> <span class="mi">16</span><span class="o">:</span><span class="mi">57</span><span class="o">:</span><span class="mo">07</span> <span class="o">+</span><span class="mo">0100</span> <span class="n">N</span> <span class="n">prepare</span> <span class="n">backend</span> <span class="k">for</span> <span class="n">merge</span> <span class="p">(</span><span class="n">backend</span><span class="o">/</span><span class="n">master</span><span class="p">)</span> <span class="p">[</span><span class="n">Anton</span> <span class="n">Semjonov</span><span class="p">]</span>
-<span class="o">|</span> <span class="o">*</span> <span class="n">ea8a4f7</span> <span class="mi">2018</span><span class="o">-</span><span class="mi">09</span><span class="o">-</span><span class="mi">18</span> <span class="mi">15</span><span class="o">:</span><span class="mi">19</span><span class="o">:</span><span class="mi">16</span> <span class="o">+</span><span class="mo">0200</span> <span class="n">N</span> <span class="n">update</span> <span class="n">scripts</span> <span class="p">[</span><span class="n">Anton</span> <span class="n">Semjonov</span><span class="p">]</span>
-<span class="o">|</span> <span class="p">[...]</span>
-<span class="o">*</span>   <span class="mi">96012</span><span class="n">d4</span> <span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">19</span> <span class="mi">11</span><span class="o">:</span><span class="mi">27</span><span class="o">:</span><span class="mi">49</span> <span class="o">+</span><span class="mo">0100</span> <span class="n">N</span> <span class="n">Merge</span> <span class="n">remote</span><span class="o">-</span><span class="n">tracking</span> <span class="n">branch</span> <span class="err">&#39;</span><span class="n">frontend</span><span class="o">/</span><span class="n">master</span><span class="err">&#39;</span> <span class="p">[</span><span class="n">Anton</span> <span class="n">Semjonov</span><span class="p">]</span>
-<span class="o">|</span>\
-<span class="o">|</span> <span class="o">*</span> <span class="n">c777b42</span> <span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">18</span> <span class="mi">16</span><span class="o">:</span><span class="mi">57</span><span class="o">:</span><span class="mi">56</span> <span class="o">+</span><span class="mo">0100</span> <span class="n">N</span> <span class="n">prepare</span> <span class="n">frontend</span> <span class="k">for</span> <span class="n">merge</span> <span class="p">(</span><span class="n">frontend</span><span class="o">/</span><span class="n">master</span><span class="p">)</span> <span class="p">[</span><span class="n">Anton</span> <span class="n">Semjonov</span><span class="p">]</span>
-<span class="o">|</span> <span class="o">*</span> <span class="n">e3812e2</span> <span class="mi">2019</span><span class="o">-</span><span class="mo">01</span><span class="o">-</span><span class="mi">18</span> <span class="mi">22</span><span class="o">:</span><span class="mi">35</span><span class="o">:</span><span class="mi">30</span> <span class="o">+</span><span class="mo">0100</span> <span class="n">N</span> <span class="n">korrigiere</span> <span class="n">Leonhard</span> <span class="p">[</span><span class="n">Anton</span> <span class="n">Semjonov</span><span class="p">]</span>
-<span class="o">|</span> <span class="p">[...]</span>
-<span class="o">*</span> <span class="n">b0605af</span> <span class="mi">2019</span><span class="o">-</span><span class="mo">02</span><span class="o">-</span><span class="mi">19</span> <span class="mi">11</span><span class="o">:</span><span class="mi">25</span><span class="o">:</span><span class="mi">36</span> <span class="o">+</span><span class="mo">0100</span> <span class="n">N</span> <span class="n">prepare</span> <span class="n">combined</span> <span class="n">repository</span> <span class="k">for</span> <span class="n">project</span> <span class="p">[</span><span class="n">Anton</span> <span class="n">Semjonov</span><span class="p">]</span>
-</pre></div>
-                
-                  
-                
+<pre class="codehilite"><code>⦁ project/project : master $ git log --graph
+*   7a53ff5 2019-02-19 11:28:15 +0100 N Merge remote-tracking branch 'backend/master' (HEAD -&gt; master) [Anton Semjonov]
+|\
+| * f89bfa3 2019-02-18 16:57:07 +0100 N prepare backend for merge (backend/master) [Anton Semjonov]
+| * ea8a4f7 2018-09-18 15:19:16 +0200 N update scripts [Anton Semjonov]
+| [...]
+*   96012d4 2019-02-19 11:27:49 +0100 N Merge remote-tracking branch 'frontend/master' [Anton Semjonov]
+|\
+| * c777b42 2019-02-18 16:57:56 +0100 N prepare frontend for merge (frontend/master) [Anton Semjonov]
+| * e3812e2 2019-01-18 22:35:30 +0100 N korrigiere Leonhard [Anton Semjonov]
+| [...]
+* b0605af 2019-02-19 11:25:36 +0100 N prepare combined repository for project [Anton Semjonov]</code></pre>
               
-              
-                
-
-
-              
-            </article>
+            </div>
           </div>
-        </div>
-      </main>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        
-<footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="freeipa.html" title="FreeIPA" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                FreeIPA
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="gitlab.html" title="Gitlab" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Gitlab
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-          <div class="md-footer-copyright__highlight">
-            Copyright (c) 2018 Anton Semjonov, licensed under Creative Commons BY-SA 4.0 (https://semjonov.de/license)
-          </div>
-        
-        powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
-        and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
-          Material for MkDocs</a>
-      </div>
+        <a href="gitlab.html" class="btn btn-neutral float-right" title="Gitlab">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="freeipa.html" class="btn btn-neutral" title="FreeIPA"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright (c) 2019 Anton Semjonov.
+Licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/" title="Creative Commons Attribution-ShareAlike 4.0">CC-BY-SA-4.0</a> license.
+</p>
+    
   </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-    </div>
-    
-      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
-    
-  </body>
+        <span><a href="freeipa.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="gitlab.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
 </html>

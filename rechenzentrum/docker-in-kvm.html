@@ -1,1276 +1,477 @@
-
-
-
-
-<!doctype html>
-<html lang="en" class="no-js">
-  <head>
-    
-      <meta charset="utf-8">
-      <meta name="viewport" content="width=device-width,initial-scale=1">
-      <meta http-equiv="x-ua-compatible" content="ie=edge">
-      
-      
-      
-      
-        <meta name="lang:clipboard.copy" content="Copy to clipboard">
-      
-        <meta name="lang:clipboard.copied" content="Copied to clipboard">
-      
-        <meta name="lang:search.language" content="en">
-      
-        <meta name="lang:search.pipeline.stopwords" content="True">
-      
-        <meta name="lang:search.pipeline.trimmer" content="True">
-      
-        <meta name="lang:search.result.none" content="No matching documents">
-      
-        <meta name="lang:search.result.one" content="1 matching document">
-      
-        <meta name="lang:search.result.other" content="# matching documents">
-      
-        <meta name="lang:search.tokenizer" content="[\s\-]+">
-      
-      <link rel="shortcut icon" href="../assets/planet.png">
-      <meta name="generator" content="mkdocs-1.0.4, mkdocs-material-4.4.3">
-    
-    
-      
-        <title>Docker in QEMU/KVM - ansemjo's docs</title>
-      
-    
-    
-      <link rel="stylesheet" href="../assets/stylesheets/application.30686662.css">
-      
-      
-    
-    
-      <script src="../assets/javascripts/modernizr.74668098.js"></script>
-    
-    
-      
-    
-    <link rel="stylesheet" href="../assets/fonts/material-icons.css">
-    
-    
-    
-      
-    
-    
-  </head>
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-    <body dir="ltr">
+  <meta name="author" content="Anton Semjonov">
+  <link rel="shortcut icon" href="../assets/planet.png">
   
-    <svg class="md-svg">
-      <defs>
-        
-        
-          <svg xmlns="http://www.w3.org/2000/svg" width="416" height="448" viewBox="0 0 416 448" id="__github"><path fill="currentColor" d="M160 304q0 10-3.125 20.5t-10.75 19T128 352t-18.125-8.5-10.75-19T96 304t3.125-20.5 10.75-19T128 256t18.125 8.5 10.75 19T160 304zm160 0q0 10-3.125 20.5t-10.75 19T288 352t-18.125-8.5-10.75-19T256 304t3.125-20.5 10.75-19T288 256t18.125 8.5 10.75 19T320 304zm40 0q0-30-17.25-51T296 232q-10.25 0-48.75 5.25Q229.5 240 208 240t-39.25-2.75Q130.75 232 120 232q-29.5 0-46.75 21T56 304q0 22 8 38.375t20.25 25.75 30.5 15 35 7.375 37.25 1.75h42q20.5 0 37.25-1.75t35-7.375 30.5-15 20.25-25.75T360 304zm56-44q0 51.75-15.25 82.75-9.5 19.25-26.375 33.25t-35.25 21.5-42.5 11.875-42.875 5.5T212 416q-19.5 0-35.5-.75t-36.875-3.125-38.125-7.5-34.25-12.875T37 371.5t-21.5-28.75Q0 312 0 260q0-59.25 34-99-6.75-20.5-6.75-42.5 0-29 12.75-54.5 27 0 47.5 9.875t47.25 30.875Q171.5 96 212 96q37 0 70 8 26.25-20.5 46.75-30.25T376 64q12.75 25.5 12.75 54.5 0 21.75-6.75 42 34 40 34 99.5z"/></svg>
-        
-      </defs>
-    </svg>
-    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
-    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
-    <label class="md-overlay" data-md-component="overlay" for="__drawer"></label>
+  <title>Docker in QEMU/KVM - ansemjo's docs</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
+
+  <link rel="stylesheet" href="../css/theme.css" type="text/css" />
+  <link rel="stylesheet" href="../css/theme_extra.css" type="text/css" />
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css">
+  
+  <script>
+    // Current page data
+    var mkdocs_page_name = "Docker in QEMU/KVM";
+    var mkdocs_page_input_path = "rechenzentrum/docker-in-kvm.md";
+    var mkdocs_page_url = null;
+  </script>
+  
+  <script src="../js/jquery-2.1.1.min.js" defer></script>
+  <script src="../js/modernizr-2.8.3.min.js" defer></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+  <script>hljs.initHighlightingOnLoad();</script> 
+  
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+
     
-      <a href="#docker-in-qemukvm" tabindex="1" class="md-skip">
-        Skip to content
-      </a>
-    
-    
-      <header class="md-header" data-md-component="header">
-  <nav class="md-header-nav md-grid">
-    <div class="md-flex">
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <a href="../index.html" title="ansemjo's docs" class="md-header-nav__button md-logo">
-          
-            <i class="md-icon"></i>
-          
-        </a>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        <label class="md-icon md-icon--menu md-header-nav__button" for="__drawer"></label>
-      </div>
-      <div class="md-flex__cell md-flex__cell--stretch">
-        <div class="md-flex__ellipsis md-header-nav__title" data-md-component="title">
-          
-            <span class="md-header-nav__topic">
-              ansemjo's docs
-            </span>
-            <span class="md-header-nav__topic">
-              
-                Docker in QEMU/KVM
-              
-            </span>
-          
-        </div>
-      </div>
-      <div class="md-flex__cell md-flex__cell--shrink">
-        
-          <label class="md-icon md-icon--search md-header-nav__button" for="__search"></label>
-          
-<div class="md-search" data-md-component="search" role="dialog">
-  <label class="md-search__overlay" for="__search"></label>
-  <div class="md-search__inner" role="search">
-    <form class="md-search__form" name="search">
-      <input type="text" class="md-search__input" name="query" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="query" data-md-state="active">
-      <label class="md-icon md-search__icon" for="__search"></label>
-      <button type="reset" class="md-icon md-search__icon" data-md-component="reset" tabindex="-1">
-        &#xE5CD;
-      </button>
-    </form>
-    <div class="md-search__output">
-      <div class="md-search__scrollwrap" data-md-scrollfix>
-        <div class="md-search-result" data-md-component="result">
-          <div class="md-search-result__meta">
-            Type to start searching
-          </div>
-          <ol class="md-search-result__list"></ol>
-        </div>
-      </div>
-    </div>
-  </div>
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+      <div class="wy-side-nav-search">
+        <a href="../index.html" class="icon icon-home"> ansemjo's docs</a>
+        <div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
 </div>
-        
       </div>
-      
-        <div class="md-flex__cell md-flex__cell--shrink">
-          <div class="md-header-nav__source">
-            
 
-
-  
-
-<a href="https://github.com/ansemjo/wiki/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    ansemjo/wiki
-  </div>
-</a>
-          </div>
-        </div>
-      
-    </div>
-  </nav>
-</header>
-    
-    <div class="md-container">
-      
-        
-      
-      
-        
-
-  
-
-<nav class="md-tabs md-tabs--active" data-md-component="tabs">
-  <div class="md-tabs__inner md-grid">
-    <ul class="md-tabs__list">
-      
-        
-  <li class="md-tabs__item">
-    
-      <a href="../index.html" class="md-tabs__link">
-        Home
-      </a>
-    
-  </li>
-
-      
-        
-      
-        
-  
-  
-    <li class="md-tabs__item">
-      
-        <a href="../personal/löschungsantrag.html" class="md-tabs__link">
-          Personal
-        </a>
-      
-    </li>
-  
-
-      
-        
-  
-  
-    <li class="md-tabs__item">
-      
-        <a href="index.html" class="md-tabs__link md-tabs__link--active">
-          Rechenzentrum
-        </a>
-      
-    </li>
-  
-
-      
-        
-  
-  
-    <li class="md-tabs__item">
-      
-        <a href="../security/net-disk-decryption.html" class="md-tabs__link">
-          Security
-        </a>
-      
-    </li>
-  
-
-      
-        
-  
-  
-    <li class="md-tabs__item">
-      
-        <a href="../tips/ansible.html" class="md-tabs__link">
-          Tips
-        </a>
-      
-    </li>
-  
-
-      
-    </ul>
-  </div>
-</nav>
-      
-      <main class="md-main" role="main">
-        <div class="md-main__inner md-grid" data-md-component="container">
-          
-            
-              <div class="md-sidebar md-sidebar--primary" data-md-component="navigation">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
-                    <nav class="md-nav md-nav--primary" data-md-level="0">
-  <label class="md-nav__title md-nav__title--site" for="__drawer">
-    <a href="../index.html" title="ansemjo's docs" class="md-nav__button md-logo">
-      
-        <i class="md-icon"></i>
-      
-    </a>
-    ansemjo's docs
-  </label>
-  
-    <div class="md-nav__source">
-      
-
-
-  
-
-<a href="https://github.com/ansemjo/wiki/" title="Go to repository" class="md-source" data-md-source="github">
-  
-    <div class="md-source__icon">
-      <svg viewBox="0 0 24 24" width="24" height="24">
-        <use xlink:href="#__github" width="24" height="24"></use>
-      </svg>
-    </div>
-  
-  <div class="md-source__repository">
-    ansemjo/wiki
-  </div>
-</a>
-    </div>
-  
-  <ul class="md-nav__list" data-md-scrollfix>
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../index.html" title="Home" class="md-nav__link">
-      Home
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item">
-    <a href="../software.html" title="Software" class="md-nav__link">
-      Software
-    </a>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-3" type="checkbox" id="nav-3">
-    
-    <label class="md-nav__link" for="nav-3">
-      Personal
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-3">
-        Personal
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../personal/löschungsantrag.html" title="DSGVO Löschungsantrag" class="md-nav__link">
-      DSGVO Löschungsantrag
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../personal/versicherungen.html" title="Versicherungen" class="md-nav__link">
-      Versicherungen
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-4" type="checkbox" id="nav-4" checked>
-    
-    <label class="md-nav__link" for="nav-4">
-      Rechenzentrum
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-4">
-        Rechenzentrum
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="index.html" title="Overview" class="md-nav__link">
-      Overview
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="bootstrap.html" title="Bootstrap" class="md-nav__link">
-      Bootstrap
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-  
-
-
-  <li class="md-nav__item md-nav__item--active">
-    
-    <input class="md-toggle md-nav__toggle" data-md-toggle="toc" type="checkbox" id="__toc">
-    
-      
-    
-    
-      <label class="md-nav__link md-nav__link--active" for="__toc">
-        Docker in QEMU/KVM
-      </label>
-    
-    <a href="docker-in-kvm.html" title="Docker in QEMU/KVM" class="md-nav__link md-nav__link--active">
-      Docker in QEMU/KVM
-    </a>
-    
-      
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#boot-a-coreos-virtual-machine" class="md-nav__link">
-    Boot a CoreOS Virtual Machine
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#via-text-console-modern-virt-install" class="md-nav__link">
-    Via Text Console (modern virt-install)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#via-text-console-older-virt-install" class="md-nav__link">
-    Via Text Console (older virt-install)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#via-vnc-viewer" class="md-nav__link">
-    Via VNC Viewer
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-coreos-to-disk" class="md-nav__link">
-    Install CoreOS to Disk
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prepare-ignition" class="md-nav__link">
-    Prepare Ignition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    Installation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#miscellaneous" class="md-nav__link">
-    Miscellaneous
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fixed-dhcp-address" class="md-nav__link">
-    Fixed DHCP Address
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ssh-client-configuration" class="md-nav__link">
-    SSH Client Configuration
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
-    </ul>
-  
-</nav>
-    
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="flynn.html" title="Flynn" class="md-nav__link">
-      Flynn
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="kvm-on-alpine.html" title="KVM on Alpine" class="md-nav__link">
-      KVM on Alpine
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="netboot.html" title="Network Boot" class="md-nav__link">
-      Network Boot
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="tls-host-aliases.html" title="TLS for Host Aliases" class="md-nav__link">
-      TLS for Host Aliases
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-5" type="checkbox" id="nav-5">
-    
-    <label class="md-nav__link" for="nav-5">
-      Security
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-5">
-        Security
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../security/net-disk-decryption.html" title="Network Disk Decryption" class="md-nav__link">
-      Network Disk Decryption
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../security/secureboot.html" title="Secureboot" class="md-nav__link">
-      Secureboot
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../security/systemd-decryption-target.html" title="Systemd Disk Decryption Target" class="md-nav__link">
-      Systemd Disk Decryption Target
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../security/zfs-in-place-encryption.html" title="ZFS in-place Encryption" class="md-nav__link">
-      ZFS in-place Encryption
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-      
-      
-      
-
-
-  <li class="md-nav__item md-nav__item--nested">
-    
-      <input class="md-toggle md-nav__toggle" data-md-toggle="nav-6" type="checkbox" id="nav-6">
-    
-    <label class="md-nav__link" for="nav-6">
-      Tips
-    </label>
-    <nav class="md-nav" data-md-component="collapsible" data-md-level="1">
-      <label class="md-nav__title" for="nav-6">
-        Tips
-      </label>
-      <ul class="md-nav__list" data-md-scrollfix>
-        
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/ansible.html" title="Ansible" class="md-nav__link">
-      Ansible
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/backblaze.html" title="Backblaze" class="md-nav__link">
-      Backblaze
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/bash.html" title="Bash" class="md-nav__link">
-      Bash
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/centos.html" title="CentOS" class="md-nav__link">
-      CentOS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/containers.html" title="Containers" class="md-nav__link">
-      Containers
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/coreos.html" title="CoreOS" class="md-nav__link">
-      CoreOS
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/documentscan.html" title="Document Scanning" class="md-nav__link">
-      Document Scanning
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/freeipa.html" title="FreeIPA" class="md-nav__link">
-      FreeIPA
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/git.html" title="Git" class="md-nav__link">
-      Git
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/gitlab.html" title="Gitlab" class="md-nav__link">
-      Gitlab
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/golang.html" title="Go" class="md-nav__link">
-      Go
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/lenovo.html" title="Lenovo" class="md-nav__link">
-      Lenovo
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/openwrt.html" title="OpenWRT" class="md-nav__link">
-      OpenWRT
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/python.html" title="Python" class="md-nav__link">
-      Python
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/restic.html" title="Restic" class="md-nav__link">
-      Restic
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/serialdevices.html" title="Serial" class="md-nav__link">
-      Serial
-    </a>
-  </li>
-
-        
-          
-          
-          
-
-
-  <li class="md-nav__item">
-    <a href="../tips/tor.html" title="Tor" class="md-nav__link">
-      Tor
-    </a>
-  </li>
-
-        
-      </ul>
-    </nav>
-  </li>
-
-    
-  </ul>
-</nav>
-                  </div>
-                </div>
-              </div>
-            
-            
-              <div class="md-sidebar md-sidebar--secondary" data-md-component="toc">
-                <div class="md-sidebar__scrollwrap">
-                  <div class="md-sidebar__inner">
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+	<ul class="current">
+	  
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../index.html">Home</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <a class="" href="../software.html">Software</a>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Personal</span>
+    <ul class="subnav">
+                <li class="">
                     
-<nav class="md-nav md-nav--secondary">
-  
-  
-    
-  
-  
-    <label class="md-nav__title" for="__toc">Table of contents</label>
-    <ul class="md-nav__list" data-md-scrollfix>
-      
-        <li class="md-nav__item">
-  <a href="#prerequisites" class="md-nav__link">
-    Prerequisites
-  </a>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#boot-a-coreos-virtual-machine" class="md-nav__link">
-    Boot a CoreOS Virtual Machine
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#via-text-console-modern-virt-install" class="md-nav__link">
-    Via Text Console (modern virt-install)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#via-text-console-older-virt-install" class="md-nav__link">
-    Via Text Console (older virt-install)
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#via-vnc-viewer" class="md-nav__link">
-    Via VNC Viewer
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#install-coreos-to-disk" class="md-nav__link">
-    Install CoreOS to Disk
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#prepare-ignition" class="md-nav__link">
-    Prepare Ignition
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#installation" class="md-nav__link">
-    Installation
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-        <li class="md-nav__item">
-  <a href="#miscellaneous" class="md-nav__link">
-    Miscellaneous
-  </a>
-  
-    <nav class="md-nav">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
-  <a href="#fixed-dhcp-address" class="md-nav__link">
-    Fixed DHCP Address
-  </a>
-  
-</li>
-        
-          <li class="md-nav__item">
-  <a href="#ssh-client-configuration" class="md-nav__link">
-    SSH Client Configuration
-  </a>
-  
-</li>
-        
-      </ul>
-    </nav>
-  
-</li>
-      
-      
-      
-      
-      
+    <a class="" href="../personal/löschungsantrag.html">DSGVO Löschungsantrag</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../personal/versicherungen.html">Versicherungen</a>
+                </li>
     </ul>
-  
-</nav>
-                  </div>
-                </div>
-              </div>
-            
+	    </li>
           
-          <div class="md-content">
-            <article class="md-content__inner md-typeset">
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Rechenzentrum</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="index.html">Overview</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="bootstrap.html">Bootstrap</a>
+                </li>
+                <li class=" current">
+                    
+    <a class="current" href="docker-in-kvm.html">Docker in QEMU/KVM</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#docker-in-qemukvm">Docker in QEMU/KVM</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#prerequisites">Prerequisites</a></li>
+        
+            <li><a class="toctree-l4" href="#boot-a-coreos-virtual-machine">Boot a CoreOS Virtual Machine</a></li>
+        
+            <li><a class="toctree-l4" href="#install-coreos-to-disk">Install CoreOS to Disk</a></li>
+        
+            <li><a class="toctree-l4" href="#miscellaneous">Miscellaneous</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
+                <li class="">
+                    
+    <a class="" href="flynn.html">Flynn</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="kvm-on-alpine.html">KVM on Alpine</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="netboot.html">Network Boot</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="tls-host-aliases.html">TLS for Host Aliases</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Security</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../security/net-disk-decryption.html">Network Disk Decryption</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../security/secureboot.html">Secureboot</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../security/systemd-decryption-target.html">Systemd Disk Decryption Target</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../security/zfs-in-place-encryption.html">ZFS in-place Encryption</a>
+                </li>
+    </ul>
+	    </li>
+          
+            <li class="toctree-l1">
+		
+    <span class="caption-text">Tips</span>
+    <ul class="subnav">
+                <li class="">
+                    
+    <a class="" href="../tips/ansible.html">Ansible</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/backblaze.html">Backblaze</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/bash.html">Bash</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/centos.html">CentOS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/containers.html">Containers</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/coreos.html">CoreOS</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/documentscan.html">Document Scanning</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/freeipa.html">FreeIPA</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/git.html">Git</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/gitlab.html">Gitlab</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/golang.html">Go</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/lenovo.html">Lenovo</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/openwrt.html">OpenWRT</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/python.html">Python</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/restic.html">Restic</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/serialdevices.html">Serial</a>
+                </li>
+                <li class="">
+                    
+    <a class="" href="../tips/tor.html">Tor</a>
+                </li>
+    </ul>
+	    </li>
+          
+        </ul>
+      </div>
+      &nbsp;
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="../index.html">ansemjo's docs</a>
+      </nav>
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="../index.html">Docs</a> &raquo;</li>
+    
+      
+        
+          <li>Rechenzentrum &raquo;</li>
+        
+      
+    
+    <li>Docker in QEMU/KVM</li>
+    <li class="wy-breadcrumbs-aside">
+      
+        <a href="https://github.com/ansemjo/wiki/edit/master/docs/rechenzentrum/docker-in-kvm.md"> Edit on ansemjo/wiki</a>
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main">
+            <div class="section">
               
-                
-                  <a href="https://github.com/ansemjo/wiki/edit/master/docs/rechenzentrum/docker-in-kvm.md" title="Edit this page" class="md-icon md-content__icon">&#xE3C9;</a>
-                
-                
-                <h1 id="docker-in-qemukvm">Docker in QEMU/KVM</h1>
+                <h1 id="docker-in-qemukvm">Docker in QEMU/KVM<a class="headerlink" href="#docker-in-qemukvm" title="Permanent link">&para;</a></h1>
 <p>Some applications may require a properly isolated Docker engine where users of the API have every freedom but when they must not be able to compromise the host security. Since access to the Docker socket is equivalent to being <code>root</code> (<a href="https://opensource.com/article/18/10/podman-more-secure-way-run-containers">or worse</a>) we must preferably run the engine on a seperate machine.</p>
 <p>Long story short: virtualization with QEMU/KVM provides all the required isolation and CoreOS is easy to deploy and bundles Docker by default.</p>
 <p>The following steps are designed for a CentOS 7 hypervisor.</p>
-<h2 id="prerequisites">Prerequisites</h2>
+<h2 id="prerequisites">Prerequisites<a class="headerlink" href="#prerequisites" title="Permanent link">&para;</a></h2>
 <p>First of all, we need to prepare our hypervisor, so install QEMU and libvirt.</p>
-<div class="codehilite"><pre><span></span><span class="n">yum</span> <span class="n">install</span> <span class="n">qemu</span><span class="o">-</span><span class="n">kvm</span> <span class="n">libvirt</span> <span class="n">virt</span><span class="o">-</span><span class="n">install</span>
-<span class="n">modprobe</span> <span class="n">kvm</span>
-<span class="n">systemctl</span> <span class="n">enable</span> <span class="c1">--now libvirtd</span>
-</pre></div>
+<pre class="codehilite"><code>yum install qemu-kvm libvirt virt-install
+modprobe kvm
+systemctl enable --now libvirtd</code></pre>
 
 
-<p>Make sure you have hardware virtualization available. If you're running in a virtual machine already you may need to enable passthrough explicitly. On an Intel machine you should have a module <code>kvm_intel</code> loaded as well.</p>
+<p>Make sure you have hardware virtualization available. If you&rsquo;re running in a virtual machine already you may need to enable passthrough explicitly. On an Intel machine you should have a module <code>kvm_intel</code> loaded as well.</p>
 <div class="admonition info">
 <p class="admonition-title">Info</p>
 <p>We are going to use <code>virt-install</code> as well, however the version in EPEL is not recent enough to use the <code>kernel=</code> and<code>initrd=</code> arguments with <code>--location</code>. Thus prefer a local manager and append <code>--connect qemu+ssh://root@hypervisor/system</code> to <code>virsh</code> or <code>virt-install</code> commands.</p>
 </div>
-<h2 id="boot-a-coreos-virtual-machine">Boot a CoreOS Virtual Machine</h2>
+<h2 id="boot-a-coreos-virtual-machine">Boot a CoreOS Virtual Machine<a class="headerlink" href="#boot-a-coreos-virtual-machine" title="Permanent link">&para;</a></h2>
 <p>There is <a href="https://coreos.com/os/docs/latest/booting-with-libvirt.html">a guide</a> on how to boot CoreOS with <code>libvirt</code> but I prefer to perform a clean installation to disk. Therefore we need to boot CoreOS to RAM and deploy using an Ignition configuration. Preferably, this is done with the provided PXE images.</p>
 <p>Depending on your version of <code>virt-install</code> there are different installation methods available: in the terminal via text console or remotely over VNC.</p>
-<h3 id="via-text-console-modern-virt-install">Via Text Console (modern <code>virt-install</code>)</h3>
-<p>If you don't want to bother with VNC connections and would prefer to install via a text console on the hypervisor itself, you can download and run the CoreOS <code>vmlinuz</code> and <code>cpio.gz</code> directly by specifying them in the <code>--location</code> argument:</p>
-<div class="codehilite"><pre><span></span>virt-install --name core --memory <span class="m">2048</span> --vcpus <span class="m">2</span> <span class="se">\</span>
-  --accelerate --rng /dev/urandom --autostart --graphics none <span class="se">\</span>
-  --disk <span class="nv">size</span><span class="o">=</span><span class="m">20</span>,bus<span class="o">=</span>virtio --os-variant virtio26 <span class="se">\</span>
-  --location <span class="s2">&quot;https://stable.release.core-os.net/amd64-usr/current/,kernel=coreos_production_pxe.vmlinuz,initrd=coreos_production_pxe_image.cpio.gz&quot;</span> <span class="se">\</span>
-  --extra-args <span class="s2">&quot;coreos.autologin console=ttyS0&quot;</span>
-</pre></div>
+<h3 id="via-text-console-modern-virt-install">Via Text Console (modern <code>virt-install</code>)<a class="headerlink" href="#via-text-console-modern-virt-install" title="Permanent link">&para;</a></h3>
+<p>If you don&rsquo;t want to bother with VNC connections and would prefer to install via a text console on the hypervisor itself, you can download and run the CoreOS <code>vmlinuz</code> and <code>cpio.gz</code> directly by specifying them in the <code>--location</code> argument:</p>
+<pre class="codehilite"><code class="language-sh">virt-install --name core --memory 2048 --vcpus 2 \
+  --accelerate --rng /dev/urandom --autostart --graphics none \
+  --disk size=20,bus=virtio --os-variant virtio26 \
+  --location &quot;https://stable.release.core-os.net/amd64-usr/current/,kernel=coreos_production_pxe.vmlinuz,initrd=coreos_production_pxe_image.cpio.gz&quot; \
+  --extra-args &quot;coreos.autologin console=ttyS0&quot;</code></pre>
 
 
 <p>If you prefer to download and verify <a href="https://stable.release.core-os.net/amd64-usr/current/coreos_production_iso_image.iso">an ISO</a> locally instead, you can substitute the <code>--location</code> argument:</p>
-<div class="codehilite"><pre><span></span>  --location ../path/to/coreos.iso,kernel<span class="o">=</span>/coreos/vmlinuz,initrd<span class="o">=</span>/coreos/cpio.gz <span class="se">\</span>
-</pre></div>
+<pre class="codehilite"><code class="language-sh">  --location ../path/to/coreos.iso,kernel=/coreos/vmlinuz,initrd=/coreos/cpio.gz \</code></pre>
 
 
-<p>This is useful when you're doing many installs to avoid the repeated downloads.</p>
+<p>This is useful when you&rsquo;re doing many installs to avoid the repeated downloads.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
 <p>You can find files inside an ISO with <code>isoinfo -Jf -i /path/to/disc.iso</code>.</p>
 </div>
-<h3 id="via-text-console-older-virt-install">Via Text Console (older <code>virt-install</code>)</h3>
-<p>Older versions of <code>virt-install</code> -- among them version 1.5.0 that is shipped with CentOS 7 -- do not support the <code>--location ...,kernel=...,initrd=...</code> syntax and complain about unreachable URLs. In this case you can download the files and fake a Debain installation directory that is autodetected simply by passing the directory path to <code>virt-install</code>.</p>
+<h3 id="via-text-console-older-virt-install">Via Text Console (older <code>virt-install</code>)<a class="headerlink" href="#via-text-console-older-virt-install" title="Permanent link">&para;</a></h3>
+<p>Older versions of <code>virt-install</code> &ndash; among them version 1.5.0 that is shipped with CentOS 7 &ndash; do not support the <code>--location ...,kernel=...,initrd=...</code> syntax and complain about unreachable URLs. In this case you can download the files and fake a Debain installation directory that is autodetected simply by passing the directory path to <code>virt-install</code>.</p>
 <p>Download and verify the PXE image as per the CoreOS docs:</p>
-<div class="codehilite"><pre><span></span><span class="nb">cd</span> /var/lib/libvirt/images
-mkdir -p coreos <span class="o">&amp;&amp;</span> <span class="nb">cd</span> coreos
-<span class="nv">stable</span><span class="o">=</span>https://stable.release.core-os.net/amd64-usr/current/
-wget <span class="nv">$stable</span>/coreos_production_pxe.vmlinuz
-wget <span class="nv">$stable</span>/coreos_production_pxe.vmlinuz.sig
-wget <span class="nv">$stable</span>/coreos_production_pxe_image.cpio.gz
-wget <span class="nv">$stable</span>/coreos_production_pxe_image.cpio.gz.sig
+<pre class="codehilite"><code class="language-sh">cd /var/lib/libvirt/images
+mkdir -p coreos &amp;&amp; cd coreos
+stable=https://stable.release.core-os.net/amd64-usr/current/
+wget $stable/coreos_production_pxe.vmlinuz
+wget $stable/coreos_production_pxe.vmlinuz.sig
+wget $stable/coreos_production_pxe_image.cpio.gz
+wget $stable/coreos_production_pxe_image.cpio.gz.sig
 gpg --verify coreos_production_pxe.vmlinuz.sig
-gpg --verify coreos_production_pxe_image.cpio.gz.sig
-</pre></div>
+gpg --verify coreos_production_pxe_image.cpio.gz.sig</code></pre>
 
 
 <p>Create a fake <code>MANIFEST</code> and a directory structure that mimics a Debian netboot installer:</p>
-<div class="codehilite"><pre><span></span>mkdir -p amd64/current/images/netboot/debian-installer/amd64/
-<span class="nb">echo</span> debian-installer &gt; amd64/current/images/MANIFEST
+<pre class="codehilite"><code class="language-sh">mkdir -p amd64/current/images/netboot/debian-installer/amd64/
+echo debian-installer &gt; amd64/current/images/MANIFEST
 ln -sr coreos_production_pxe.vmlinuz amd64/current/images/netboot/debian-installer/amd64/linux
-ln -sr coreos_production_pxe_image.cpio.gz amd64/current/images/netboot/debian-installer/amd64/initrd.gz
-</pre></div>
+ln -sr coreos_production_pxe_image.cpio.gz amd64/current/images/netboot/debian-installer/amd64/initrd.gz</code></pre>
 
 
 <p>Pass the <code>amd64</code> subdirectory as the installer location:</p>
-<div class="codehilite"><pre><span></span>virt-install --name core --memory <span class="m">2048</span> --vcpus <span class="m">2</span> <span class="se">\</span>
-  --accelerate --rng /dev/urandom --autostart --graphics none <span class="se">\</span>
-  --disk <span class="nv">size</span><span class="o">=</span><span class="m">20</span>,bus<span class="o">=</span>virtio --os-variant virtio26 <span class="se">\</span>
-  --location /var/lib/libvirt/images/coreos/amd64 <span class="se">\</span>
-  --extra-args <span class="s2">&quot;coreos.autologin console=ttyS0&quot;</span>
-</pre></div>
+<pre class="codehilite"><code class="language-sh">virt-install --name core --memory 2048 --vcpus 2 \
+  --accelerate --rng /dev/urandom --autostart --graphics none \
+  --disk size=20,bus=virtio --os-variant virtio26 \
+  --location /var/lib/libvirt/images/coreos/amd64 \
+  --extra-args &quot;coreos.autologin console=ttyS0&quot;</code></pre>
 
 
-<p>This method is probably useful for other distributions that don't get detected automatically either as well.</p>
-<h3 id="via-vnc-viewer">Via VNC Viewer</h3>
-<p>Sometimes an installer may just refuse to start on the serial console or you're more confident in a graphical installer. This method also applies when you want to use an ISO image without specifying additional kernel parameters.
+<p>This method is probably useful for other distributions that don&rsquo;t get detected automatically either as well.</p>
+<h3 id="via-vnc-viewer">Via VNC Viewer<a class="headerlink" href="#via-vnc-viewer" title="Permanent link">&para;</a></h3>
+<p>Sometimes an installer may just refuse to start on the serial console or you&rsquo;re more confident in a graphical installer. This method also applies when you want to use an ISO image without specifying additional kernel parameters.
 As an example, this section uses an image of <a href="https://netboot.xyz">netboot.xyz</a>, which can be used to interactively boot many different distributions.</p>
 <p>First, download the <code>netboot.xyz</code> image:</p>
-<div class="codehilite"><pre><span></span><span class="n">cd</span> <span class="o">/</span><span class="n">var</span><span class="o">/</span><span class="n">lib</span><span class="o">/</span><span class="n">libvirt</span><span class="o">/</span><span class="n">boot</span>
-<span class="n">curl</span> <span class="o">-</span><span class="n">LO</span> <span class="n">https</span><span class="p">:</span><span class="o">//</span><span class="n">boot</span><span class="p">.</span><span class="n">netboot</span><span class="p">.</span><span class="n">xyz</span><span class="o">/</span><span class="n">ipxe</span><span class="o">/</span><span class="n">netboot</span><span class="p">.</span><span class="n">xyz</span><span class="p">.</span><span class="n">iso</span>
-</pre></div>
+<pre class="codehilite"><code>cd /var/lib/libvirt/boot
+curl -LO https://boot.netboot.xyz/ipxe/netboot.xyz.iso</code></pre>
 
 
 <p>Now create the virtual machine with <code>virt-install</code>, specifying the ISO with the <code>--cdrom</code> argument:</p>
-<div class="codehilite"><pre><span></span><span class="n">virt</span><span class="o">-</span><span class="n">install</span> <span class="c1">--name core --memory 2048 --vcpus 2 \</span>
-  <span class="c1">--accelerate --rng /dev/urandom --autostart \</span>
-  <span class="c1">--disk size=20,bus=virtio --os-variant virtio26 \</span>
-  <span class="c1">--graphics vnc,listen=0.0.0.0 --noautoconsole \</span>
-  <span class="c1">--cdrom /var/lib/libvirt/boot/netboot.xyz.iso</span>
-</pre></div>
+<pre class="codehilite"><code>virt-install --name core --memory 2048 --vcpus 2 \
+  --accelerate --rng /dev/urandom --autostart \
+  --disk size=20,bus=virtio --os-variant virtio26 \
+  --graphics vnc,listen=0.0.0.0 --noautoconsole \
+  --cdrom /var/lib/libvirt/boot/netboot.xyz.iso</code></pre>
 
 
 <p>This should start the installation process and enable a VNC console. You can check the port with <code>virsh vncdisplay runner</code> and verify with <code>ss -tln</code> if in doubt. In my case a default of <code>:0</code> corresponds to port 5900 on the host, so temporarily open that port in the firewall:</p>
-<div class="codehilite"><pre><span></span><span class="n">firewall</span><span class="o">-</span><span class="n">cmd</span> <span class="c1">--add-port 5900/tcp</span>
-</pre></div>
+<pre class="codehilite"><code>firewall-cmd --add-port 5900/tcp</code></pre>
 
 
 <p>Connect with your favourite VNC client and complete the installation.</p>
 <div class="admonition hint">
 <p class="admonition-title">Hint</p>
-<p>You can't currently change the keyboard map on the console. Set a password with
+<p>You can&rsquo;t currently change the keyboard map on the console. Set a password with
 <code>sudo passwd core</code> and connect with <code>ssh</code> instead if you run into problems.</p>
 </div>
-<h2 id="install-coreos-to-disk">Install CoreOS to Disk</h2>
-<h3 id="prepare-ignition">Prepare Ignition</h3>
+<h2 id="install-coreos-to-disk">Install CoreOS to Disk<a class="headerlink" href="#install-coreos-to-disk" title="Permanent link">&para;</a></h2>
+<h3 id="prepare-ignition">Prepare Ignition<a class="headerlink" href="#prepare-ignition" title="Permanent link">&para;</a></h3>
 <p>By now you should have prepared an Ignition configuration. There is of course a lot of variation possible here but most importantly you should enable <code>rngd.service</code> and <code>docker.service</code> and make sure that you can connect with SSH public keys. Mine looks somewhat like this:</p>
-<div class="codehilite"><pre><span></span><span class="nn">---</span>
-<span class="c1"># enable docker service</span>
-<span class="nt">systemd</span><span class="p">:</span>
-  <span class="nt">units</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">rngd.service</span>
-      <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">docker.service</span>
-      <span class="nt">enabled</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">yes</span>
+<pre class="codehilite"><code class="language-yaml">---
+# enable docker service
+systemd:
+  units:
+    - name: rngd.service
+      enabled: yes
+    - name: docker.service
+      enabled: yes
 
-<span class="c1"># ssh public keys</span>
-<span class="nt">passwd</span><span class="p">:</span>
-  <span class="nt">users</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">core</span>
-      <span class="nt">ssh_authorized_keys</span><span class="p">:</span>
-        <span class="p p-Indicator">-</span> <span class="c1"># add your keys here</span>
+# ssh public keys
+passwd:
+  users:
+    - name: core
+      ssh_authorized_keys:
+        - # add your keys here
 
-<span class="c1"># automatic updates during maintenance window</span>
-<span class="nt">locksmith</span><span class="p">:</span>
-  <span class="nt">reboot_strategy</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">reboot</span>
-  <span class="nt">window_start</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">04:00</span>
-  <span class="nt">window_length</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">3h</span>
+# automatic updates during maintenance window
+locksmith:
+  reboot_strategy: reboot
+  window_start: 04:00
+  window_length: 3h
 
-<span class="c1"># enable console autologin</span>
-<span class="nt">storage</span><span class="p">:</span>
-  <span class="nt">filesystems</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">name</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">OEM</span>
-      <span class="nt">mount</span><span class="p">:</span>
-        <span class="nt">device</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/dev/disk/by-label/OEM</span>
-        <span class="nt">format</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">ext4</span>
-  <span class="nt">files</span><span class="p">:</span>
-    <span class="p p-Indicator">-</span> <span class="nt">filesystem</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">OEM</span>
-      <span class="nt">path</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">/grub.cfg</span>
-      <span class="nt">mode</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">0644</span>
-      <span class="nt">append</span><span class="p">:</span> <span class="l l-Scalar l-Scalar-Plain">true</span>
-      <span class="nt">contents</span><span class="p">:</span>
-        <span class="nt">inline</span><span class="p">:</span> <span class="p p-Indicator">|</span>
-          <span class="no">set linux_append=&quot;$linux_append coreos.autologin&quot;</span>
-</pre></div>
+# enable console autologin
+storage:
+  filesystems:
+    - name: OEM
+      mount:
+        device: /dev/disk/by-label/OEM
+        format: ext4
+  files:
+    - filesystem: OEM
+      path: /grub.cfg
+      mode: 0644
+      append: true
+      contents:
+        inline: |
+          set linux_append=&quot;$linux_append coreos.autologin&quot;</code></pre>
 
 
-<h3 id="installation">Installation</h3>
+<h3 id="installation">Installation<a class="headerlink" href="#installation" title="Permanent link">&para;</a></h3>
 <p>After transpiling, I am using <a href="https://surge.sh">surge.sh</a> to host small static files quickly. Download the configuration and finally install CoreOS to disk:</p>
-<div class="codehilite"><pre><span></span>curl -LO <span class="s2">&quot;https://ks.surge.sh/coreos/docker.json&quot;</span>
+<pre class="codehilite"><code class="language-sh">curl -LO &quot;https://ks.surge.sh/coreos/docker.json&quot;
 sudo coreos-install -d /dev/vda -i docker.json
 sudo udevadm settle
-sudo reboot
-</pre></div>
+sudo reboot</code></pre>
 
 
-<h2 id="miscellaneous">Miscellaneous</h2>
-<h3 id="fixed-dhcp-address">Fixed DHCP Address</h3>
+<h2 id="miscellaneous">Miscellaneous<a class="headerlink" href="#miscellaneous" title="Permanent link">&para;</a></h2>
+<h3 id="fixed-dhcp-address">Fixed DHCP Address<a class="headerlink" href="#fixed-dhcp-address" title="Permanent link">&para;</a></h3>
 <p>You can add a fixed address for this virtual machine by creating an IP assignment for its MAC address with <code>virsh</code>:</p>
-<div class="codehilite"><pre><span></span>virsh net-dhcp-leases default   <span class="c1"># see current leases</span>
-virsh net-update default add-last ip-dhcp-host <span class="se">\</span>
-  --xml <span class="s2">&quot;&lt;host mac=&#39;52:54:00:e7:b6:4d&#39; ip=&#39;192.168.122.2&#39; /&gt;&quot;</span> <span class="se">\</span>
-  --live --config
-</pre></div>
+<pre class="codehilite"><code class="language-sh">virsh net-dhcp-leases default   # see current leases
+virsh net-update default add-last ip-dhcp-host \
+  --xml &quot;&lt;host mac='52:54:00:e7:b6:4d' ip='192.168.122.2' /&gt;&quot; \
+  --live --config</code></pre>
 
 
-<h3 id="ssh-client-configuration">SSH Client Configuration</h3>
+<h3 id="ssh-client-configuration">SSH Client Configuration<a class="headerlink" href="#ssh-client-configuration" title="Permanent link">&para;</a></h3>
 <p>Add an appropriate SSH config on the hypervisor:</p>
-<div class="codehilite"><pre><span></span><span class="k">Host</span> <span class="n">runner</span>
-  <span class="k">User</span> <span class="n">core</span>
-  <span class="n">HostName</span> <span class="mi">192</span><span class="p">.</span><span class="mi">168</span><span class="p">.</span><span class="mi">122</span><span class="p">.</span><span class="mi">2</span>
-  <span class="n">StrictHostKeyChecking</span> <span class="k">no</span>
-  <span class="n">UserKnownHostsFile</span> <span class="o">/</span><span class="n">dev</span><span class="o">/</span><span class="k">null</span>
-</pre></div>
-                
-                  
-                
+<pre class="codehilite"><code>Host runner
+  User core
+  HostName 192.168.122.2
+  StrictHostKeyChecking no
+  UserKnownHostsFile /dev/null</code></pre>
               
-              
-                
-
-
-              
-            </article>
+            </div>
           </div>
-        </div>
-      </main>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        
-<footer class="md-footer">
-  
-    <div class="md-footer-nav">
-      <nav class="md-footer-nav__inner md-grid">
-        
-          <a href="bootstrap.html" title="Bootstrap" class="md-flex md-footer-nav__link md-footer-nav__link--prev" rel="prev">
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-back md-footer-nav__button"></i>
-            </div>
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Previous
-                </span>
-                Bootstrap
-              </span>
-            </div>
-          </a>
-        
-        
-          <a href="flynn.html" title="Flynn" class="md-flex md-footer-nav__link md-footer-nav__link--next" rel="next">
-            <div class="md-flex__cell md-flex__cell--stretch md-footer-nav__title">
-              <span class="md-flex__ellipsis">
-                <span class="md-footer-nav__direction">
-                  Next
-                </span>
-                Flynn
-              </span>
-            </div>
-            <div class="md-flex__cell md-flex__cell--shrink">
-              <i class="md-icon md-icon--arrow-forward md-footer-nav__button"></i>
-            </div>
-          </a>
-        
-      </nav>
-    </div>
-  
-  <div class="md-footer-meta md-typeset">
-    <div class="md-footer-meta__inner md-grid">
-      <div class="md-footer-copyright">
-        
-          <div class="md-footer-copyright__highlight">
-            Copyright (c) 2018 Anton Semjonov, licensed under Creative Commons BY-SA 4.0 (https://semjonov.de/license)
-          </div>
-        
-        powered by
-        <a href="https://www.mkdocs.org">MkDocs</a>
-        and
-        <a href="https://squidfunk.github.io/mkdocs-material/">
-          Material for MkDocs</a>
-      </div>
+        <a href="flynn.html" class="btn btn-neutral float-right" title="Flynn">Next <span class="icon icon-circle-arrow-right"></span></a>
+      
+      
+        <a href="bootstrap.html" class="btn btn-neutral" title="Bootstrap"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+    
+      <p>Copyright (c) 2019 Anton Semjonov.
+Licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/" title="Creative Commons Attribution-ShareAlike 4.0">CC-BY-SA-4.0</a> license.
+</p>
+    
   </div>
+
+  Built with <a href="http://www.mkdocs.org">MkDocs</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
 </footer>
       
-    </div>
-    
-      <script src="../assets/javascripts/application.ac79c3b0.js"></script>
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" style="cursor: pointer">
+    <span class="rst-current-version" data-toggle="rst-current-version">
       
-      <script>app.initialize({version:"1.0.4",url:{base:".."}})</script>
       
-    
-  </body>
+        <span><a href="bootstrap.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+      
+      
+        <span style="margin-left: 15px"><a href="flynn.html" style="color: #fcfcfc">Next &raquo;</a></span>
+      
+    </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+
+</body>
 </html>
