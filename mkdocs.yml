@@ -1,26 +1,34 @@
-# site name and backing repository
+# site metadata
 site_name: ansemjo's docs
+site_author: Anton Semjonov
 repo_name: ansemjo/wiki
 repo_url: https://github.com/ansemjo/wiki
+site_favicon: assets/planet.png
 
-# license under CC BY-SA 4.0
-copyright: Copyright (c) 2018 Anton Semjonov, licensed under Creative Commons BY-SA 4.0 (https://semjonov.de/license)
+# license under CC-BY-SA-4.0
+copyright: |
+  Copyright (c) 2019 Anton Semjonov.
+  Licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/" title="Creative Commons Attribution-ShareAlike 4.0">CC-BY-SA-4.0</a> license.
 
 # use plain html files / urls
 use_directory_urls: no
 
 # theme settings
-theme:
-  name: material
-  font: no # don't use google fonts
-  favicon: assets/planet.png
-  feature:
-    tabs: yes # display subdirectories as tabs
+theme: readthedocs
 
-# markdown settings
+# advanced markdown settings
 markdown_extensions:
-  - admonition
-  - footnotes
-  - toc
-  - meta
-  - codehilite
+  - meta # parse frontmatter
+  - toc: # generate self-links on headings
+      permalink: yes
+      marker: null
+  - tables # markdown tables
+  - fenced_code # more fence styles
+  - abbr # define abbreviations with *[ABBR]:
+  - smarty # replace ticks, ellipsis and dashes
+  - sane_lists # nicer list parsing
+  - admonition # rst-style !!! note blocks
+  - footnotes # insert footnotes with [^1]
+  - codehilite: # code highlighting with pygments
+      guess_lang: no
+      linenums: no

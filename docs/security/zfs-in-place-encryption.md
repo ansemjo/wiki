@@ -65,6 +65,7 @@ Overwrite with zeroes or random data:
 Create a new partition table and one partition with your desired size (the UUID sets the partition
 type to `FreeBSD ZFS`):
 
+    #!bash
     sfdisk /dev/disk/by-id/ata-${DISK} <<EOF
     label: gpt
     start=2M size=7811076096 type=516E7CBA-6ECF-11D6-8FF8-00022D09712B
@@ -72,11 +73,13 @@ type to `FreeBSD ZFS`):
 
 Create and open the LUKS container with your desired cipher / hash / keysize settings:
 
-    cryptsetup luksFormat -h sha384 /dev/disk/by-id/ata-${DISK}-part1
+    #!bash
+    cryptsetup luksFormat /dev/disk/by-id/ata-${DISK}-part1
     cryptsetup open /dev/disk/by-id/ata-${DISK}-part1 ${DISK}_LUKS
 
 Replace the drive in the pool and wait for it to resilver:
 
+    #!bash
     zpool replace kourier ata-${DISK}-part2 /dev/mapper/${DISK}_LUKS
     watch -d zpool status -P
 
