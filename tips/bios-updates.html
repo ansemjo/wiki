@@ -9,7 +9,7 @@
   <meta name="author" content="Anton Semjonov">
   <link rel="shortcut icon" href="../assets/planet.png">
   
-  <title>Lenovo - ansemjo's docs</title>
+  <title>BIOS Updates - ansemjo's docs</title>
   <link href='https://fonts.googleapis.com/css?family=Lato:400,700|Roboto+Slab:400,700|Inconsolata:400,700' rel='stylesheet' type='text/css'>
 
   <link rel="stylesheet" href="../css/theme.css" type="text/css" />
@@ -18,8 +18,8 @@
   
   <script>
     // Current page data
-    var mkdocs_page_name = "Lenovo";
-    var mkdocs_page_input_path = "tips/lenovo.md";
+    var mkdocs_page_name = "BIOS Updates";
+    var mkdocs_page_input_path = "tips/bios-updates.md";
     var mkdocs_page_url = null;
   </script>
   
@@ -148,6 +148,26 @@
                     
     <a class="" href="bash.html">Bash</a>
                 </li>
+                <li class=" current">
+                    
+    <a class="current" href="bios-updates.html">BIOS Updates</a>
+    <ul class="subnav">
+            
+    <li class="toctree-l3"><a href="#bios-updates">BIOS Updates</a></li>
+    
+        <ul>
+        
+            <li><a class="toctree-l4" href="#lenovo-laptops-from-linux">Lenovo Laptops from Linux</a></li>
+        
+            <li><a class="toctree-l4" href="#supermicro-boards-via-ipmi">Supermicro Boards via IPMI</a></li>
+        
+            <li><a class="toctree-l4" href="#supermicro-boards-with-uefi">Supermicro Boards with UEFI</a></li>
+        
+        </ul>
+    
+
+    </ul>
+                </li>
                 <li class="">
                     
     <a class="" href="centos.html">CentOS</a>
@@ -179,22 +199,6 @@
                 <li class="">
                     
     <a class="" href="golang.html">Go</a>
-                </li>
-                <li class=" current">
-                    
-    <a class="current" href="lenovo.html">Lenovo</a>
-    <ul class="subnav">
-            
-    <li class="toctree-l3"><a href="#lenovo">Lenovo</a></li>
-    
-        <ul>
-        
-            <li><a class="toctree-l4" href="#updating-bios-on-a-lenovo-from-linux">Updating BIOS on a Lenovo from Linux</a></li>
-        
-        </ul>
-    
-
-    </ul>
                 </li>
                 <li class="">
                     
@@ -245,10 +249,10 @@
         
       
     
-    <li>Lenovo</li>
+    <li>BIOS Updates</li>
     <li class="wy-breadcrumbs-aside">
       
-        <a href="https://github.com/ansemjo/wiki/edit/master/docs/tips/lenovo.md"> Edit on ansemjo/wiki</a>
+        <a href="https://github.com/ansemjo/wiki/edit/master/docs/tips/bios-updates.md"> Edit on ansemjo/wiki</a>
       
     </li>
   </ul>
@@ -257,14 +261,14 @@
           <div role="main">
             <div class="section">
               
-                <h1 id="lenovo">Lenovo<a class="headerlink" href="#lenovo" title="Permanent link">&para;</a></h1>
-<h2 id="updating-bios-on-a-lenovo-from-linux">Updating BIOS on a Lenovo from Linux<a class="headerlink" href="#updating-bios-on-a-lenovo-from-linux" title="Permanent link">&para;</a></h2>
+                <h1 id="bios-updates">BIOS Updates<a class="headerlink" href="#bios-updates" title="Permanent link">&para;</a></h1>
+<h2 id="lenovo-laptops-from-linux">Lenovo Laptops from Linux<a class="headerlink" href="#lenovo-laptops-from-linux" title="Permanent link">&para;</a></h2>
 <p>Some modern Lenovo machines do not have an optical disc drive. The only option
 for machines without Windows is a bootable .iso image though. What now?</p>
 <p>Turns out inside that image there is another bootable format: an El Torito
 image. You can extract that with a script called
 <a href="/assets/geteltorito.pl"><code>geteltorito.pl</code></a> and flash it to a USB stick.</p>
-<pre class="codehilite"><code># ./geteltorito.pl -o n10ur17w-usb.img n10ur17w.iso
+<pre class="codehilite"><code class="language-shell"># ./geteltorito.pl -o n10ur17w-usb.img n10ur17w.iso
 Booting catalog starts at sector: 20
 Manufacturer of CD: NERO BURNING ROM
 Image architecture: x86
@@ -283,6 +287,26 @@ Image has been written to file &quot;n10ur17w-usb.img&quot;.
 <p>This information and script is taken from
 <a href="http://thinkwiki.de/BIOS-Update_ohne_optisches_Laufwerk_unter_Linux">thinkwiki.de</a></p>
 </div>
+<h2 id="supermicro-boards-via-ipmi">Supermicro Boards via IPMI<a class="headerlink" href="#supermicro-boards-via-ipmi" title="Permanent link">&para;</a></h2>
+<p>On boards that include the IPMI remote management feature you can just
+upload the firmware file in the web interface. Easy peasy.</p>
+<h2 id="supermicro-boards-with-uefi">Supermicro Boards with UEFI<a class="headerlink" href="#supermicro-boards-with-uefi" title="Permanent link">&para;</a></h2>
+<p>On other boards you&rsquo;ll need to create a bootable USB stick with the BIOS
+updater. With UEFI there&rsquo;s an easier way though. This is info and the script
+below come from the <a href="https://www.thomas-krenn.com/de/wiki/BIOS_Update_per_UEFI_an_Supermicro_Mainboards_durchf%C3%BChren">Thomas Krenn Wiki</a>.</p>
+<ul>
+<li>create a USB stick with a FAT32 partition; it doesn&rsquo;t need to be bootable but
+  using a GPT partition table and marking the partition as &ldquo;EFI System&rdquo; seems
+  to help</li>
+<li>extract the <a href="/assets/smcflash.tar">flash script (<code>flash.tar</code>)</a> to this
+  partition; these files are from an X10DRI BIOS update package</li>
+<li>copy the downloaded firmware file for you motherboard to the partition</li>
+<li>reboot the server; maybe use the &ldquo;Reboot with ME disable&rdquo; mode to enable
+  updates to the Management Engine</li>
+<li>use the boot menu to enter the &ldquo;Built-in EFI Shell&rdquo;</li>
+<li>navigate to your USB stick; that should be <code>fs0:</code> &hellip;</li>
+<li>start the update with <code>flash.nsh {updatefile}</code></li>
+</ul>
               
             </div>
           </div>
@@ -290,10 +314,10 @@ Image has been written to file &quot;n10ur17w-usb.img&quot;.
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="openwrt.html" class="btn btn-neutral float-right" title="OpenWRT">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="centos.html" class="btn btn-neutral float-right" title="CentOS">Next <span class="icon icon-circle-arrow-right"></span></a>
       
       
-        <a href="golang.html" class="btn btn-neutral" title="Go"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="bash.html" class="btn btn-neutral" title="Bash"><span class="icon icon-circle-arrow-left"></span> Previous</a>
       
     </div>
   
@@ -323,10 +347,10 @@ Licensed under a <a href="https://creativecommons.org/licenses/by-sa/4.0/" title
     <span class="rst-current-version" data-toggle="rst-current-version">
       
       
-        <span><a href="golang.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
+        <span><a href="bash.html" style="color: #fcfcfc;">&laquo; Previous</a></span>
       
       
-        <span style="margin-left: 15px"><a href="openwrt.html" style="color: #fcfcfc">Next &raquo;</a></span>
+        <span style="margin-left: 15px"><a href="centos.html" style="color: #fcfcfc">Next &raquo;</a></span>
       
     </span>
 </div>
