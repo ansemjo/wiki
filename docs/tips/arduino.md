@@ -17,9 +17,9 @@ MISO │ 1 2 │ VCC
 
 ### FTDI 232R Serial Chip
 
-The FT232R provides a ["bit-bang" mode][bitbang] as well. Some breakout boards come with
-an ISP header directly soldered on but you can also just use the breadboard pins on a full
-breakout. I'm using a Sparkfun FT232R Breakout to do this.
+The FT232R provides a straightforward ["bit-bang" mode][bitbang] to drive these pins. Some
+breakout boards come with an ISP header directly soldered on but you can also just use the
+breadboard pins on a full breakout. I'm using a Sparkfun FT232R Breakout to do this.
 
 [bitbang]: https://www.ftdichip.com/Support/Documents/AppNotes/AN_232R-01_Bit_Bang_Mode_Available_For_FT232R_and_Ft245R.pdf
 
@@ -51,8 +51,8 @@ On the bottom of the Sparkfun breakout the legs are mapped like this:
 ╰───────────────────╯
 ```
 
-This programmer should come configured with a decently modern `avrdude` version already. If
-it not here is a copy:
+This configuration should come shipped with a decently modern `avrdude` version
+already. If it's not, here is a copy:
 
 ```
 # see http://www.geocities.jp/arduino_diecimila/bootloader/index_en.html
@@ -70,15 +70,15 @@ programmer
 ```
 
 Using `avrdude` like this is said to be slower than other methods but in my testing it
-turned out to be decently quick. Not "minutes" like some comments suggest anyway.
+turned out to be decently quick -- not "minutes" like some comments suggest anyway.
 
     avrdude -c arduino-ft232r -p m328p -v
 
 
 ### Raspberry Pi
 
-At the time, I used the GPIO pins on a Raspberry Pi Zero W and amended the
-`avrdude` configuration to use straightforward bit-banging. Here is a possible
+At the time, however, I used the GPIO pins on a Raspberry Pi Zero W and amended the
+`avrdude` configuration to use bit-banging as well. Here is a possible
 mapping of the GPIO pins on the 40-pin header:
 
 ```
@@ -105,8 +105,8 @@ programmer
 ;
 ```
 
-Put that in `~/.avrduderc` or a seperate file, which can be included with `avrdude -C +gpio.conf ...`.
-Now use this programmer like this:
+Put that in `~/.avrduderc` or a seperate file, which can be included with
+`avrdude -C +gpio.conf ...`. Now use this programmer config like this:
 
-    avrdude -c gpio -p m1284p -v
+    sudo avrdude -c gpio -p m1284p -v
 
