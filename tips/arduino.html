@@ -275,9 +275,9 @@ MISO │ 1 2 │ VCC
 
 
 <h3 id="ftdi-232r-serial-chip">FTDI 232R Serial Chip<a class="headerlink" href="#ftdi-232r-serial-chip" title="Permanent link">&para;</a></h3>
-<p>The FT232R provides a <a href="https://www.ftdichip.com/Support/Documents/AppNotes/AN_232R-01_Bit_Bang_Mode_Available_For_FT232R_and_Ft245R.pdf">&ldquo;bit-bang&rdquo; mode</a> as well. Some breakout boards come with
-an ISP header directly soldered on but you can also just use the breadboard pins on a full
-breakout. I&rsquo;m using a Sparkfun FT232R Breakout to do this.</p>
+<p>The FT232R provides a straightforward <a href="https://www.ftdichip.com/Support/Documents/AppNotes/AN_232R-01_Bit_Bang_Mode_Available_For_FT232R_and_Ft245R.pdf">&ldquo;bit-bang&rdquo; mode</a> to drive these pins. Some
+breakout boards come with an ISP header directly soldered on but you can also just use the
+breadboard pins on a full breakout. I&rsquo;m using a Sparkfun FT232R Breakout to do this.</p>
 <p>These are the pins of a FT232R which correspond to the above ISP header:</p>
 <pre class="codehilite"><code>     ┏─────╮
  CTS │ 1 2 │ VCC
@@ -302,8 +302,8 @@ breakout. I&rsquo;m using a Sparkfun FT232R Breakout to do this.</p>
 ╰───────────────────╯</code></pre>
 
 
-<p>This programmer should come configured with a decently modern <code>avrdude</code> version already. If
-it not here is a copy:</p>
+<p>This configuration should come shipped with a decently modern <code>avrdude</code> version
+already. If it&rsquo;s not, here is a copy:</p>
 <pre class="codehilite"><code># see http://www.geocities.jp/arduino_diecimila/bootloader/index_en.html
 # Note: pins are numbered from 1!
 programmer
@@ -319,13 +319,13 @@ programmer
 
 
 <p>Using <code>avrdude</code> like this is said to be slower than other methods but in my testing it
-turned out to be decently quick. Not &ldquo;minutes&rdquo; like some comments suggest anyway.</p>
+turned out to be decently quick &ndash; not &ldquo;minutes&rdquo; like some comments suggest anyway.</p>
 <pre class="codehilite"><code>avrdude -c arduino-ft232r -p m328p -v</code></pre>
 
 
 <h3 id="raspberry-pi">Raspberry Pi<a class="headerlink" href="#raspberry-pi" title="Permanent link">&para;</a></h3>
-<p>At the time, I used the GPIO pins on a Raspberry Pi Zero W and amended the
-<code>avrdude</code> configuration to use straightforward bit-banging. Here is a possible
+<p>At the time, however, I used the GPIO pins on a Raspberry Pi Zero W and amended the
+<code>avrdude</code> configuration to use bit-banging as well. Here is a possible
 mapping of the GPIO pins on the 40-pin header:</p>
 <pre class="codehilite"><code>                15 ┆ · · ┆ 16
           3.3V  17 │ x · │ 18
@@ -348,9 +348,9 @@ programmer
 ;</code></pre>
 
 
-<p>Put that in <code>~/.avrduderc</code> or a seperate file, which can be included with <code>avrdude -C +gpio.conf ...</code>.
-Now use this programmer like this:</p>
-<pre class="codehilite"><code>avrdude -c gpio -p m1284p -v</code></pre>
+<p>Put that in <code>~/.avrduderc</code> or a seperate file, which can be included with
+<code>avrdude -C +gpio.conf ...</code>. Now use this programmer config like this:</p>
+<pre class="codehilite"><code>sudo avrdude -c gpio -p m1284p -v</code></pre>
               
             </div>
           </div>
