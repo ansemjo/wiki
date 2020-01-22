@@ -15,7 +15,7 @@ MISO │ 1 2 │ VCC
      ╰─────╯
 ```
 
-### FTDI 232R Serial Chip
+### Sparkfun FTDI FT232R Breakout Board
 
 The FT232R provides a straightforward ["bit-bang" mode][bitbang] to drive these pins. Some
 breakout boards come with an ISP header directly soldered on but you can also just use the
@@ -74,6 +74,83 @@ turned out to be decently quick -- not "minutes" like some comments suggest anyw
 
     avrdude -c arduino-ft232r -p m328p -v
 
+
+### Adafruit FTDI FT232H Breakout Board
+
+Even better, the FT232H provides a proper MPSSE SPI interface. I mentioned above that
+bit-banging is said to be slower but I didn't perceive it as too bad. Oh it *does* make
+a difference! Performing a simple benchmark with successive readout and writebacks of
+the `eeprom` and `flash` areas on an Arduino Nano clone took **16 seconds** using the
+FT232H while it took over **two minutes** on the FT232R.
+
+Looking from the top, the pins on the Adafruit board are used like this:
+
+```
+        USB
+┏──────────────────╮
+│ ■ 5V        C9 □ │
+│ ■ GND       C8 □ │
+│ ■ D0 SCK    C7 □ │
+│ ■ D1 MOSI   C6 □ │
+│ ■ D2 MISO   C5 □ │
+│ ■ D3 RST    C4 □ │
+│ □ D4        C3 □ │
+│ □ D5        C2 □ │
+│ □ D6        C1 □ │
+│ □ D7        C0 □ │
+╰──────────────────╯
+```
+
+The pins are all nicely in one row, so you can easily craft a custom cable, too.
+
+![](/assets/ft232h.png)
+
+The `avrdude` config was first described on [helix.air.net.au][helix] and is now integrated in the
+systemwide config as programmer `UM232H`:
+
+[helix]: http://www.jdunman.com/ww/AmateurRadio/SDR/helix_air_net_au%20%20AVRDUDE%20and%20FTDI%20232H.htm "Mirror"
+
+```
+# UM232H module from FTDI and Glyn.com.au.
+# See helix.air.net.au for detailed usage information.
+# /* ... */
+# Use the -b flag to set the SPI clock rate eg -b 3750000 is the fastest I could get
+# a 16MHz Atmega1280 to program reliably.  The 232H is conveniently 5V tolerant.
+programmer
+  id         = "UM232H";
+  desc       = "FT232H based module from FTDI and Glyn.com.au";
+  type       = "avrftdi";
+  usbvid     = 0x0403;
+  usbpid     = 0x6014;
+  usbdev     = "A";
+  usbvendor  = "";
+  usbproduct = "";
+  usbsn      = "";
+#ISP-signals
+  sck    = 0;
+  mosi   = 1;
+  miso   = 2;
+  reset  = 3;
+;
+```
+
+I've created two straightforward programmer aliases in my `~/.avrduderc` config and
+can use these two breakout boards with `avrdude -c ft232r` and `avrdude -c ft232h`
+respectively:
+
+```
+# alias for adafruit ft232h
+programmer parent "UM232H"
+  id         = "ft232h";
+  desc       = "Adafruit FT232H based SPI programmer";
+;
+
+# alias for sparkfun ft232r breakout
+programmer parent "arduino-ft232r"
+  id         = "ft232r";
+  desc       = "Sparkfun FT232R breakout bit-banging";
+;
+```
 
 ### Raspberry Pi
 
