@@ -149,7 +149,9 @@
     
         <ul>
         
-            <li><a class="toctree-l4" href="#ftdi-232r-serial-chip">FTDI 232R Serial Chip</a></li>
+            <li><a class="toctree-l4" href="#sparkfun-ftdi-ft232r-breakout-board">Sparkfun FTDI FT232R Breakout Board</a></li>
+        
+            <li><a class="toctree-l4" href="#adafruit-ftdi-ft232h-breakout-board">Adafruit FTDI FT232H Breakout Board</a></li>
         
             <li><a class="toctree-l4" href="#raspberry-pi">Raspberry Pi</a></li>
         
@@ -274,7 +276,7 @@ MISO │ 1 2 │ VCC
      ╰─────╯</code></pre>
 
 
-<h3 id="ftdi-232r-serial-chip">FTDI 232R Serial Chip<a class="headerlink" href="#ftdi-232r-serial-chip" title="Permanent link">&para;</a></h3>
+<h3 id="sparkfun-ftdi-ft232r-breakout-board">Sparkfun FTDI FT232R Breakout Board<a class="headerlink" href="#sparkfun-ftdi-ft232r-breakout-board" title="Permanent link">&para;</a></h3>
 <p>The FT232R provides a straightforward <a href="https://www.ftdichip.com/Support/Documents/AppNotes/AN_232R-01_Bit_Bang_Mode_Available_For_FT232R_and_Ft245R.pdf">&ldquo;bit-bang&rdquo; mode</a> to drive these pins. Some
 breakout boards come with an ISP header directly soldered on but you can also just use the
 breadboard pins on a full breakout. I&rsquo;m using a Sparkfun FT232R Breakout to do this.</p>
@@ -321,6 +323,71 @@ programmer
 <p>Using <code>avrdude</code> like this is said to be slower than other methods but in my testing it
 turned out to be decently quick &ndash; not &ldquo;minutes&rdquo; like some comments suggest anyway.</p>
 <pre class="codehilite"><code>avrdude -c arduino-ft232r -p m328p -v</code></pre>
+
+
+<h3 id="adafruit-ftdi-ft232h-breakout-board">Adafruit FTDI FT232H Breakout Board<a class="headerlink" href="#adafruit-ftdi-ft232h-breakout-board" title="Permanent link">&para;</a></h3>
+<p>Even better, the FT232H provides a proper MPSSE SPI interface. I mentioned above that
+bit-banging is said to be slower but I didn&rsquo;t perceive it as too bad. Oh it <em>does</em> make
+a difference! Performing a simple benchmark with successive readout and writebacks of
+the <code>eeprom</code> and <code>flash</code> areas on an Arduino Nano clone took <strong>16 seconds</strong> using the
+FT232H while it took over <strong>two minutes</strong> on the FT232R.</p>
+<p>Looking from the top, the pins on the Adafruit board are used like this:</p>
+<pre class="codehilite"><code>        USB
+┏──────────────────╮
+│ ■ 5V        C9 □ │
+│ ■ GND       C8 □ │
+│ ■ D0 SCK    C7 □ │
+│ ■ D1 MOSI   C6 □ │
+│ ■ D2 MISO   C5 □ │
+│ ■ D3 RST    C4 □ │
+│ □ D4        C3 □ │
+│ □ D5        C2 □ │
+│ □ D6        C1 □ │
+│ □ D7        C0 □ │
+╰──────────────────╯</code></pre>
+
+
+<p>The pins are all nicely in one row, so you can easily craft a custom cable, too.</p>
+<p><img alt="" src="/assets/ft232h.png" /></p>
+<p>The <code>avrdude</code> config was first described on <a href="http://www.jdunman.com/ww/AmateurRadio/SDR/helix_air_net_au%20%20AVRDUDE%20and%20FTDI%20232H.htm" title="Mirror">helix.air.net.au</a> and is now integrated in the
+systemwide config as programmer <code>UM232H</code>:</p>
+<pre class="codehilite"><code># UM232H module from FTDI and Glyn.com.au.
+# See helix.air.net.au for detailed usage information.
+# /* ... */
+# Use the -b flag to set the SPI clock rate eg -b 3750000 is the fastest I could get
+# a 16MHz Atmega1280 to program reliably.  The 232H is conveniently 5V tolerant.
+programmer
+  id         = &quot;UM232H&quot;;
+  desc       = &quot;FT232H based module from FTDI and Glyn.com.au&quot;;
+  type       = &quot;avrftdi&quot;;
+  usbvid     = 0x0403;
+  usbpid     = 0x6014;
+  usbdev     = &quot;A&quot;;
+  usbvendor  = &quot;&quot;;
+  usbproduct = &quot;&quot;;
+  usbsn      = &quot;&quot;;
+#ISP-signals
+  sck    = 0;
+  mosi   = 1;
+  miso   = 2;
+  reset  = 3;
+;</code></pre>
+
+
+<p>I&rsquo;ve created two straightforward programmer aliases in my <code>~/.avrduderc</code> config and
+can use these two breakout boards with <code>avrdude -c ft232r</code> and <code>avrdude -c ft232h</code>
+respectively:</p>
+<pre class="codehilite"><code># alias for adafruit ft232h
+programmer parent &quot;UM232H&quot;
+  id         = &quot;ft232h&quot;;
+  desc       = &quot;Adafruit FT232H based SPI programmer&quot;;
+;
+
+# alias for sparkfun ft232r breakout
+programmer parent &quot;arduino-ft232r&quot;
+  id         = &quot;ft232r&quot;;
+  desc       = &quot;Sparkfun FT232R breakout bit-banging&quot;;
+;</code></pre>
 
 
 <h3 id="raspberry-pi">Raspberry Pi<a class="headerlink" href="#raspberry-pi" title="Permanent link">&para;</a></h3>
